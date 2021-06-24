@@ -21,7 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('catalog/', include(''))
+    path('catalog/', include('catalog.urls'))
 ]
 
 # Для формирования маршрута для медиа файлов, только в отладочном режиме
