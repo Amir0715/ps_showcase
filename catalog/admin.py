@@ -32,7 +32,7 @@ admin.site.register(Console, ConsoleAdmin)
 
 class GameAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug', 'type', 'console_model', 'available', 'price', 'stock', 'created_at', 'updated_at']
-    list_filter = ['available', 'created_at', 'updated_at', 'console_model', ]
+    list_filter = ['available', 'created_at', 'updated_at', 'console_model', 'type']
     list_editable = ['price', 'stock', 'available']
     prepopulated_fields = {'slug': ('name',)}
 
