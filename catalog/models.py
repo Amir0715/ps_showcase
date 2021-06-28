@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE, RESTRICT
+from django.urls import reverse_lazy
 
 def user_directory_path(instance, filename):
     """Метод формирования пути для изображений
@@ -11,7 +12,7 @@ def user_directory_path(instance, filename):
     Returns:
         string: конечный путь для сохранения 
     """
-    return f'{instance.category.name}/{instance.name}/{filename}'
+    return f'{instance.product.name}/{filename}'
 
 
 class Genre(models.Model):
@@ -34,14 +35,31 @@ class Gallery(models.Model):
         Модель альбома для фотографий
     """
     image = models.ImageField(verbose_name='Изображение', upload_to=user_directory_path)
-    product = models.ForeignKey(to='Product', verbose_name='Продукт', on_delete=CASCADE, related_name='images')
-
+    is_cover = models.BooleanField(verbose_name='Обложка?', default=False) 
     class Meta:
+        abstract = True
         verbose_name = 'Альбом'
         verbose_name_plural = 'Альбомы'
 
+class GameGallery(Gallery):
+    product = models.ForeignKey(to='Game', verbose_name='Игра', on_delete=CASCADE, related_name='images')
+    
     def __str__(self):
         return self.product.name
+    
+    class Meta:
+        verbose_name = 'Альбом игр'
+        verbose_name_plural = 'Альбомы игр'
+
+class ConsoleGallery(Gallery):
+    product = models.ForeignKey(to='Console', verbose_name='Консоль', on_delete=CASCADE, related_name='images')
+
+    def __str__(self):
+        return self.product.name
+
+    class Meta:
+        verbose_name = 'Альбом консолей'
+        verbose_name_plural = 'Альбомы консолей'
 
 class ConsoleModel(models.Model):
     name = models.CharField(verbose_name='Название', max_length=25, db_index=True)
@@ -59,7 +77,6 @@ class Product(models.Model):
         Модель продукта, для продажи
     """
     name = models.CharField(verbose_name='Название', max_length=200, db_index=True)
-    slug = models.SlugField(verbose_name='Алиас',max_length=200, db_index=True)
     
     description = models.TextField(verbose_name='Описание', blank=True)
     price = models.DecimalField(verbose_name='Цена', max_digits=10, decimal_places=2)
@@ -68,8 +85,9 @@ class Product(models.Model):
 
     created_at = models.DateTimeField(verbose_name='Создано', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='Обновлено', auto_now=True)
-
+    in_carousel = models.BooleanField(verbose_name='В карусели', default=False)
     class Meta:
+        abstract=True
         ordering = ('name',)
         index_together = (('id', 'slug'),)
         verbose_name = 'Продукт'
@@ -77,7 +95,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
 
 class Console(Product):
     
@@ -91,6 +108,9 @@ class Console(Product):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse_lazy("catalog:console_view", kwargs={"console_pk": self.pk})
 
 class Game(Product):
 
@@ -111,3 +131,6 @@ class Game(Product):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse_lazy("catalog:game_view", kwargs={"game_pk": self.pk})
