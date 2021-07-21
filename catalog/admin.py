@@ -17,15 +17,15 @@ class ConsoleModelAdmin(admin.ModelAdmin):
 admin.site.register(ConsoleModel, ConsoleModelAdmin)
 
 class ConsoleAdmin(admin.ModelAdmin):
-    list_display = ['name','console_model', 'price', 'volume', 'number_of_gamepads', 'stock', 'available', 'created_at', 'updated_at']
-    list_filter = ['available', 'created_at', 'updated_at', 'console_model']
-    list_editable = ['price', 'stock', 'available']
+    list_display = ['id', 'name','console_model', 'price', 'volume', 'number_of_gamepads', 'available', 'stock', 'in_carousel', 'created_at', 'updated_at']
+    list_filter = ['available', 'created_at', 'updated_at', 'console_model', 'in_carousel']
+    list_editable = ['price', 'stock', 'available', 'in_carousel']
 
 admin.site.register(Console, ConsoleAdmin)
 
 class GameAdmin(admin.ModelAdmin):
-    list_display = ['name', 'type', 'console_model', 'available', 'price', 'stock', 'created_at', 'updated_at']
-    list_filter = ['available', 'created_at', 'updated_at', 'console_model', 'type']
-    list_editable = ['price', 'stock', 'available']
+    list_display = ['id', 'name', 'type', 'console_model','price', 'available', 'stock', 'in_carousel', 'created_at', 'updated_at']
+    list_filter = ['available', 'created_at', 'updated_at', 'console_model', 'type', 'in_carousel']
+    list_editable = ['price', 'stock', 'available', 'in_carousel']
 
 admin.site.register(Game, GameAdmin)

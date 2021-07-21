@@ -8,15 +8,20 @@ import random
 
 class IndexView(View):
     def get(self, request):
-        carousel_game = Game.objects.filter(in_carousel=True)
-        carousel_console = Console.objects.filter(in_carousel=True)
-
+        games = Game.objects.filter(available=True)
+        consoles = Console.objects.filter(available=True)
+        carousel_game = games.filter(in_carousel=True)
+        carousel_console = consoles.filter(in_carousel=True)
+        print(games, consoles)
+        print(carousel_game, carousel_console)
         context = {
             "carousel": {
                 "games": carousel_game,
                 "consoles": carousel_console,
                 "lenght": range(len(carousel_game) + len(carousel_console)),
-            }
+            },
+            "games": games,
+            "consoles": consoles
         }
         return render(request, "index/index.html", context)
 
