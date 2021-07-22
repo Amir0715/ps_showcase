@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.deletion import CASCADE, RESTRICT
-from django.urls import reverse_lazy
+from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 
 def user_directory_path(instance, filename):
     """Метод формирования пути для изображений
@@ -14,21 +15,22 @@ def user_directory_path(instance, filename):
     """
     return f'{instance.product.name}/{filename}'
 
+class Category(models.Model):
 
-class Genre(models.Model):
-    """
-        Модель жанра для игр
-    """
-    name = models.CharField(verbose_name='Название', max_length=200, db_index=True)
-    slug = models.SlugField(verbose_name='Алиас',max_length=200, db_index=True)
+    parent_category = models.ForeignKey('self', on_delete=RESTRICT, null=True, blank=True) # Родительская категория
+    
+    name = models.CharField(verbose_name='Имя категории', max_length=255)
+    slug = models.SlugField(unique=True) # category/nootboki/ - slug поле 
 
-    class Meta:
-        ordering = ('name',)
-        verbose_name = 'Жанр'
-        verbose_name_plural = 'Жанры'
+    image = models.ImageField(verbose_name='Изображение категории')
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
+
+    class Meta: 
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+        ordering = ['name']
 
 class Gallery(models.Model):
     """
@@ -36,58 +38,34 @@ class Gallery(models.Model):
     """
     image = models.ImageField(verbose_name='Изображение', upload_to=user_directory_path)
     is_cover = models.BooleanField(verbose_name='Обложка?', default=False) 
+    product = models.ForeignKey('Product', verbose_name='Игра', on_delete=CASCADE, related_name='images')
+    
+    def __str__(self):
+        return self.product.name
+
     class Meta:
-        abstract = True
         verbose_name = 'Альбом'
         verbose_name_plural = 'Альбомы'
 
-class GameGallery(Gallery):
-    product = models.ForeignKey(to='Game', verbose_name='Игра', on_delete=CASCADE, related_name='images')
-    
-    def __str__(self):
-        return self.product.name
-    
-    class Meta:
-        verbose_name = 'Альбом игр'
-        verbose_name_plural = 'Альбомы игр'
-
-class ConsoleGallery(Gallery):
-    product = models.ForeignKey(to='Console', verbose_name='Консоль', on_delete=CASCADE, related_name='images')
-
-    def __str__(self):
-        return self.product.name
-
-    class Meta:
-        verbose_name = 'Альбом консолей'
-        verbose_name_plural = 'Альбомы консолей'
-
-class ConsoleModel(models.Model):
-    name = models.CharField(verbose_name='Название', max_length=25, db_index=True)
-    slug = models.SlugField(verbose_name='Алиас',max_length=25, db_index=True)
-    
-    class Meta:
-        verbose_name = 'Модель консоли'
-        verbose_name_plural = 'Модель консоли'
-
-    def __str__(self):
-        return self.name
 
 class Product(models.Model):
     """
         Модель продукта, для продажи
     """
-    name = models.CharField(verbose_name='Название', max_length=200, db_index=True)
-    
-    description = models.TextField(verbose_name='Описание', blank=True)
-    price = models.DecimalField(verbose_name='Цена', max_digits=10, decimal_places=2)
+    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=RESTRICT)
+    name = models.CharField(verbose_name='Имя продукта', max_length=255, db_index=True)
+    slug = models.SlugField(unique=True)
+
+    description = models.TextField(verbose_name='Описание')
+    price = models.DecimalField(verbose_name='Цена', max_digits=9, decimal_places=2)
+
     stock = models.PositiveIntegerField(verbose_name='Количество')
     available = models.BooleanField(verbose_name='Доступно', default=True)
 
     created_at = models.DateTimeField(verbose_name='Создано', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='Обновлено', auto_now=True)
-    in_carousel = models.BooleanField(verbose_name='В карусели', default=False)
+
     class Meta:
-        abstract=True
         ordering = ('name',)
         index_together = (('id', 'slug'),)
         verbose_name = 'Продукт'
@@ -96,41 +74,44 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-class Console(Product):
-    
-    volume = models.PositiveIntegerField(verbose_name='Объем памяти') 
-    number_of_gamepads = models.PositiveIntegerField(verbose_name='Количество геймпадов', default=1)
-    console_model = models.ForeignKey('ConsoleModel', related_name='consoles', on_delete=RESTRICT)
-    class Meta:
-        ordering = ('name',)
-        verbose_name = 'Консоль'
-        verbose_name_plural = 'Консоли'
+class CartProduct(models.Model):
 
-    def __str__(self):
-        return self.name
-    
-    def get_absolute_url(self):
-        return reverse_lazy("catalog:console_view", kwargs={"console_pk": self.pk})
+    cart = models.ForeignKey('Cart', verbose_name='Корзина', on_delete=CASCADE)
+    product = models.ForeignKey('Product', verbose_name='Продукт', on_delete=CASCADE, related_name='related_producs')
+    qty = models.PositiveIntegerField(default=1)
+    final_price = models.DecimalField(verbose_name='Общая цена', max_digits=9, decimal_places=2) # общая цена карточки корзины
 
-class Game(Product):
+    def __str__(self) -> str:
+        return f"Продукт: {self.product.name} в корзине {self.cart.owner.firstname}"
 
-    GAME_TYPE = [
-        (0, 'Unknown'),
-        (1, 'Blu-ray Disc'), 
-        (2, 'Digital copies')
-    ]
 
-    genres = models.ManyToManyField('Genre', related_name='games')
-    console_model = models.ForeignKey('ConsoleModel', related_name='games', on_delete=RESTRICT)
-    type = models.IntegerField(choices=GAME_TYPE)
+class Cart(models.Model):
+
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Владелец', on_delete=CASCADE)
+    products = models.ManyToManyField('CartProduct', blank=True, related_name='related_cart') # карточки продуктов
+    total_products = models.PositiveIntegerField(default=0) # кол-во наименований продукта
+    final_price = models.DecimalField(verbose_name='Общая цена', max_digits=9, decimal_places=2) # общая цена корзины 
 
     class Meta:
-        ordering = ('name',)
-        verbose_name = 'Игра'
-        verbose_name_plural = 'Игры'
+        verbose_name = "Корзина"
+        verbose_name_plural = "Корзины"
 
-    def __str__(self):
-        return self.name
+class CategoryAttribute(models.Model):
 
-    def get_absolute_url(self):
-        return reverse_lazy("catalog:game_view", kwargs={"game_pk": self.pk})
+    category = models.ForeignKey("Category", verbose_name="Атрибут категории", on_delete=models.CASCADE, related_name="attributes")
+    
+    name = models.CharField(verbose_name="Название атрибута", max_length=255)
+
+    class Meta:
+        verbose_name = "Атрибут категории"
+        verbose_name_plural = "Атрибуты категорий"
+
+
+class AttributeValue(models.Model):
+    attribute = models.ForeignKey("CategoryAttribute", verbose_name="Атрибут", on_delete=models.CASCADE, related_name="values")
+    product = models.ForeignKey("Product", verbose_name="Значение атрибута для продукта", on_delete=models.CASCADE, related_name="values")
+    value = models.CharField(verbose_name="Значение атрибута", max_length=255)
+
+    class Meta: 
+        verbose_name = "Значение атрибута"
+        verbose_name_plural = "Значения атрибутов"

@@ -44,6 +44,12 @@ INSTALLED_APPS = [
 
     # scss
     "sass_processor",
+
+    # for phone number
+    "phonenumber_field",
+
+    # user model
+    "user",
 ]
 
 MIDDLEWARE = [
@@ -147,3 +153,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Путь для формирования адресного пути для медиа файлов
 
 MEDIA_URL = '/media/'
+
+AUTH_USER_MODEL = 'user.User'
+
+SITE_ID = 1
