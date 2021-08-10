@@ -29,5 +29,3 @@ admin.site.register(CartProduct)
 admin.site.register(Cart)
 admin.site.register(CategoryAttribute)
 admin.site.register(AttributeValue)
-
-

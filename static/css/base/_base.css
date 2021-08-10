@@ -1,0 +1,14 @@
+* {
+  color: #FFFFFF; }
+
+a {
+  text-decoration: none;
+  outline: none !important; }
+  a:active {
+    border: 0;
+    outline: none; }
+
+body {
+  height: 200vh; }
+
+/*# sourceMappingURL=_base.css.map */

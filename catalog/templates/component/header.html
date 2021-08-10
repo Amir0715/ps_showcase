@@ -1,34 +1,39 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'catalog:index' %}">Главная</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Ссылки</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Категории
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'catalog:consoles' %}">Консоли</a></li>
-                        <li><a class="dropdown-item" href="{% url 'catalog:games' %}">Игры</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="{% url 'admin:index' %}">Админка</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Search</button>
-            </form>
+<header class="header">
+    <div class="header_flex-wraper">
+        <div class="header_flex-wraper__left">
+            <div class="header_flex-wraper__left__logo"><a href="#">ps shop</a></div>
+            <div class="header_flex-wraper__left__navbar">
+                <!-- menu -->
+                <ul class="header_flex-wraper__left__navbar-li">
+                    <li>
+                        <a href="#">игры <i class="fas fa-chevron-down icon__arrow_down"></i></a>
+                        <!-- drop menu -->
+                        <!-- <ul class="header_flex-wraper__left__navbar-li__game_drop">
+                            <li><a href="#">новые игры</a></li>
+                            <li><a href="#">популярные</a></li>
+                            <li><a href="#">со скидкой</a></li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="#">консоли <i class="fas fa-chevron-down icon__arrow_down"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="header_flex-wraper__right">
+            <div class="header_flex-wraper__right__social">
+                <a href="#"><i class="fab fa-instagram icon__social"></i></a>
+                <a href="#"><i class="fab fa-whatsapp icon__social"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane icon__social"></i></a>
+                <a href="#"><i class="fab fa-viber icon__social"></i></a>
+            </div>
+            <div class="header_flex-wraper__right__search">
+                <input type="search" name="search" id="search" placeholder="поиск...">
+                <!-- <i class="fas fa-search icon__search"></i> -->
+            </div>
+            <div class="header_flex-wraper__right__cart">
+                <a href="#"><i class="fas fa-shopping-cart icon__cart"></i></a> <span class="cart_count">0</span>
+            </div>
         </div>
     </div>
-</nav>
+</header>

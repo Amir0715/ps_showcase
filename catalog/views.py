@@ -30,3 +30,10 @@ class ProductListView(ListView):
         print(result_set)
         context["product_sets"] = result_set
         return context
+
+
+class IndexView(View):
+    template_name = 'index/index.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
