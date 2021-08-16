@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;700&display=swap");
+* {
+  color: #FFFFFF; }
+
+a {
+  text-decoration: none;
+  outline: none !important; }
+  a:active {
+    border: 0;
+    outline: none; }
+
+.game-card {
+  width: 270px;
+  height: 350px;
+  cursor: pointer; }
+  .game-card:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75); }
+  .game-card_cover {
+    height: 290px; }
+    .game-card_cover img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%; }
+  .game-card_body {
+    display: flex;
+    flex-direction: column; }
+    .game-card_body_header {
+      text-align: center;
+      font-size: 18px;
+      height: 30px;
+      line-height: 30px;
+      color: #000; }
+    .game-card_body_footer {
+      display: flex;
+      height: 30px;
+      text-align: center;
+      line-height: 30px; }
+      .game-card_body_footer_price {
+        color: #000;
+        display: block;
+        width: 130px; }
+      .game-card_body_footer_button {
+        display: block;
+        background-color: #0072CE;
+        width: 140px; }
+
+/*# sourceMappingURL=_game_card.css.map */

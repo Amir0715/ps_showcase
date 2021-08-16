@@ -1,0 +1,54 @@
+@import '../base/base';
+
+.game-card {
+    width: 270px;
+    height: 350px;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 0px 0px 10px rgba($color: #000, $alpha: 0.75);
+
+    }
+
+    &_cover {
+        height: 290px;
+
+        img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    &_body {
+        display: flex;
+        flex-direction: column;
+
+        &_header {
+            text-align: center;
+            font-size: 18px;
+            height: 30px;
+            line-height: 30px;
+            color: #000;
+        }
+
+        &_footer {
+            display: flex;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+
+            &_price {
+                color: #000;
+                display: block;
+                width: 130px;
+            }
+
+            &_button {
+                display: block;
+                background-color: $base_color;
+                width: 140px;
+            }
+        }
+    }
+}

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;700&display=swap");
 * {
   color: #FFFFFF; }
 
@@ -8,10 +9,9 @@ a {
     border: 0;
     outline: none; }
 
-body {
-  height: 200vh; }
-
 .header {
+  position: relative;
+  z-index: 10;
   background-color: #0072CE;
   box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25); }
   .header_flex-wraper {
@@ -21,17 +21,40 @@ body {
     align-items: center; }
     .header_flex-wraper__left {
       font-size: 23pt;
-      text-transform: uppercase;
       width: 50%;
       justify-content: space-between;
       display: flex; }
       .header_flex-wraper__left__logo {
+        font-weight: 700;
+        font-family: 'Montserrat Alternates', sans-serif;
         margin: auto 15px; }
-      .header_flex-wraper__left__navbar-li {
+      .header_flex-wraper__left__navbar-list {
         display: flex;
-        justify-content: space-around;
-        width: 350px; }
-        .header_flex-wraper__left__navbar-li a {
+        justify-content: space-between;
+        width: 400px; }
+        .header_flex-wraper__left__navbar-list a {
+          display: block; }
+        .header_flex-wraper__left__navbar-list > li {
+          position: relative; }
+        .header_flex-wraper__left__navbar-list__second_list {
+          display: none;
+          position: absolute;
+          background-color: #F0F0F0;
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+          font-size: 20px;
+          width: 300px; }
+          .header_flex-wraper__left__navbar-list__second_list > li {
+            margin: 0px 10px;
+            padding: 5px; }
+            .header_flex-wraper__left__navbar-list__second_list > li:hover {
+              background-color: #E4E4E4; }
+            .header_flex-wraper__left__navbar-list__second_list > li:first-child {
+              margin-top: 10px; }
+            .header_flex-wraper__left__navbar-list__second_list > li:last-child {
+              margin-bottom: 10px; }
+          .header_flex-wraper__left__navbar-list__second_list a {
+            color: #000; }
+        .header_flex-wraper__left__navbar-list > li:hover .header_flex-wraper__left__navbar-list__second_list {
           display: block; }
     .header_flex-wraper__right {
       width: 50%;

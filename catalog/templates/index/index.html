@@ -1,4 +1,263 @@
 {% extends 'base.html' %}
+{% load sass_tags %}
+{% load static %}
+{% block styles %}
+<link type="text/css" rel="stylesheet" href="{% sass_src 'css/components/_carousel.scss' %}" />
+<link type="text/css" rel="stylesheet" href="{% sass_src 'css/components/_game_card.scss' %}">
+<link type="text/css" rel="stylesheet" href="{% sass_src 'css/index/index.scss' %}">
+
+{% endblock styles %}
+
 
 {% block content %}
+{% include 'component/carousel.html' %}
+<main class="content">
+    <section class="section">
+        <div class="section_header">
+            <div class="section_header_title">Новые игры</div>
+            <div class="section_header_see-all"><a href="#">Посмотреть все</a></div>
+        </div>
+        <div class="section_games">
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+                <div class="game-card_body">
+                    <div class="game-card_body_header">
+                        Killzone: shadow fall
+                    </div>
+                    <div class="game-card_body_footer">
+                        <span class="game-card_body_footer_price">
+                            1 999 р
+                        </span>
+                        <a href="#" class="game-card_body_footer_button">
+                            В корзину
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+                <div class="game-card_body">
+                    <div class="game-card_body_header">
+                        Killzone: shadow fall
+                    </div>
+                    <div class="game-card_body_footer">
+                        <span class="game-card_body_footer_price">
+                            1 999 р
+                        </span>
+                        <a href="#" class="game-card_body_footer_button">
+                            В корзину
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+                <div class="game-card_body">
+                    <div class="game-card_body_header">
+                        Killzone: shadow fall
+                    </div>
+                    <div class="game-card_body_footer">
+                        <span class="game-card_body_footer_price">
+                            1 999 р
+                        </span>
+                        <a href="#" class="game-card_body_footer_button">
+                            В корзину
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+                <div class="game-card_body">
+                    <div class="game-card_body_header">
+                        Killzone: shadow fall
+                    </div>
+                    <div class="game-card_body_footer">
+                        <span class="game-card_body_footer_price">
+                            1 999 р
+                        </span>
+                        <a href="#" class="game-card_body_footer_button">
+                            В корзину
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="banner">
+        <div class="banner_body">
+            <div class="banner_body_description">
+                <div class="banner_body_description_text">Wolfenstein: The Two Pack</div>
+                <a href="#" class="banner_body_description_button">Подробнее</a>
+            </div>
+            <img src="{% static 'images/image2.png' %}" alt="" class="banner_body_img">
+        </div>
+        <div class="banner_background">
+            <img src="{% static 'images/image2.png' %}" alt="" class="banner_background-img">
+        </div>
+    </section>
+    <section class="section">
+        <div class="section_header">
+            <div class="section_header_title">Лучшие игры</div>
+            <div class="section_header_see-all"><a href="#">Посмотреть все</a></div>
+        </div>
+        <div class="section_games">
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+                <div class="game-card_body">
+                    <div class="game-card_body_header">
+                        Killzone: shadow fall
+                    </div>
+                    <div class="game-card_body_footer">
+                        <span class="game-card_body_footer_price">
+                            1 999 р
+                        </span>
+                        <a href="#" class="game-card_body_footer_button">
+                            В корзину
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+                <div class="game-card_body">
+                    <div class="game-card_body_header">
+                        Killzone: shadow fall
+                    </div>
+                    <div class="game-card_body_footer">
+                        <span class="game-card_body_footer_price">
+                            1 999 р
+                        </span>
+                        <a href="#" class="game-card_body_footer_button">
+                            В корзину
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+                <div class="game-card_body">
+                    <div class="game-card_body_header">
+                        Killzone: shadow fall
+                    </div>
+                    <div class="game-card_body_footer">
+                        <span class="game-card_body_footer_price">
+                            1 999 р
+                        </span>
+                        <a href="#" class="game-card_body_footer_button">
+                            В корзину
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+                <div class="game-card_body">
+                    <div class="game-card_body_header">
+                        Killzone: shadow fall
+                    </div>
+                    <div class="game-card_body_footer">
+                        <span class="game-card_body_footer_price">
+                            1 999 р
+                        </span>
+                        <a href="#" class="game-card_body_footer_button">
+                            В корзину
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="banner">
+        <div class="banner_body">
+            <div class="banner_body_description">
+                <div class="banner_body_description_text">Wolfenstein: The Two Pack</div>
+                <a href="#" class="banner_body_description_button">Подробнее</a>
+            </div>
+            <img src="{% static 'images/image2.png' %}" alt="" class="banner_body_img">
+        </div>
+        <div class="banner_background">
+            <img src="{% static 'images/image2.png' %}" alt="" class="banner_background-img">
+        </div>
+    </section>
+    <section class="soon section">
+        <div class="section_header">
+            <div class="section_header_title">Скоро в продаже</div>
+            <div class="section_header_see-all"><a href="#">Посмотреть все</a></div>
+        </div>
+        <div class="section_games">
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-card_cover">
+                    <img src="{% static 'images/game_cover.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main>
+<footer class="footer">
+    <section class="footer_inner">
+        <div class="footer_inner_contacts">
+            <div class="footer_inner_contacts_address">
+                <div class="footer_inner_contacts_address_title">
+                    Наши контакты:
+                </div>
+                <div class="footer_inner_contacts_address_item">
+                    <span>Москва, ул. Москворечье</span>
+                    <span>+7 777 777 77 77</span>
+                </div>
+            </div>
+            <div class="footer_inner_contacts_social">
+                <a href="#"><i class="fab fa-instagram icon__social"></i></a>
+                <a href="#"><i class="fab fa-whatsapp icon__social"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane icon__social"></i></a>
+                <a href="#"><i class="fab fa-viber icon__social"></i></a>
+            </div>
+        </div>
+        <div class="footer_inner_copyright">
+            © 2021, Ps shop. Все права сохранены.
+        </div>
+    </section>
+</footer>
 {% endblock content %}
