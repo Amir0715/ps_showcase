@@ -1,3 +1,4 @@
+{% load static %}
 <footer class="footer">
     <section class="footer_inner centered">
         <div class="footer_inner_contacts">
@@ -6,15 +7,15 @@
                     Наши контакты:
                 </div>
                 <div class="footer_inner_contacts_address_item">
-                    <span>Москва, ул. Москворечье</span>
+                    <address>Москва, ул. Москворечье</address>
                     <span>+7 777 777 77 77</span>
                 </div>
             </div>
             <div class="footer_inner_contacts_social">
-                <a href="#"><i class="fab fa-instagram icon__social"></i></a>
-                <a href="#"><i class="fab fa-whatsapp icon__social"></i></a>
-                <a href="#"><i class="fab fa-telegram-plane icon__social"></i></a>
-                <a href="#"><i class="fab fa-viber icon__social"></i></a>
+                <a href="#"><img src="{% static 'images/instagram.svg' %}" class="icon__social_footer_instagram"></a>
+                <a href="#"><img src="{% static 'images/whatsapp.svg' %}" class="icon__social_footer_whatsapp"></a>
+                <a href="#"><img src="{% static 'images/telegram.svg' %}" class="icon__social_footer_telegram"></a>
+                <a href="#"><img src="{% static 'images/viber.svg' %}" class="icon__social_footer_viber"></a>
             </div>
         </div>
         <div class="footer_inner_copyright">

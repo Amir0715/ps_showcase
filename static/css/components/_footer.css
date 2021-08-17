@@ -32,6 +32,9 @@ a {
         font-weight: 700; }
       .footer_inner_contacts_address_item {
         margin-top: 15px; }
+        .footer_inner_contacts_address_item address {
+          margin-bottom: 10px;
+          display: block; }
         .footer_inner_contacts_address_item span {
           margin-bottom: 10px;
           display: block; }

@@ -1,3 +1,4 @@
+{% load static %}
 <header class="header">
     <div class="header_flex-wraper">
         <div class="header_flex-wraper__left">
@@ -27,17 +28,16 @@
         </div>
         <div class="header_flex-wraper__right">
             <div class="header_flex-wraper__right__social">
-                <a href="#"><i class="fab fa-instagram icon__social"></i></a>
-                <a href="#"><i class="fab fa-whatsapp icon__social"></i></a>
-                <a href="#"><i class="fab fa-telegram-plane icon__social"></i></a>
-                <a href="#"><i class="fab fa-viber icon__social"></i></a>
+                <a href="#"><img src="{% static 'images/instagram.svg' %}" class="icon__social_instagram"></a>
+                <a href="#"><img src="{% static 'images/whatsapp.svg' %}" class="icon__social_whatsapp"></a>
+                <a href="#"><img src="{% static 'images/telegram.svg' %}" class="icon__social_telegram"></a>
+                <a href="#"><img src="{% static 'images/viber.svg' %}" class="icon__social_viber"></a>
             </div>
             <div class="header_flex-wraper__right__search">
-                <input type="search" name="search" id="search" placeholder="поиск...">
-                <!-- <i class="fas fa-search icon__search"></i> -->
+                <input type="search" name="search" id="search" placeholder="Поиск...">
             </div>
             <div class="header_flex-wraper__right__cart">
-                <a href="#"><i class="fas fa-shopping-cart icon__cart"></i></a> <span class="cart_count">0</span>
+                <a href="#"><i class="fas fa-shopping-cart icon__cart"></i></a> <span class="icon__cart_count">0</span>
             </div>
         </div>
     </div>

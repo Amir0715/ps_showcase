@@ -1,10 +1,11 @@
 @import '../base/base';
 
-.header{
+.header {
     position: relative;
     z-index: 5;
     background-color: $base_color;
     box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+
     &_flex-wraper {
         height: 48px;
         display: flex;
@@ -17,25 +18,30 @@
             width: 50%;
             justify-content: space-between;
             display: flex;
-            
+
             &__logo {
                 font-weight: 700;
                 font-family: 'Montserrat Alternates', sans-serif;
                 margin: auto 15px;
-            };
+            }
+
+            ;
 
             &__navbar {
-                
+
                 &-list {
                     display: flex;
                     justify-content: space-between;
                     width: 400px;
+
                     a {
                         display: block;
                     }
-                    & > li{
+
+                    &>li {
                         position: relative;
                     }
+
                     &__second_list {
                         display: none;
                         position: absolute;
@@ -43,31 +49,38 @@
                         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
                         font-size: 20px;
                         width: 300px;
-                        & > li {
+
+                        &>li {
                             margin: 0px 10px;
                             padding: 5px;
+
                             &:hover {
                                 background-color: $ligth_grey_color;
                             }
+
                             &:first-child {
                                 margin-top: 10px;
                             }
+
                             &:last-child {
-                                margin-bottom: 10px;    
+                                margin-bottom: 10px;
                             }
                         }
+
                         & a {
                             color: #000;
                         }
 
                     }
-                    & > li:hover &__second_list { 
+
+                    &>li:hover &__second_list {
                         display: block;
                     }
                 }
-                
+
             }
         }
+
         &__right {
             width: 50%;
             margin: auto 15px;
@@ -75,40 +88,102 @@
 
             justify-content: flex-end;
             display: flex;
+
             &__social {
                 font-size: 30px;
                 width: 150px;
                 display: flex;
                 justify-content: space-between;
+
             }
 
             &__search {
                 align-items: center;
                 margin: 0px 30px;
+
                 input {
                     border: none;
                     border-radius: 5px;
-                    
+
                     height: 30px;
                     width: 190px;
                     padding: 0px 5px;
                     font-size: 18px;
 
                     &::placeholder {
-                        text-transform:capitalize;
                         color: $second_font_color;
-                    };
-                };
-            };
+                    }
 
-            &__cart {
-                .icon__cart{
-                    font-size: 30px;
+                    ;
                 }
-                .cart_count {
-                    font-size: 27px;
-                }
+
+                ;
             }
-        };
-    };
-};
+
+            ;
+
+            &__cart {}
+        }
+
+        ;
+    }
+
+    ;
+}
+
+;
+
+.icon {
+
+    &__social {
+        
+        &_instagram {
+            width: 25px;
+            height: 25px;
+        }
+
+        &_whatsapp {
+            width: 30px;
+            height: 30px;
+        }
+
+        &_telegram {
+            width: 25px;
+            height: 25px;
+        }
+
+        &_viber {
+            width: 30px;
+            height: 30px;
+        }
+        &_footer {
+            &_instagram {
+                width: 50px;
+                height: 50px;
+            }
+    
+            &_whatsapp {
+                width: 60px;
+                height: 60px;
+            }
+    
+            &_telegram {
+                width: 50px;
+                height: 50px;
+            }
+    
+            &_viber {
+                width: 60px;
+                height: 60px;
+            } 
+        }
+    }
+
+    &__cart {
+        font-size: 30px;
+
+        &_count {
+            font-size: 27px;
+        }
+    }
+}
