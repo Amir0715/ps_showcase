@@ -1,10 +1,14 @@
 @import '../base/base';
 
+.centered {
+    width: 1140px;
+    margin: 0px auto;
+}
+
 .content {}
 
 .section {
-    margin: 100px auto 0px;
-    width: 1140px;
+    margin-top: 100px;
 
     &_header {
         display: flex;
@@ -70,26 +74,16 @@
             }
         }
 
-        &_img {
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-        }
     }
 
     &_background {
-        overflow: hidden;
         height: 450px;
-
+        
         &-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            -webkit-filter: blur(20px);
-            -moz-filter: blur(20px);
-            -o-filter: blur(20px);
-            -ms-filter: blur(20px);
-            filter: blur(20px);
+            filter: brightness(70%)
         }
     }
 }
@@ -116,9 +110,7 @@
     background-color: $base_color;
 
     &_inner {
-        width: 1140px;
         height: 155px;
-        margin: 0px auto;
         padding: 35px 0px 10px;
         display: flex;
         flex-direction: column;
