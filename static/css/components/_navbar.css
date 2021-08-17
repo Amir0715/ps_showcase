@@ -9,9 +9,13 @@ a {
     border: 0;
     outline: none; }
 
+.centered {
+  width: 1140px;
+  margin: 0px auto; }
+
 .header {
   position: relative;
-  z-index: 10;
+  z-index: 5;
   background-color: #0072CE;
   box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25); }
   .header_flex-wraper {

@@ -9,6 +9,10 @@ a {
     border: 0;
     outline: none; }
 
+.centered {
+  width: 1140px;
+  margin: 0px auto; }
+
 .game-card {
   width: 270px;
   height: 350px;

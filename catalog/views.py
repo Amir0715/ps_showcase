@@ -37,3 +37,9 @@ class IndexView(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+class GameDetailView(View):
+    template_name = "game/game_detail.html"
+
+    def get(self, request):
+        return render(request, self.template_name)

@@ -9,6 +9,10 @@ a {
     border: 0;
     outline: none; }
 
+.centered {
+  width: 1140px;
+  margin: 0px auto; }
+
 .slideshow-container {
   position: relative;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);

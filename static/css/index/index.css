@@ -79,31 +79,4 @@ a {
   .soon .game-card_cover {
     height: 300px; }
 
-.footer {
-  margin-top: 100px;
-  height: 200px;
-  background-color: #0072CE; }
-  .footer_inner {
-    height: 155px;
-    padding: 35px 0px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-size: 18px; }
-    .footer_inner_contacts {
-      display: flex;
-      justify-content: space-between; }
-      .footer_inner_contacts_address_title {
-        font-size: 24px;
-        font-weight: 700; }
-      .footer_inner_contacts_address_item {
-        margin-top: 15px; }
-        .footer_inner_contacts_address_item span {
-          margin-bottom: 10px;
-          display: block; }
-      .footer_inner_contacts_social {
-        font-size: 38px; }
-        .footer_inner_contacts_social a {
-          margin-left: 5px; }
-
 /*# sourceMappingURL=index.css.map */

@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load sass_tags %}
+{% load static %}
+
+{% block styles %}
+<link type="text/css" rel="stylesheet" href="{% sass_src 'css/game/game_detail.scss' %}">
+
+{% endblock styles %}
+
+{% block content %}
+<main>
+    <div class="cover-container">
+        <img src="{% static 'images/image2.png' %}" alt="" class="cover-container_img">
+        <div class="cover-container_inner">
+            <div class="cover-container_inner_description">
+                <div class="cover-container_inner_description_text">Wolfenstein: The New Order</div>
+                <div class="cover-container_inner_description_flex-wraper">
+                    <div class="cover-container_inner_description_flex-wraper_price">1 999 р</div>
+                    <a href="{% url 'catalog:detail' %}"
+                        class="cover-container_inner_description_flex-wraper_button">Добавить в корзину</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="galery-container">
+        <a href="#" class="galery-container_left-arrow ">&#10094;</a>
+        <div class="galery-container_inner">
+            <img src="{% static 'images/image2.png' %}" class="galery-container_inner_img cursor"
+                onclick="openModal();currentSlide(1)">
+            <img src="{% static 'images/image2.png' %}" class="galery-container_inner_img cursor"
+                onclick="openModal();currentSlide(1)">
+            <img src="{% static 'images/image2.png' %}" class="galery-container_inner_img cursor"
+                onclick="openModal();currentSlide(1)">
+            <img src="{% static 'images/image2.png' %}" class="galery-container_inner_img cursor"
+                onclick="openModal();currentSlide(1)">
+        </div>
+        <a href="#" class="galery-container_rigth-arrow">&#10095;</a>
+    </div>
+    <div class="lightbox-container" id="lightbox">
+        <span class="lightbox-container_close cursor" onclick="closeModal()">X</span>
+        <div class="lightbox-container_body">
+            <div class="lightbox-container_body_slide">
+                <img src="{% static 'images/screenshot1.jpg' %}" class="lightbox-container_body_slide_img">
+                <img src="{% static 'images/screenshot2.jpg' %}" class="lightbox-container_body_slide_img">
+                <img src="{% static 'images/screenshot3.jpg' %}" class="lightbox-container_body_slide_img">
+                <img src="{% static 'images/screenshot4.jpg' %}" class="lightbox-container_body_slide_img">
+                <img src="{% static 'images/screenshot1.jpg' %}" class="lightbox-container_body_slide_img">
+                <img src="{% static 'images/screenshot3.jpg' %}" class="lightbox-container_body_slide_img">
+            </div>
+
+            <a class="lightbox-container_body_left-arrow cursor" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="lightbox-container_body_right-arrow cursor" onclick="plusSlides(1)">&#10095;</a>
+
+            <div class="lightbox-container_body_demos">
+                <img src="{% static 'images/screenshot1.jpg' %}" class="lightbox-container_body_demos_img cursor demo_img_active" onclick="currentSlide(1)">
+                <img src="{% static 'images/screenshot2.jpg' %}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide(2)">
+                <img src="{% static 'images/screenshot3.jpg' %}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide(3)">
+                <img src="{% static 'images/screenshot4.jpg' %}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide(4)">
+                <img src="{% static 'images/screenshot1.jpg' %}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide(5)">
+                <img src="{% static 'images/screenshot3.jpg' %}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide(6)">
+            </div>
+        </div>
+    </div>
+    <div class="info-container centered">
+        <div class="info-container_description">
+            <div class="info-container_description_header">
+                Описание
+            </div>
+            <div class="info-container_description_text">
+                Wolfenstein®: The New Order - это возрождение серии, которая когда-то положила начало жанру FPS.
+                Разрабатываемая студией Machine Games, в которой собрались опытные мастера, создавшие не одну знаменитую
+                игру, Wolfenstein представляет собой сочетание психологической драмы с захватывающим сюжетом,
+                приключениями и боевой системой от первого лица.
+
+                В напряженной, кинематографичной и графически очень достоверной (благодаря движку id Tech® 5 engine от
+                id® Software’s) игре Wolfenstein герой должен сокрушить нацистскую военную машину, покорившую всю
+                Европу. С помощью маленькой горстки уцелевших бойцов Сопротивления вам предстоит проникнуть на самые
+                секретные объекты Рейха, сразиться с легионами фашистских боевых роботов, взять под контроль
+                супер-оружие, покорившее всю Землю... и не только.
+
+                СЮЖЕТ:
+                Овладев доселе неизвестными супертехнологиями, нацистская Германия смогла переломить ход войны и
+                поставить на колени даже самые могущественные нации. Герой войны Б.Дж. Бласковиц провел 14 лет в коме, а
+                очнувшись, обнаружил, что на дворе 1960 год, Вторая мировая война проиграна, и нацисты правят миром
+                железной рукой. Вам предстоит стать Бласковицем - героем проигранной войны и единственным в мире
+                человеком, способным изменить ход истории.
+
+                ОСНОВНЫЕ ОСОБЕННОСТИ:
+                Приключенческий шутер
+                Wolfenstein - это сумасшедшие автогонки по горным трассам, спуск в морские глубины, сражения с боевыми
+                роботами фюрера и многое другое, из чего складывается поистине увлекательное приключение.
+                Сюжет и персонажи
+                Напряженные бои, сумасшедшие повороты сюжета и характерные персонажи сплавляются воедино в историю,
+                которая никого не оставит равнодушным.
+                Альтернативная история
+                Знакомые незнакомые послевоенные годы - мир, где нацисты победили во Второй мировой войне и исковеркали
+                все, до чего могли дотянуться.
+                Арсенал и противники
+                В тайных лабораториях рейха и на оружейных складах вы найдете новейшие образцы смертоносных игрушек
+                фюрера. Вооружившись ими, вы получите шанс справиться с гигантскими боевыми роботами, грозными
+                суперсолдатами и штурмовыми отрядами нацистов.
+            </div>
+        </div>
+        <div class="info-container_attributes">
+            <div class="info-container_attributes_header">
+
+            </div>
+            <ul class="info-container_attributes_list">
+                <li>
+                    <span class="info-container_attributes_list_key">Жанр :</span>
+                    <ul class="info-container_attributes_sublist">
+                        <li><span class="info-container_attributes_sublist_value">Шутер</span></li>
+                        <li><span class="info-container_attributes_sublist_value">От первого лица</span></li>
+                        <li><span class="info-container_attributes_sublist_value">Фантастика</span></li>
+                    </ul>
+                </li>
+                <li><span class="info-container_attributes_list_key">Дата выхода:</span>
+                    <ul class="info-container_attributes_sublist">
+                        <li><span class="info-container_attributes_sublist_value">2014 г</span></li>
+                    </ul>
+                </li>
+                <li><span class="info-container_attributes_list_key">Рейтинг:</span>
+                    <ul class="info-container_attributes_sublist">
+                        <li><span class="info-container_attributes_sublist_value">18+</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="banner-container centered">
+        <img src="{% static 'images/image2.png' %}" alt="" class="banner-container_img">
+        <div class="banner-container_text">
+            Wolfenstein: The New Order
+        </div>
+    </div>
+</main>
+<script src="{% static 'js/lightbox.js' %}"></script>
+{% endblock content %}

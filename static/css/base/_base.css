@@ -9,4 +9,8 @@ a {
     border: 0;
     outline: none; }
 
+.centered {
+  width: 1140px;
+  margin: 0px auto; }
+
 /*# sourceMappingURL=_base.css.map */
