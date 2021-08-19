@@ -36,6 +36,7 @@ main {}
             font-size: 38px;
 
             &_text {
+                @include latoFont(600);
                 line-height: 80px;
             }
 
@@ -205,6 +206,7 @@ main {}
         padding: 25px 50px 130px;
 
         &_header {
+            @include rabotoFont(400);
             padding-bottom: 10px;
             margin-bottom: 15px;
             color: $base_color !important;
@@ -246,7 +248,7 @@ main {}
 
             &_key {
                 font-size: 16px;
-                font-weight: 700;
+                font-weight: 400;
             }
         }
 
@@ -278,6 +280,7 @@ main {}
     }
 
     &_text {
+        @include latoFont(700);
         position: absolute;
         margin: auto;
         top: 0;

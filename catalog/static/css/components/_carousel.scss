@@ -83,10 +83,12 @@
         margin-bottom: 20px;
         text-align: center;
         .text {
+            @include latoFont(600);
             font-size: 36px;
             text-shadow: 4px 4px 4px rgba($color: #000, $alpha: 1);
         }
         .button {
+            font-size: 20px;
             display: block;
             line-height: 35px;
             width: 200px;

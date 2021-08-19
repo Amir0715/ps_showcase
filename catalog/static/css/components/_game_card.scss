@@ -25,6 +25,7 @@
         flex-direction: column;
 
         &_header {
+            @include latoFont(500);
             text-align: center;
             font-size: 18px;
             height: 30px;

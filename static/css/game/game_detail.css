@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 * {
   color: #FFFFFF; }
 
@@ -12,6 +12,16 @@ a {
 .centered {
   width: 1140px;
   margin: 0px auto; }
+
+.button {
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  text-align: center; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300; }
 
 .cursor {
   cursor: pointer; }
@@ -40,6 +50,8 @@ a {
       right: 0px;
       font-size: 38px; }
       .cover-container_inner_description_text {
+        font-family: 'Lato', sans-serif;
+        font-weight: 600;
         line-height: 80px; }
       .cover-container_inner_description_flex-wraper {
         display: flex;
@@ -158,6 +170,8 @@ a {
     background-color: #f3f4f4;
     padding: 25px 50px 130px; }
     .info-container_description_header {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
       padding-bottom: 10px;
       margin-bottom: 15px;
       color: #0072CE !important;
@@ -186,7 +200,7 @@ a {
         list-style: disc; }
       .info-container_attributes_list_key {
         font-size: 16px;
-        font-weight: 700; }
+        font-weight: 400; }
     .info-container_attributes_sublist {
       margin: 10px 0px 10px 20px; }
       .info-container_attributes_sublist_value {
@@ -207,6 +221,8 @@ a {
     width: 100%;
     filter: brightness(60%); }
   .banner-container_text {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
     position: absolute;
     margin: auto;
     top: 0;

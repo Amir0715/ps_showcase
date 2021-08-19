@@ -47,14 +47,15 @@
         margin-right: auto;
 
         &_description {
+            
             position: absolute;
             bottom: 40px;
             right: 40px;
             margin-bottom: 20px;
             margin-right: 20px;
-            text-align: center;
-
+            
             &_text {
+                @include latoFont(600);
                 font-size: 36px;
                 text-shadow: 4px 4px 4px rgba($color: #000, $alpha: 1);
             }

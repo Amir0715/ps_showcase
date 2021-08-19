@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 * {
   color: #FFFFFF; }
 
@@ -12,6 +12,16 @@ a {
 .centered {
   width: 1140px;
   margin: 0px auto; }
+
+.button {
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  text-align: center; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300; }
 
 .section {
   margin-top: 100px; }
@@ -47,9 +57,10 @@ a {
       bottom: 40px;
       right: 40px;
       margin-bottom: 20px;
-      margin-right: 20px;
-      text-align: center; }
+      margin-right: 20px; }
       .banner_body_description_text {
+        font-family: 'Lato', sans-serif;
+        font-weight: 600;
         font-size: 36px;
         text-shadow: 4px 4px 4px black; }
       .banner_body_description_button {
