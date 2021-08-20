@@ -17,7 +17,10 @@ a {
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
+  background-color: #0072CE;
   text-align: center; }
+  .button:hover {
+    background-color: #005eaa; }
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -49,27 +52,31 @@ body {
         .header_flex-wraper__left__navbar-list a {
           display: block; }
         .header_flex-wraper__left__navbar-list > li {
-          position: relative; }
+          position: relative;
+          display: block;
+          cursor: pointer; }
+        .header_flex-wraper__left__navbar-list > li:hover i {
+          color: #ddd;
+          transform: rotate(-180deg); }
+        .header_flex-wraper__left__navbar-list > li:hover .header_flex-wraper__left__navbar-list__second_list-wraper {
+          display: block; }
         .header_flex-wraper__left__navbar-list__second_list {
-          display: none;
-          position: absolute;
           background-color: #F0F0F0;
-          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
           font-size: 20px;
-          width: 300px; }
+          width: 180px;
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+          padding: 10px; }
+          .header_flex-wraper__left__navbar-list__second_list-wraper {
+            position: absolute;
+            top: 20px;
+            padding-top: 20px;
+            display: none; }
           .header_flex-wraper__left__navbar-list__second_list > li {
-            margin: 0px 10px;
             padding: 5px; }
             .header_flex-wraper__left__navbar-list__second_list > li:hover {
               background-color: #E4E4E4; }
-            .header_flex-wraper__left__navbar-list__second_list > li:first-child {
-              margin-top: 10px; }
-            .header_flex-wraper__left__navbar-list__second_list > li:last-child {
-              margin-bottom: 10px; }
           .header_flex-wraper__left__navbar-list__second_list a {
             color: #000; }
-        .header_flex-wraper__left__navbar-list > li:hover .header_flex-wraper__left__navbar-list__second_list {
-          display: block; }
     .header_flex-wraper__right {
       width: 50%;
       margin: auto 15px;

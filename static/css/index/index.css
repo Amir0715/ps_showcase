@@ -17,7 +17,10 @@ a {
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
+  background-color: #0072CE;
   text-align: center; }
+  .button:hover {
+    background-color: #005eaa; }
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -33,6 +36,8 @@ body {
       color: #000; }
     .section_header_see-all a {
       color: #0072CE; }
+      .section_header_see-all a:hover {
+        color: #005eaa; }
   .section_games {
     display: flex;
     justify-content: space-between;

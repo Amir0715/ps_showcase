@@ -17,7 +17,10 @@ a {
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
+  background-color: #0072CE;
   text-align: center; }
+  .button:hover {
+    background-color: #005eaa; }
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -59,25 +62,49 @@ body {
   border-radius: 3px 0 0 3px; }
 
 /* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
+.show {
+  -webkit-animation-name: show;
   -webkit-animation-duration: 1.5s;
   -webkit-animation-timing-function: ease-in;
   animation-timing-function: ease-in;
-  animation-name: fade;
+  animation-name: show;
   animation-duration: 1.5s; }
 
-@-webkit-keyframes fade {
-  from {
-    opacity: .4; }
-  to {
+@-webkit-keyframes show {
+  0% {
+    opacity: 0; }
+  100% {
     opacity: 1; } }
 
-@keyframes fade {
-  from {
-    opacity: .4; }
-  to {
+@keyframes show {
+  0% {
+    opacity: 0; }
+  100% {
     opacity: 1; } }
+
+.hide {
+  -webkit-animation-name: hide;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-timing-function: ease-out;
+  -webkit-animation-delay: 1.5s;
+  -webkit-animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-name: hide;
+  animation-duration: 1.5s;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards; }
+
+@-webkit-keyframes hide {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes hide {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
 
 /* Caption text */
 .flex-wraper {
@@ -103,7 +130,6 @@ body {
       width: 200px;
       height: 35px;
       margin: 15px auto 0px;
-      background-color: #0072CE;
       border-radius: 8px;
       box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); }
 

@@ -19,6 +19,9 @@
         &_see-all {
             a {
                 color: $base_color;
+                &:hover {
+                    color: $hover_base_color;
+                }
             }
         }
     }
