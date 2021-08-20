@@ -1,50 +1,48 @@
-var slideIndex = 0;
-showSlides(slideIndex);
-
+var dots = document.getElementsByClassName("indicator");
+var slides = document.getElementsByClassName("slide");
+var curentIndex = slides.length - 1; // текущий индекс слайда
+var duration = 10000;
+plusSlide(1);
+var timeId = startTimer();
 // Next/previous controls
-function plusSlides(n) {
-    showSlides(slideIndex += n);
+function plusSlide(n) {
+    hideSlide();
+    if (curentIndex + n > slides.length - 1) {
+        curentIndex = 0
+    } else if (curentIndex + n < 0) {
+        curentIndex = slides.length - 1
+    } else {
+        curentIndex += n; 
+    }
+    showSlide();
 }
 
 // Thumbnail image controls
 function currentSlide(n) {
-    showSlides(slideIndex = n);
+    hideSlide();
+    curentIndex = n;
+    showSlide();
 }
 
-function showSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("slide");
-    var dots = document.getElementsByClassName("indicator");
-    if (n > slides.length) {
-        slideIndex = 1
-    }
-    if (n < 1) {
-        slideIndex = slides.length
-    }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex - 1].style.display = "block";
-    slides[slideIndex - 1].className += " show";
-    dots[slideIndex - 1].className += " active";
+function showSlide() {
+    console.log(curentIndex);
+    slides[curentIndex].style.display = "block";
+    dots[curentIndex].className += " active";
 }
 
-    /*
-    var slideIndex = 0;
-    showSlides();
+function hideSlide() {
+    console.log(curentIndex);
+    slides[curentIndex].style.display = "none";
+    dots[curentIndex].className = dots[curentIndex].className.replace(" active", "");
+}
 
-    function showSlides() {
-        var i;
-        var slides = document.getElementsByClassName("slide");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {slideIndex = 1}
-        slides[slideIndex-1].style.display = "block";
-        setTimeout(showSlides, 2000); // Change image every 2 seconds
-    } 
-    */
+function startTimer() {
+    return setInterval(() => {
+        plusSlide(1);
+    }, duration);
+}
+
+function resetTimer() {
+    clearInterval(timeId);
+    timeId = startTimer();
+}
