@@ -1,0 +1,73 @@
+@import '../base/base';
+
+.content {
+    margin-top: 100px;
+}
+
+.catalog {
+    grid-area: C;
+    &_header {
+        font-size: 24px;
+
+        &_title {
+            color: $dark_font_color;
+        }
+    }
+
+    &_grid {
+        margin-top: 30px;
+        display: grid;
+        row-gap: 20px;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-areas: 'S C C C';
+}
+
+.filter {
+    padding: 0px 20px;
+    width: 180px;
+    grid-area: S;
+    color: $dark_font_color;
+    &_group {
+        margin-bottom: 20px;
+        &_header {
+            margin-bottom: 10px;
+            &_title {
+                color: $dark_font_color;
+                font-size: 20px;
+            }
+        }
+        &_items {
+            &_label {
+                position: relative;
+                cursor: pointer;
+                padding: 5px 0px 5px 25px;
+                height: 16px;
+                &_icon {
+                    height: 16px;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    margin: auto 0px;
+                }
+                &_input {
+                    display: none;
+                }
+                &_text {
+                    font-size: 16px;
+                    line-height: 16px;
+                    display: inline-block;
+
+                    color: $dark_font_color;
+                }
+            }
+        }
+    }
+}

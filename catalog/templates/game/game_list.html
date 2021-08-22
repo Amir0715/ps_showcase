@@ -1,0 +1,460 @@
+{% extends 'base.html' %}
+{% load sass_tags %}
+{% load static %}
+
+{% block styles %}
+<link type="text/css" rel="stylesheet" href="{% sass_src 'css/components/_carousel.scss' %}" />
+<link type="text/css" rel="stylesheet" href="{% sass_src 'css/components/_game_card.scss' %}">
+<link type="text/css" rel="stylesheet" href="{% sass_src 'css/game/game_list.scss' %}">
+{% endblock styles %}
+
+
+{% block content %}
+{% include 'component/carousel.html' %}
+
+<main class="content">
+    <div class="centered grid">
+        <div class="catalog grid_item">
+            <div class="catalog_header">
+                <div class="catalog_header_title">Новые игры</div>
+            </div>
+            <div class="catalog_grid">
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game-card">
+                    <a href="#">
+                        <div class="game-card_cover">
+                            <img src="{% static 'images/game_cover.png' %}" alt="">
+                        </div>
+                        <div class="game-card_body">
+                            <div class="game-card_body_header">
+                                Killzone: shadow fall
+                            </div>
+                            <div class="game-card_body_footer">
+                                <span class="game-card_body_footer_price">
+                                    1 999 р
+                                </span>
+                                <a href="#" class="game-card_body_footer_button">
+                                    В корзину
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="filter grid_item">
+            <div class="filter_group">
+                <div class="filter_group_header">
+                    <div class="filter_group_header_title">Цена</div>
+                </div>
+                <div class="filter_group_items">
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="p1" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            Любая
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="p2" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            До 500 р
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="p3" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            До 700 р
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="p4" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            До 1000 р
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="p5" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            До 1500 р
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="p6" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            До 2500 р
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter_group">
+                <div class="filter_group_header">
+                    <div class="filter_group_header_title">Жанры</div>
+                </div>
+                <div class="filter_group_items">
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="g1" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            Все игры
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="g2" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            Ролевые игры
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="g3" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            Симуляторы
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="g4" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            Гонки
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="g5" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            Спорт
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="g6" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            Экшен
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="g7" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            Шутер
+                        </div>
+                    </div>
+                    <div class="filter_group_items_label">
+                        <img src="{% static 'images/blank-check-box.svg' %}" alt="" class="filter_group_items_label_icon">
+                        <input type="radio" name="price" id="g8" class="filter_group_items_label_input">
+                        <div class="filter_group_items_label_text">
+                            Приключение
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

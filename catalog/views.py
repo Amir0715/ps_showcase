@@ -43,3 +43,9 @@ class GameDetailView(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+class GameListView(View):
+    template_name = "game/game_list.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
