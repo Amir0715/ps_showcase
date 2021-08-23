@@ -10,13 +10,13 @@
 {% block content %}
 <main>
     <div class="cover-container">
-        <img src="{% static 'images/image2.png' %}" alt="" class="cover-container_img">
+        <img src="{{ game.get_cover.image.url }}" alt="" class="cover-container_img">
         <div class="cover-container_inner">
             <div class="cover-container_inner_description">
-                <div class="cover-container_inner_description_text">Wolfenstein: The New Order</div>
+                <div class="cover-container_inner_description_text">{{ game.name }}</div>
                 <div class="cover-container_inner_description_flex-wraper">
-                    <div class="cover-container_inner_description_flex-wraper_price">1 999 р</div>
-                    <a href="{% url 'catalog:detail' %}"
+                    <div class="cover-container_inner_description_flex-wraper_price">{{ game.price }} р</div>
+                    <a href="#"
                         class="cover-container_inner_description_flex-wraper_button button">Добавить в корзину</a>
                 </div>
             </div>
@@ -25,39 +25,38 @@
     <div class="galery-container">
         <a href="#" class="galery-container_left-arrow ">&#10094;</a>
         <div class="galery-container_inner">
-            <img src="{% static 'images/image2.png' %}" class="galery-container_inner_img cursor"
-                onclick="openModal();currentSlide(1)">
-            <img src="{% static 'images/image2.png' %}" class="galery-container_inner_img cursor"
-                onclick="openModal();currentSlide(1)">
-            <img src="{% static 'images/image2.png' %}" class="galery-container_inner_img cursor"
-                onclick="openModal();currentSlide(1)">
-            <img src="{% static 'images/image2.png' %}" class="galery-container_inner_img cursor"
-                onclick="openModal();currentSlide(1)">
+            
+            {% for image in game.images.all %}
+            <img src="{{ image.image.url }}" class="galery-container_inner_img cursor"
+            onclick="openModal();currentSlide({{ forloop.counter }})">
+            {% endfor %}
+                
         </div>
         <a href="#" class="galery-container_rigth-arrow">&#10095;</a>
     </div>
+
     <div class="lightbox-container" id="lightbox">
         <span class="lightbox-container_close cursor" onclick="closeModal()">X</span>
         <div class="lightbox-container_body">
+
             <div class="lightbox-container_body_slide">
-                <img src="{% static 'images/screenshot1.jpg' %}" class="lightbox-container_body_slide_img">
-                <img src="{% static 'images/screenshot2.jpg' %}" class="lightbox-container_body_slide_img">
-                <img src="{% static 'images/screenshot3.jpg' %}" class="lightbox-container_body_slide_img">
-                <img src="{% static 'images/screenshot4.jpg' %}" class="lightbox-container_body_slide_img">
-                <img src="{% static 'images/screenshot1.jpg' %}" class="lightbox-container_body_slide_img">
-                <img src="{% static 'images/screenshot3.jpg' %}" class="lightbox-container_body_slide_img">
+                {% for image in game.images.all %}
+                <img src="{{ image.image.url }}" class="lightbox-container_body_slide_img">
+                {% endfor %}
             </div>
 
             <a class="lightbox-container_body_left-arrow cursor" onclick="plusSlides(-1)">&#10094;</a>
             <a class="lightbox-container_body_right-arrow cursor" onclick="plusSlides(1)">&#10095;</a>
 
             <div class="lightbox-container_body_demos">
-                <img src="{% static 'images/screenshot1.jpg' %}" class="lightbox-container_body_demos_img cursor demo_img_active" onclick="currentSlide(1)">
-                <img src="{% static 'images/screenshot2.jpg' %}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide(2)">
-                <img src="{% static 'images/screenshot3.jpg' %}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide(3)">
-                <img src="{% static 'images/screenshot4.jpg' %}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide(4)">
-                <img src="{% static 'images/screenshot1.jpg' %}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide(5)">
-                <img src="{% static 'images/screenshot3.jpg' %}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide(6)">
+                {% for image in game.images.all %}
+                
+                {% if forloop.first %}
+                <img src="{{ image.image.url }}" class="lightbox-container_body_demos_img cursor demo_img_active" onclick="currentSlide({{ forloop.counter }})">    
+                {% else %}
+                <img src="{{ image.image.url }}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide({{ forloop.counter }})">  
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -67,38 +66,7 @@
                 Описание
             </div>
             <div class="info-container_description_text">
-                Wolfenstein®: The New Order - это возрождение серии, которая когда-то положила начало жанру FPS.
-                Разрабатываемая студией Machine Games, в которой собрались опытные мастера, создавшие не одну знаменитую
-                игру, Wolfenstein представляет собой сочетание психологической драмы с захватывающим сюжетом,
-                приключениями и боевой системой от первого лица.
-
-                В напряженной, кинематографичной и графически очень достоверной (благодаря движку id Tech® 5 engine от
-                id® Software’s) игре Wolfenstein герой должен сокрушить нацистскую военную машину, покорившую всю
-                Европу. С помощью маленькой горстки уцелевших бойцов Сопротивления вам предстоит проникнуть на самые
-                секретные объекты Рейха, сразиться с легионами фашистских боевых роботов, взять под контроль
-                супер-оружие, покорившее всю Землю... и не только.
-
-                СЮЖЕТ:
-                Овладев доселе неизвестными супертехнологиями, нацистская Германия смогла переломить ход войны и
-                поставить на колени даже самые могущественные нации. Герой войны Б.Дж. Бласковиц провел 14 лет в коме, а
-                очнувшись, обнаружил, что на дворе 1960 год, Вторая мировая война проиграна, и нацисты правят миром
-                железной рукой. Вам предстоит стать Бласковицем - героем проигранной войны и единственным в мире
-                человеком, способным изменить ход истории.
-
-                ОСНОВНЫЕ ОСОБЕННОСТИ:
-                Приключенческий шутер
-                Wolfenstein - это сумасшедшие автогонки по горным трассам, спуск в морские глубины, сражения с боевыми
-                роботами фюрера и многое другое, из чего складывается поистине увлекательное приключение.
-                Сюжет и персонажи
-                Напряженные бои, сумасшедшие повороты сюжета и характерные персонажи сплавляются воедино в историю,
-                которая никого не оставит равнодушным.
-                Альтернативная история
-                Знакомые незнакомые послевоенные годы - мир, где нацисты победили во Второй мировой войне и исковеркали
-                все, до чего могли дотянуться.
-                Арсенал и противники
-                В тайных лабораториях рейха и на оружейных складах вы найдете новейшие образцы смертоносных игрушек
-                фюрера. Вооружившись ими, вы получите шанс справиться с гигантскими боевыми роботами, грозными
-                суперсолдатами и штурмовыми отрядами нацистов.
+                {{ game.description }}
             </div>
         </div>
         <div class="info-container_attributes">
@@ -128,9 +96,9 @@
         </div>
     </div>
     <div class="banner-container centered">
-        <img src="{% static 'images/image2.png' %}" alt="" class="banner-container_img">
+        <img src="{{ game.get_cover.image.url }}" alt="" class="banner-container_img">
         <div class="banner-container_text">
-            Wolfenstein: The New Order
+            {{ game.name }}
         </div>
     </div>
 </main>

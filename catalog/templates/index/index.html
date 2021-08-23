@@ -7,29 +7,29 @@
 <link type="text/css" rel="stylesheet" href="{% sass_src 'css/index/index.scss' %}">
 
 {% endblock styles %}
-
-
 {% block content %}
 {% include 'component/carousel.html' %}
 <main class="content">
     <section class="section centered">
         <div class="section_header">
             <div class="section_header_title">Новые игры</div>
-            <div class="section_header_see-all"><a href="{% url 'catalog:game_list' %}">Посмотреть все</a></div>
+            <div class="section_header_see-all"><a href="{% url 'catalog:game_list' game_category.0.slug %}">Посмотреть
+                    все</a></div>
         </div>
         <div class="section_games">
+            {% for game in new_games %}
             <div class="game-card">
-                <a href="#">
+                <a href="{% url 'catalog:detail' game.slug %}">
                     <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
+                        <img src="{{ game.get_cover.image.url }}" alt="">
                     </div>
                     <div class="game-card_body">
                         <div class="game-card_body_header">
-                            Killzone: shadow fall
+                            {{ game.name }}
                         </div>
                         <div class="game-card_body_footer">
                             <span class="game-card_body_footer_price">
-                                1 999 р
+                                {{ game.price }}
                             </span>
                             <a href="#" class="game-card_body_footer_button">
                                 В корзину
@@ -38,97 +38,42 @@
                     </div>
                 </a>
             </div>
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                    <div class="game-card_body">
-                        <div class="game-card_body_header">
-                            Killzone: shadow fall
-                        </div>
-                        <div class="game-card_body_footer">
-                            <span class="game-card_body_footer_price">
-                                1 999 р
-                            </span>
-                            <a href="#" class="game-card_body_footer_button">
-                                В корзину
-                            </a>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                    <div class="game-card_body">
-                        <div class="game-card_body_header">
-                            Killzone: shadow fall
-                        </div>
-                        <div class="game-card_body_footer">
-                            <span class="game-card_body_footer_price">
-                                1 999 р
-                            </span>
-                            <a href="#" class="game-card_body_footer_button">
-                                В корзину
-                            </a>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                    <div class="game-card_body">
-                        <div class="game-card_body_header">
-                            Killzone: shadow fall
-                        </div>
-                        <div class="game-card_body_footer">
-                            <span class="game-card_body_footer_price">
-                                1 999 р
-                            </span>
-                            <a href="#" class="game-card_body_footer_button">
-                                В корзину
-                            </a>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            {% endfor %}
         </div>
     </section>
     <section class="banner">
         <div class="banner_body">
             <div class="banner_body_description">
-                <div class="banner_body_description_text">Wolfenstein: The Two Pack</div>
-                <a href="#" class="banner_body_description_button button">Подробнее</a>
+                <div class="banner_body_description_text">{{ banner_games.0.name }}</div>
+                <a href="{% url 'catalog:detail' banner_games.0.slug %}"
+                    class="banner_body_description_button button">Подробнее</a>
             </div>
         </div>
         <div class="banner_background">
-            <img src="{% static 'images/image2.png' %}" alt="" class="banner_background-img">
+            <img src="{{ banner_games.0.get_cover.image.url }}" alt="" class="banner_background-img">
         </div>
     </section>
     <section class="section centered">
         <div class="section_header">
             <div class="section_header_title">Лучшие игры</div>
-            <div class="section_header_see-all"><a href="{% url 'catalog:game_list' %}">Посмотреть все</a></div>
+            <div class="section_header_see-all"><a href="{% url 'catalog:game_list' game_category.0.slug %}">Посмотреть
+                    все</a></div>
         </div>
         <div class="section_games">
+
+            {% for game in best_games %}
             <div class="game-card">
-                <a href="#">
+                <a href="{% url 'catalog:detail' game.slug %}">
                     <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
+                        <img src="{{ game.get_cover.image.url }}" alt="">
                     </div>
                     <div class="game-card_body">
                         <div class="game-card_body_header">
-                            Killzone: shadow fall
+                            {{ game.name }}
                         </div>
                         <div class="game-card_body_footer">
                             <span class="game-card_body_footer_price">
-                                1 999 р
+                                {{ game.price }}
                             </span>
                             <a href="#" class="game-card_body_footer_button">
                                 В корзину
@@ -137,129 +82,37 @@
                     </div>
                 </a>
             </div>
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                    <div class="game-card_body">
-                        <div class="game-card_body_header">
-                            Killzone: shadow fall
-                        </div>
-                        <div class="game-card_body_footer">
-                            <span class="game-card_body_footer_price">
-                                1 999 р
-                            </span>
-                            <a href="#" class="game-card_body_footer_button">
-                                В корзину
-                            </a>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                    <div class="game-card_body">
-                        <div class="game-card_body_header">
-                            Killzone: shadow fall
-                        </div>
-                        <div class="game-card_body_footer">
-                            <span class="game-card_body_footer_price">
-                                1 999 р
-                            </span>
-                            <a href="#" class="game-card_body_footer_button">
-                                В корзину
-                            </a>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                    <div class="game-card_body">
-                        <div class="game-card_body_header">
-                            Killzone: shadow fall
-                        </div>
-                        <div class="game-card_body_footer">
-                            <span class="game-card_body_footer_price">
-                                1 999 р
-                            </span>
-                            <a href="#" class="game-card_body_footer_button">
-                                В корзину
-                            </a>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            {% endfor %}
         </div>
     </section>
     <section class="banner">
         <div class="banner_body">
             <div class="banner_body_description">
-                <div class="banner_body_description_text">Wolfenstein: The Two Pack</div>
-                <a href="#" class="banner_body_description_button button">Подробнее</a>
+                <div class="banner_body_description_text">{{ banner_games.1.name }}</div>
+                <a href="{% url 'catalog:detail' banner_games.1.slug %}" class="banner_body_description_button button">Подробнее</a>
             </div>
         </div>
         <div class="banner_background">
-            <img src="{% static 'images/image2.png' %}" alt="" class="banner_background-img">
+            <img src="{{ banner_games.1.get_cover.image.url }}" alt="" class="banner_background-img">
         </div>
     </section>
     <section class="soon section centered">
         <div class="section_header">
             <div class="section_header_title">Скоро в продаже</div>
-            <div class="section_header_see-all"><a href="#">Посмотреть все</a></div>
-        </div>
-        <div class="section_games">
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                </a>
-            </div>
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                </a>
-            </div>
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                </a>
-            </div>
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                </a>
-            </div>
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                </a>
-            </div>
-            <div class="game-card">
-                <a href="#">
-                    <div class="game-card_cover">
-                        <img src="{% static 'images/game_cover.png' %}" alt="">
-                    </div>
-                </a>
-            </div>
+            <div class="section_header_see-all"><a href="{% url 'catalog:game_list' game_category.0.slug %}">Посмотреть
+                    все</a></div>
         </div>
 
+        <div class="section_games">
+            {% for game in soon_games %}
+            <div class="game-card">
+                <a href="{% url 'catalog:detail' game.slug %}">
+                    <div class="game-card_cover">
+                        <img src="{{ game.get_cover.image.url }}" alt="">
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
     </section>
 </main>
 

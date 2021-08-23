@@ -1,4 +1,4 @@
-var dots = document.getElementsByClassName("indicator");
+// var dots = document.getElementsByClassName("indicator");
 var slides = document.getElementsByClassName("slide");
 var curentIndex = slides.length - 1; // текущий индекс слайда
 var duration = 10000;
@@ -27,13 +27,13 @@ function currentSlide(n) {
 function showSlide() {
     console.log(curentIndex);
     slides[curentIndex].style.display = "block";
-    dots[curentIndex].className += " active";
+    // dots[curentIndex].className += " active";
 }
 
 function hideSlide() {
     console.log(curentIndex);
     slides[curentIndex].style.display = "none";
-    dots[curentIndex].className = dots[curentIndex].className.replace(" active", "");
+    // dots[curentIndex].className = dots[curentIndex].className.replace(" active", "");
 }
 
 function startTimer() {

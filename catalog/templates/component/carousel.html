@@ -2,47 +2,26 @@
 <!-- Slideshow container -->
 <div class="slideshow-container">
 
-    <!-- Full-width images with number and caption text -->
+    {% for game in carousel_games %}
     <div class="slide fade">
-        <img src="{% static 'images/image1.png' %}">
+        <img src="{{ game.get_cover.image.url }}">
         <div class="flex-wraper">
             <div class="description">
-                <div class="text">Amazing Cultivation Simulator</div>
-                <a href="{% url 'catalog:detail' %}" class="button">Подробнее</a>
+                <div class="text">{{ game.name }}</div>
+                <a href="{% url 'catalog:detail' game.slug %}" class="button">Подробнее</a>
             </div>
         </div>
     </div>
-
-    <div class="slide fade">
-        <img src="{% static 'images/image2.png' %}">
-        <div class="flex-wraper">
-            <div class="description">
-                <div class="text">Ass</div>
-                <a href="{% url 'catalog:detail' %}" class="button">Подробнее</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="slide fade">
-        <img src="{% static 'images/image3.png' %}">
-        <div class="flex-wraper">
-            <div class="description">
-                <div class="text">Amazing Ass</div>
-                <a href="{% url 'catalog:detail' %}" class="button">Подробнее</a>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 
     <!-- Next and previous buttons -->
     <a class="prev" onclick="plusSlide(-1);resetTimer()">&#10094;</a>
     <a class="next" onclick="plusSlide(1);resetTimer()">&#10095;</a>
 </div>
 
-<!-- The dots/circles -->
+<!-- The dots/circles
 <div class="indicators">
     <span class="indicator" onclick="currentSlide(0)"></span>
     <span class="indicator" onclick="currentSlide(1)"></span>
     <span class="indicator" onclick="currentSlide(2)"></span>
-</div>
-
-<script src="{% static 'js/carousel.js' %}"></script>
+</div> -->
