@@ -5,9 +5,10 @@
     z-index: 5;
     background-color: $base_color;
     box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
+    height: 48px;
 
     &_flex-wraper {
-        height: 48px;
+        height: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -24,8 +25,6 @@
                 margin: auto 15px;
             }
 
-            ;
-
             &__navbar {
 
                 &-list {
@@ -34,32 +33,36 @@
                     width: 400px;
 
                     a {
-                        display: block;
+                        display: inline-block;
                     }
 
-                    &>li {
+                    & > li {
                         position: relative;
                         display: block;
                         cursor: pointer;
+                        & > div > a {
+                            text-transform: uppercase;
+                        }
                     }
 
-                    &>li:hover {
+                    & > li:hover {
                         i {
                             color: $dark_grey_color;
                             transform: rotate(-180deg);
                         }
                     }
 
-                    &>li:hover &__second_list-wraper {
+                    & > li:hover &__second_list-wraper {
                         display: block;
-                        
                     }
+
                     &__second_list {
                         background-color: #F0F0F0;
                         font-size: 20px;
                         width: 180px;
                         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
                         padding: 10px;
+
                         &-wraper {
                             position: absolute;
                             top: 20px;
@@ -67,7 +70,7 @@
                             display: none;
 
                         }
-                        
+
                         &>li {
                             padding: 5px;
 
@@ -78,11 +81,10 @@
 
                         & a {
                             color: #000;
+                            
                         }
 
                     }
-
-                    
                 }
 
             }
@@ -91,8 +93,6 @@
         &__right {
             width: 50%;
             margin: auto 15px;
-
-
             justify-content: flex-end;
             display: flex;
 
@@ -116,39 +116,40 @@
                     width: 190px;
                     padding: 0px 5px;
                     font-size: 18px;
-
+                    margin-right: 15px;
                     &::placeholder {
                         color: $second_font_color;
                     }
-
-                    ;
+                }
+                img {
+                    width: 25px;
+                    height: 24px;
                 }
 
-                ;
             }
 
-            ;
-
-            &__cart {}
+            &__menu {
+                display: none;
+            }
         }
 
-        ;
+
     }
 
-    ;
+
 }
 
-;
+
 
 .icon {
-    
+
     &__logo {
         width: 30px;
         height: 30px;
     }
 
     &__social {
-        
+
         &_instagram {
             width: 25px;
             height: 25px;
@@ -168,34 +169,200 @@
             width: 30px;
             height: 30px;
         }
+
         &_footer {
             &_instagram {
                 width: 50px;
                 height: 50px;
             }
-    
+
             &_whatsapp {
                 width: 60px;
                 height: 60px;
             }
-    
+
             &_telegram {
                 width: 50px;
                 height: 50px;
             }
-    
+
             &_viber {
                 width: 60px;
                 height: 60px;
-            } 
+            }
         }
     }
 
     &__cart {
-        font-size: 30px;
+        width: 25px;
+        height: 24px;
 
         &_count {
-            font-size: 27px;
+            font-size: 20px;
         }
+    }
+}
+
+
+@media only screen and (max-device-width : 767px) {
+    .header {
+        height: 40px;
+
+        &_flex-wraper {
+            &__left {
+                width: auto;
+                &__logo {
+                    img {
+                        width: 33px;
+                        height: 33px;
+                    }
+
+                    &__name {
+                        display: none;
+                    }
+                }
+
+                &__navbar {
+                    // меню
+                    position: fixed;
+                    top: -200%;
+                    left: 0;
+                    width: 100%;
+                    background-color: #F0F0F0;
+                    a {
+                        color: #000;
+                        font-size: 20px;
+                        text-transform: capitalize;
+                    }
+                    i { 
+                        color: $base_color;
+                        &.active {
+                            color: $dark_grey_color;
+                            transform: rotate(-180deg);
+                        }
+                    }
+                    &.active {
+                        top: 40px;
+                        box-shadow: 0px 10px 9px rgba(0, 0, 0, 0.5);
+                    }
+                    &-list {
+                        display: block;
+                        width: auto;
+                        margin: 20px 12px;
+                        & > li {
+                            margin-bottom: 10px;
+
+                            & >:first-child  { 
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                            }
+                        }
+                        &__second_list-wraper {
+                            width: auto;
+                            // margin: 15px 0px 0px 0px;
+                            padding: 0px;
+                            position: relative;
+                            top: 0;
+                            left: 0;
+                            &.active {
+                                display: block;
+                            }
+                        }
+                        &__second_list {
+                            padding: 0px 0px 0px 10px;
+                            box-shadow: none;
+
+                            // font-size: 20px;
+                            width: 100%;
+                            // display: block;
+                        }
+                    }
+                    
+                }
+            }
+
+            &__right {
+                width: auto;
+                margin-left: 0px;
+                &__social {
+                    display: none;
+                }
+
+                &__search {
+                    input {
+                        width: 130px;
+                        height: 24px;
+                        margin-right: 5px;
+                        display: none;
+                    }
+                    margin: 0px 15px 0px 0px;
+                }
+
+                &__cart {
+                    margin: 0px 20px 0px 0px;
+                    span {
+                        font-size: 18px;
+                        color: #90B3CE;
+                        line-height: 24px;
+                    }
+                    img {
+                        margin: 0px 3px 0px 0px;
+                    }
+                }
+                &__menu {
+                    // бургер
+                    display: block;
+                    position: relative;
+                    width: 30px;
+                    height: 24px;
+                    span {
+                        // центральная линия бургера
+                        position: absolute;
+                        background-color: #fff;
+                        width: 100%;
+                        height: 2px;
+                        left: 0px;
+                        top: 11px;
+                        transition: all 1s ease 0s;
+                    }
+                    &:before, &:after {
+                        content: "";
+                        background-color: #fff;
+                        position: absolute;
+                        width: 100%;
+                        height: 2px;
+                        left: 0px;
+                        transition: all 0.3s ease 0s;
+                    }
+                    &:before {
+                        // верхняя линия бургера
+                        top: 0px;
+                    }
+                    &:after {
+                        // нижняя линия бургера
+                        bottom: 0px; 
+                    }
+                    &.active {
+                        &:before {
+                            transform: rotate(45deg);
+                            top: 11px;
+                        }
+                        &:after {
+                            transform: rotate(-45deg);
+                            bottom: 11px;
+                        }
+                        span {
+                            left: -1000px;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    .content, .footer{
+        // TODO: CLEAR
+        display: none;
     }
 }

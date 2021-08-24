@@ -2,16 +2,17 @@
 <header class="header">
     <div class="header_flex-wraper">
         <div class="header_flex-wraper__left">
-            <div class="header_flex-wraper__left__logo"><a href="{% url 'catalog:index' %}"><img src="{% static 'images/logo_icon.svg' %}" class="icon__logo"> Ps Shop </a></div>
+            <div class="header_flex-wraper__left__logo"><a href="{% url 'catalog:index' %}"><img src="{% static 'images/logo_icon.svg' %}" class="icon__logo"><span class="header_flex-wraper__left__logo__name"> Ps Shop</span>  </a></div>
             <div class="header_flex-wraper__left__navbar">
                 <!-- menu -->
                 <ul class="header_flex-wraper__left__navbar-list">
                     <li>
-                        <a href="#">ИГРЫ <i class="fas fa-chevron-down icon__arrow_down"></i></a>
+                        <div>
+                            <a href="{% url 'catalog:game_list' %}">игры</a> <i class="fas fa-chevron-down icon__arrow_down drop_menu"></i>
+                        </div>
                         <!-- drop menu -->
                         <div class="header_flex-wraper__left__navbar-list__second_list-wraper">
                             <ul class="header_flex-wraper__left__navbar-list__second_list">
-                                
                                 {% for category in game_category %}
                                 <li><a href="{% url 'catalog:game_list' category.slug %}">{{ category.name }}</a></li>
                                 {% endfor %}
@@ -19,7 +20,9 @@
                         </div>
                     </li>
                     <li>
-                        <a href="#">КОНСОЛИ <i class="fas fa-chevron-down icon__arrow_down"></i></a>
+                        <div>
+                            <a href="#">консоли</a> <i class="fas fa-chevron-down icon__arrow_down drop_menu"></i>
+                        </div>
                         <div class="header_flex-wraper__left__navbar-list__second_list-wraper">
                             <ul class="header_flex-wraper__left__navbar-list__second_list">
                                 <li><a href="#">Новые игры</a></li>
@@ -40,9 +43,13 @@
             </div>
             <div class="header_flex-wraper__right__search">
                 <input type="search" name="search" id="search" placeholder="Поиск...">
+                <img src="{% static 'images/search_icon.svg' %}" class="icon__search">
             </div>
             <div class="header_flex-wraper__right__cart">
-                <a href="#"><i class="fas fa-shopping-cart icon__cart"></i></a> <span class="icon__cart_count">0</span>
+                <a href="#"><img src="{% static 'images/cart_icon.svg' %}" class="icon__cart"><span class="icon__cart_count">0</span></a>
+            </div>
+            <div class="header_flex-wraper__right__menu">
+                <span></span>
             </div>
         </div>
     </div>
