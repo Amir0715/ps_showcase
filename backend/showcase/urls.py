@@ -6,7 +6,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
-    path('', include('catalog.urls'))
+    path('dashboard/', include('dashboard.urls')),
+    path('', include('catalog.urls')),
 ] 
 
 # Для формирования маршрута для медиа файлов, только в отладочном режиме

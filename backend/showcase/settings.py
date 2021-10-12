@@ -38,6 +38,9 @@ INSTALLED_APPS = [
 
     # user model
     "user",
+    
+    # react app dashboard
+    "dashboard"
 ]
 
 MIDDLEWARE = [
@@ -50,12 +53,21 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^http(|s)://(127.0.0.1|localhost)(|:\d+)$",
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
+
 ROOT_URLCONF = 'showcase.urls'
+FRONT_DIR = '../frontend/build'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [FRONT_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,9 +131,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'catalog/static')
+    os.path.join(BASE_DIR, 'catalog/static'),
+    FRONT_DIR,
+    ('js', os.path.join(FRONT_DIR, 'static/js')),
+    ('css', os.path.join(FRONT_DIR, 'static/css')),
+    ('media', os.path.join(FRONT_DIR, 'static/media')),
 ]
+
 SASS_PROCESSOR_ROOT = STATIC_ROOT
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
