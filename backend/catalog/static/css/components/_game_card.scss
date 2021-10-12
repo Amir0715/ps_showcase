@@ -1,10 +1,10 @@
-@import '../base';
+@import "../base";
 
 .game-card {
     // mobile first
     width: 49%;
     margin-bottom: 20px;
-    
+
     @include for-tablet-up {
         width: 250px;
         margin: 10px;

@@ -5,10 +5,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='admin'),
-    path('dashboard/', include('dashboard.urls')),
-    path('', include('catalog.urls')),
-] 
+    path("admin/", admin.site.urls, name="admin"),
+    path("dashboard/", include("dashboard.urls")),
+    path("", include("catalog.urls")),
+]
 
 # Для формирования маршрута для медиа файлов, только в отладочном режиме
 if settings.DEBUG:

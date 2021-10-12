@@ -1,6 +1,7 @@
-@import '../base';
+@import "../base";
 
-main {}
+main {
+}
 
 .cursor {
     cursor: pointer;
@@ -59,7 +60,6 @@ main {}
                     flex-grow: 1;
                 }
             }
-
         }
     }
 }
@@ -190,11 +190,10 @@ main {}
                 }
             }
             .demo_img_active {
-                border: 2px solid $base_color ;
+                border: 2px solid $base_color;
             }
         }
     }
-
 }
 
 .info-container {
@@ -223,7 +222,7 @@ main {}
     }
 
     &_attributes {
-        background-color: #E8EAED;
+        background-color: #e8eaed;
         padding: 25px 30px;
         width: 255px;
 
@@ -241,7 +240,7 @@ main {}
         &_list {
             margin-left: 20px;
 
-            &>li {
+            & > li {
                 color: #004073;
                 list-style: disc;
             }

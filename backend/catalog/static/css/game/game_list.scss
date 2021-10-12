@@ -1,4 +1,4 @@
-@import '../base';
+@import "../base";
 
 .content {
     margin-top: 100px;
@@ -25,7 +25,7 @@
 
 .grid {
     display: grid;
-    grid-template-areas: 'S C C C';
+    grid-template-areas: "S C C C";
 }
 
 .filter {

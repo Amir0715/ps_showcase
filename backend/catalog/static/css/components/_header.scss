@@ -140,12 +140,12 @@
                         width: 33px;
                         height: 33px;
                     }
-    
+
                     &__name {
                         display: none;
                     }
                 }
-    
+
                 &__navbar {
                     // меню
                     position: fixed;
@@ -176,7 +176,7 @@
                         margin: 20px 12px;
                         & > li {
                             margin-bottom: 10px;
-    
+
                             & > :first-child {
                                 display: flex;
                                 justify-content: space-between;
@@ -200,14 +200,14 @@
                     }
                 }
             }
-    
+
             &__right {
                 width: auto;
                 margin-left: 0px;
                 &__social {
                     display: none;
                 }
-    
+
                 &__search {
                     input {
                         width: 130px;
@@ -217,7 +217,7 @@
                     }
                     margin: 0px 15px 0px 0px;
                 }
-    
+
                 &__cart {
                     margin: 0px 20px 0px 0px;
                     span {
@@ -334,23 +334,22 @@
                     width: 50px;
                     height: 50px;
                 }
-    
+
                 &_whatsapp {
                     width: 60px;
                     height: 60px;
                 }
-    
+
                 &_telegram {
                     width: 50px;
                     height: 50px;
                 }
-    
+
                 &_viber {
                     width: 60px;
                     height: 60px;
                 }
             }
-            
         }
     }
 

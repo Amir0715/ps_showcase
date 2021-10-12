@@ -2,13 +2,16 @@
 <header class="header">
     <div class="header_flex-wraper">
         <div class="header_flex-wraper__left">
-            <div class="header_flex-wraper__left__logo"><a href="{% url 'catalog:index' %}"><img src="{% static 'images/logo_icon.svg' %}" class="icon__logo"><span class="header_flex-wraper__left__logo__name"> Ps Shop</span>  </a></div>
+            <div class="header_flex-wraper__left__logo"><a href="{% url 'catalog:index' %}"><img
+                        src="{% static 'images/logo_icon.svg' %}" class="icon__logo"><span
+                        class="header_flex-wraper__left__logo__name"> Ps Shop</span> </a></div>
             <div class="header_flex-wraper__left__navbar">
                 <!-- menu -->
                 <ul class="header_flex-wraper__left__navbar-list">
                     <li>
                         <div>
-                            <a href="{% url 'catalog:game_list' %}">игры</a> <i class="fas fa-chevron-down icon__arrow_down drop_menu"></i>
+                            <a href="{% url 'catalog:game_list' %}">игры</a> <i
+                                class="fas fa-chevron-down icon__arrow_down drop_menu"></i>
                         </div>
                         <!-- drop menu -->
                         <div class="header_flex-wraper__left__navbar-list__second_list-wraper">
@@ -47,7 +50,8 @@
                 <img src="{% static 'images/search_icon.svg' %}" class="icon__search">
             </div>
             <div class="header_flex-wraper__right__cart">
-                <a href="#"><img src="{% static 'images/cart_icon.svg' %}" class="icon__cart"><span class="icon__cart_count">0</span></a>
+                <a href="#"><img src="{% static 'images/cart_icon.svg' %}" class="icon__cart"><span
+                        class="icon__cart_count">0</span></a>
             </div>
             <div class="header_flex-wraper__right__menu">
                 <span></span>

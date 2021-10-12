@@ -12,7 +12,7 @@ function plusSlide(n) {
     } else if (curentIndex + n < 0) {
         curentIndex = slides.length - 1
     } else {
-        curentIndex += n; 
+        curentIndex += n;
     }
     showSlide();
 }

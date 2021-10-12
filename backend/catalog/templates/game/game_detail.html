@@ -16,8 +16,8 @@
                 <div class="cover-container_inner_description_text">{{ game.name }}</div>
                 <div class="cover-container_inner_description_flex-wraper">
                     <div class="cover-container_inner_description_flex-wraper_price">{{ game.price }} р</div>
-                    <a href="#"
-                        class="cover-container_inner_description_flex-wraper_button button">Добавить в корзину</a>
+                    <a href="#" class="cover-container_inner_description_flex-wraper_button button">Добавить в
+                        корзину</a>
                 </div>
             </div>
         </div>
@@ -25,12 +25,12 @@
     <div class="galery-container">
         <a href="#" class="galery-container_left-arrow ">&#10094;</a>
         <div class="galery-container_inner">
-            
+
             {% for image in game.images.all %}
             <img src="{{ image.image.url }}" class="galery-container_inner_img cursor"
-            onclick="openModal();currentSlide({{ forloop.counter }})">
+                onclick="openModal();currentSlide({{ forloop.counter }})">
             {% endfor %}
-                
+
         </div>
         <a href="#" class="galery-container_rigth-arrow">&#10095;</a>
     </div>
@@ -50,11 +50,13 @@
 
             <div class="lightbox-container_body_demos">
                 {% for image in game.images.all %}
-                
+
                 {% if forloop.first %}
-                <img src="{{ image.image.url }}" class="lightbox-container_body_demos_img cursor demo_img_active" onclick="currentSlide({{ forloop.counter }})">    
+                <img src="{{ image.image.url }}" class="lightbox-container_body_demos_img cursor demo_img_active"
+                    onclick="currentSlide({{ forloop.counter }})">
                 {% else %}
-                <img src="{{ image.image.url }}" class="lightbox-container_body_demos_img cursor" onclick="currentSlide({{ forloop.counter }})">  
+                <img src="{{ image.image.url }}" class="lightbox-container_body_demos_img cursor"
+                    onclick="currentSlide({{ forloop.counter }})">
                 {% endif %}
                 {% endfor %}
             </div>
