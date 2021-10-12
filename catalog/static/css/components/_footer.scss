@@ -1,7 +1,12 @@
-@import '../base/base';
+@import "../base";
+
 .footer {
-    margin-top: 100px;
-    height: 200px;
+    height: 240px;
+    margin-top: 90px;
+    @include for-tablet-up {
+        margin-top: 100px;
+        height: 200px;
+    }
     background-color: $base_color;
 
     &_inner {
@@ -10,7 +15,9 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        font-size: 18px;
+        @include for-tablet-up {
+            font-size: 18px;
+        }
 
         &_contacts {
             display: flex;
@@ -19,7 +26,10 @@
             &_address {
                 &_title {
                     @include latoFont(600);
-                    font-size: 24px;
+                    font-size: 18px;
+                    @include for-tablet-up {
+                        font-size: 24px;
+                    }
                 }
 
                 &_item {
@@ -33,18 +43,24 @@
                         display: block;
                     }
                 }
-
             }
 
             &_social {
-                font-size: 38px;
-
+                font-size: 20px;
+                @include for-tablet-up {
+                    font-size: 38px;
+                }
                 a {
                     margin-left: 5px;
                 }
             }
         }
 
-        &_copyright {}
+        &_copyright {
+            font-size: 11px;
+            @include for-tablet-up {
+                font-size: 18px;
+            }
+        }
     }
 }

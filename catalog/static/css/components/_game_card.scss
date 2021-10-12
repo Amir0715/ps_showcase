@@ -1,18 +1,39 @@
-@import '../base/base';
+@import '../base';
 
 .game-card {
-    width: 270px;
-    height: 350px;
+    // mobile first
+    width: 49%;
+    margin-bottom: 20px;
+    
+    @include for-tablet-up {
+        width: 250px;
+        margin: 10px;
+    }
+
+    @include for-desktop-up {
+        width: 270px;
+        // height: 350px;
+        margin: 0px;
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+    }
+
     cursor: pointer;
     background-color: #f8fafb;
 
     &:hover {
         box-shadow: 0px 0px 10px rgba($color: #000, $alpha: 0.75);
-
     }
 
     &_cover {
-        height: 290px;
+        height: 160px;
+        @include for-desktop-up {
+            height: 290px;
+        }
+        @include for-desktop-up {
+            height: 290px;
+        }
 
         img {
             object-fit: cover;
@@ -24,31 +45,55 @@
     &_body {
         display: flex;
         flex-direction: column;
+
         &_header {
             @include latoFont(500);
             text-align: center;
-            font-size: 18px;
-            height: 30px;
-            line-height: 30px;
+            font-size: 12px;
+            line-height: 20px;
+            height: 20px;
+            display: none;
+            @include for-tablet-up {
+                display: block;
+                line-height: 30px;
+                height: 30px;
+                font-size: 18px;
+            }
             color: #000;
         }
 
         &_footer {
             display: flex;
-            height: 30px;
+            justify-content: space-between;
             text-align: center;
+            margin-top: 5px;
             line-height: 30px;
+            height: 30px;
+            @include for-tablet-up {
+                line-height: 30px;
+                height: 30px;
+                font-size: 18px;
+            }
 
             &_price {
                 color: #000;
+                font-size: 14px;
                 display: block;
-                width: 130px;
+                width: 70px;
+                @include for-tablet-up {
+                    width: 130px;
+                    font-size: 18px;
+                }
             }
-
             &_button {
                 display: block;
                 background-color: $base_color;
-                width: 140px;
+                width: 120px;
+                font-size: 14px;
+                @include for-tablet-up {
+                    width: 140px;
+                    font-size: 18px;
+                }
                 &:hover {
                     background-color: $hover_base_color;
                 }

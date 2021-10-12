@@ -1,21 +1,23 @@
-@import '../base/base';
+@import "../base";
 
 $animation_duration: 10s;
 
 .slideshow-container {
     position: relative;
-    box-shadow: 0px 4px 10px rgba($color: #000, $alpha: 0.25);;
+    box-shadow: 0px 4px 10px rgba($color: #000, $alpha: 0.25);
     margin: auto;
 }
 
 .slide {
     display: none;
-    height: 60vh;
+    height: 280px;
+    @include for-tablet-up {
+        height: 60vh;
+    }
     img {
         object-fit: cover;
         height: 100%;
         width: 100%;
-        
     }
 }
 
@@ -29,12 +31,19 @@ $animation_duration: 10s;
     padding: 16px;
     color: $font_color;
     font-weight: bold;
-    font-size: 34px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
-    
     &:hover {
-        color:$base_color;
+        color: $base_color;
+    }
+    @include for-phone-only {
+        font-size: 20px;
+    }
+    @include for-tablet-up {
+        font-size: 26px;
+    }
+    @include for-desktop-up {
+        font-size: 34px;
     }
 }
 
@@ -48,15 +57,14 @@ $animation_duration: 10s;
 .fade {
     -webkit-animation-name: fade;
     -webkit-animation-duration: $animation_duration;
-    -webkit-animation-timing-function: cubic-bezier(.65,.05,.36,1);
-    animation-timing-function: cubic-bezier(.65,.05,.36,1);
+    -webkit-animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
+    animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
     animation-name: fade;
     animation-duration: $animation_duration;
-
 }
 
 @-webkit-keyframes fade {
-    from, 
+    from,
     to {
         opacity: 0;
     }
@@ -67,7 +75,7 @@ $animation_duration: 10s;
 }
 
 @keyframes fade {
-    from, 
+    from,
     to {
         opacity: 0;
     }
@@ -77,35 +85,49 @@ $animation_duration: 10s;
     }
 }
 
-
 /* Caption text */
-.flex-wraper{
+.flex-wraper {
     display: flex;
     justify-content: center;
     position: absolute;
-    bottom: 30px;
+    bottom: 15px;
     width: 100%;
+    @include for-tablet-up {
+        bottom: 30px;
+    }
     .description {
         color: $font_color;
         padding: 8px 12px;
-        margin-bottom: 20px;
+        @include for-tablet-up {
+            margin-bottom: 20px;
+        }
         text-align: center;
         .text {
             @include latoFont(600);
-            font-size: 36px;
+            font-size: 20px;
+            @include for-tablet-up {
+                font-size: 36px;
+            }
             text-shadow: 4px 4px 4px rgba($color: #000, $alpha: 1);
         }
         .button {
-            font-size: 20px;
             display: block;
-            line-height: 35px;
-            width: 200px;
-            height: 35px;
-            margin: 15px auto 0px; 
-            border-radius: 8px;
+            font-size: 12px;
+            height: 30px;
+            width: 120px;
+            line-height: 30px;
+            border-radius: 4px;
+            margin: 15px auto 0px;
+            @include for-tablet-up {
+                font-size: 20px;
+                line-height: 35px;
+                width: 200px;
+                border-radius: 8px;
+                height: 35px;
+            }
+
             box-shadow: 4px 4px 4px rgba($color: #000, $alpha: 0.5);
         }
-
     }
 }
 

@@ -129,6 +129,8 @@ STATICFILES_FINDERS = [
     "sass_processor.finders.CssFinder",
 ]
 
+SASS_OUTPUT_STYLE = 'compact'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

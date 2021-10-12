@@ -1,17 +1,21 @@
-@import '../base/base';
+@import "../base";
 
-
-
-.content {}
+.content {
+}
 
 .section {
-    margin-top: 100px;
+    margin-top: 50px;
+    @include for-tablet-up {
+        margin-top: 100px;
+    }
 
     &_header {
         display: flex;
         justify-content: space-between;
-        font-size: 24px;
-
+        font-size: 18px;
+        @include for-tablet-up {
+            font-size: 24px;
+        }
         &_title {
             color: #000;
         }
@@ -28,63 +32,85 @@
 
     &_games {
         display: flex;
+        flex-wrap: wrap;
+        @include for-tablet-up {
+            justify-content: center;
+            margin-top: 20px;
+        }
         justify-content: space-between;
         margin-top: 30px;
     }
 }
 
 .banner {
-    margin-top: 100px;
+    @include for-tablet-up {
+        margin-top: 100px;
+        height: 450px;
+    }
+    height: 220px;
+    margin-top: 50px;
     width: 100%;
-    height: 450px;
     position: relative;
 
     &_body {
         position: absolute;
         z-index: 10;
-        width: 1140px;
-        height: 450px;
+        width: 90%;
+        @include for-desktop-up {
+            width: 1140px;
+        }
+        height: 100%;
         left: 0;
         right: 0;
         margin-left: auto;
         margin-right: auto;
-
         &_description {
-            
             position: absolute;
-            bottom: 40px;
-            right: 40px;
-            margin-bottom: 20px;
-            margin-right: 20px;
-            
+            width: 100%;
+            bottom: 15px;
+            @include for-tablet-up {
+                right: 40px;
+                bottom: 40px;
+                margin-bottom: 20px;
+                margin-right: 20px;
+                display: block;
+                width: initial;
+            }
+            display: flex;
+            justify-content: space-between;
             &_text {
                 @include latoFont(600);
-                font-size: 36px;
+                font-size: 16px;
+                @include for-tablet-up {
+                    font-size: 36px;
+                }
                 text-shadow: 4px 4px 4px rgba($color: #000, $alpha: 1);
             }
-
             &_button {
                 display: block;
-                line-height: 35px;
-                width: 200px;
-                height: 35px;
-                margin: 15px auto 0px;
+                width: 120px;
+                height: 30px;
+                line-height: 30px;
+                @include for-tablet-up {
+                    line-height: 35px;
+                    width: 200px;
+                    height: 35px;
+                    margin: 15px auto 0px;
+                }
                 background-color: $base_color;
-                border-radius: 8px;
+                border-radius: 4px;
                 box-shadow: 4px 4px 4px rgba($color: #000, $alpha: 0.5);
             }
         }
-
     }
-
     &_background {
-        height: 450px;
-        
+        height: 100%;
+
         &-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(70%)
+            filter: brightness(70%);
         }
     }
 }
@@ -93,14 +119,17 @@
     .section_games {
         flex-wrap: wrap;
     }
-
     .game-card {
-        width: 300px;
-        height: 300px;
-        margin-bottom: 50px;
-
-        &_cover {
+        width: 160px;
+        height: 160px;
+        margin-bottom: 20px;
+        @include for-tablet-up {
+            width: 300px;
             height: 300px;
+            margin-bottom: 50px;
+        }
+        &_cover {
+            height: 100%;
         }
     }
 }

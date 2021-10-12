@@ -1,134 +1,75 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
-* {
-  color: #FFFFFF; }
+@import url(./reset/reset.css);
+* { color: #ffffff; }
 
-a {
-  text-decoration: none;
-  outline: none !important; }
-  a:active {
-    border: 0;
-    outline: none; }
+a { text-decoration: none; outline: none !important; }
 
-.centered {
-  width: 1140px;
-  margin: 0px auto; }
+a:active { border: 0; outline: none; }
 
-.button {
-  font-size: 20px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  background-color: #0072CE;
-  text-align: center; }
-  .button:hover {
-    background-color: #005eaa; }
+.centered { margin: 0px auto; }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300; }
+@media (max-width: 599px) { .centered { width: 90%; } }
 
-.slideshow-container {
-  position: relative;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-  margin: auto; }
+@media (min-width: 600px) { .centered { width: 90%; } }
 
-.slide {
-  display: none;
-  height: 60vh; }
-  .slide img {
-    object-fit: cover;
-    height: 100%;
-    width: 100%; }
+@media (min-width: 1200px) { .centered { width: 1140px; } }
 
-.prev,
-.next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: #FFFFFF;
-  font-weight: bold;
-  font-size: 34px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0; }
-  .prev:hover,
-  .next:hover {
-    color: #0072CE; }
+.button { font-size: 20px; font-family: "Roboto", sans-serif; font-weight: 400; background-color: #0072ce; text-align: center; }
+
+.button:hover { background-color: #005eaa; }
+
+body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
+
+.slideshow-container { position: relative; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25); margin: auto; }
+
+.slide { display: none; height: 280px; }
+
+@media (min-width: 600px) { .slide { height: 60vh; } }
+
+.slide img { object-fit: cover; height: 100%; width: 100%; }
+
+.prev, .next { cursor: pointer; position: absolute; top: 50%; width: auto; margin-top: -22px; padding: 16px; color: #ffffff; font-weight: bold; transition: 0.6s ease; border-radius: 0 3px 3px 0; }
+
+.prev:hover, .next:hover { color: #0072ce; }
+
+@media (max-width: 599px) { .prev, .next { font-size: 20px; } }
+
+@media (min-width: 600px) { .prev, .next { font-size: 26px; } }
+
+@media (min-width: 1200px) { .prev, .next { font-size: 34px; } }
 
 /* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px; }
+.next { right: 0; border-radius: 3px 0 0 3px; }
 
 /* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 10s;
-  -webkit-animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
-  animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
-  animation-name: fade;
-  animation-duration: 10s; }
+.fade { -webkit-animation-name: fade; -webkit-animation-duration: 10s; -webkit-animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1); animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1); animation-name: fade; animation-duration: 10s; }
 
-@-webkit-keyframes fade {
-  from,
-  to {
-    opacity: 0; }
-  10%,
-  90% {
-    opacity: 1; } }
+@-webkit-keyframes fade { from, to { opacity: 0; }
+  10%, 90% { opacity: 1; } }
 
-@keyframes fade {
-  from,
-  to {
-    opacity: 0; }
-  10%,
-  90% {
-    opacity: 1; } }
+@keyframes fade { from, to { opacity: 0; }
+  10%, 90% { opacity: 1; } }
 
 /* Caption text */
-.flex-wraper {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  bottom: 30px;
-  width: 100%; }
-  .flex-wraper .description {
-    color: #FFFFFF;
-    padding: 8px 12px;
-    margin-bottom: 20px;
-    text-align: center; }
-    .flex-wraper .description .text {
-      font-family: 'Lato', sans-serif;
-      font-weight: 600;
-      font-size: 36px;
-      text-shadow: 4px 4px 4px black; }
-    .flex-wraper .description .button {
-      font-size: 20px;
-      display: block;
-      line-height: 35px;
-      width: 200px;
-      height: 35px;
-      margin: 15px auto 0px;
-      border-radius: 8px;
-      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); }
+.flex-wraper { display: flex; justify-content: center; position: absolute; bottom: 15px; width: 100%; }
 
-.indicators {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  bottom: 30px; }
+@media (min-width: 600px) { .flex-wraper { bottom: 30px; } }
+
+.flex-wraper .description { color: #ffffff; padding: 8px 12px; text-align: center; }
+
+@media (min-width: 600px) { .flex-wraper .description { margin-bottom: 20px; } }
+
+.flex-wraper .description .text { font-family: "Lato", sans-serif; font-weight: 600; font-size: 20px; text-shadow: 4px 4px 4px black; }
+
+@media (min-width: 600px) { .flex-wraper .description .text { font-size: 36px; } }
+
+.flex-wraper .description .button { display: block; font-size: 12px; height: 30px; width: 120px; line-height: 30px; border-radius: 4px; margin: 15px auto 0px; box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); }
+
+@media (min-width: 600px) { .flex-wraper .description .button { font-size: 20px; line-height: 35px; width: 200px; border-radius: 8px; height: 35px; } }
+
+.indicators { display: flex; justify-content: center; position: relative; bottom: 30px; }
 
 /* The dots/bullets/indicators */
-.indicator {
-  cursor: pointer;
-  z-index: 10;
-  height: 5px;
-  width: 20px;
-  margin: 0 5px;
-  background-color: #ddd;
-  border-radius: 8px;
-  display: inline-block;
-  transition: background-color 0.6s ease; }
+.indicator { cursor: pointer; z-index: 10; height: 5px; width: 20px; margin: 0 5px; background-color: #ddd; border-radius: 8px; display: inline-block; transition: background-color 0.6s ease; }
 
 /*# sourceMappingURL=_carousel.css.map */
