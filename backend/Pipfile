@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 django = "*"
 django-phonenumber-field = "*"
+django-sass-processor = "*"
+phonenumbers = "*"
+pillow = "*"
 
 [dev-packages]
 pylint = "*"
