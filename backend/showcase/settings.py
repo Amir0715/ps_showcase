@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # my app
-    "catalog.apps.CatalogConfig",
+    "catalog",
     # scss
     "sass_processor",
     # for phone number
@@ -38,15 +38,15 @@ INSTALLED_APPS = [
     "dashboard",
 
     # api for react app
+    # 'django_filters',
     "api",
     'rest_framework',
     'corsheaders',
-    'drf_spectacular',
-    'django_filters',
 
     # auth system
     'djoser',
     'rest_framework.authtoken',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -118,6 +118,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication', # обычные токены которые будут записываться в базу данных
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication', # 
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        # 'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

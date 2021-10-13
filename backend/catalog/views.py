@@ -1,6 +1,5 @@
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import View
-
 from catalog.models import Product, Category
 from django.shortcuts import render
 

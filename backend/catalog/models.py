@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE, RESTRICT
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 
 
@@ -23,8 +22,8 @@ class Category(models.Model):
     Модель категории и подкатегорий
     """
 
-    parent_category = models.ForeignKey(
-        "self", on_delete=RESTRICT, null=True, blank=True
+    parent = models.ForeignKey(
+        "self", on_delete=RESTRICT, null=True, blank=True, related_name="children"
     )  # Родительская категория
 
     name = models.CharField(verbose_name="Имя категории", max_length=255)
@@ -65,7 +64,7 @@ class Product(models.Model):
     """
 
     category = models.ManyToManyField(
-        "Category", verbose_name="Категория"
+        "Category", verbose_name="Категория", related_name="products"
     )  # игры, например
     name = models.CharField(verbose_name="Имя продукта",
                             max_length=255, db_index=True)
@@ -114,7 +113,7 @@ class CartProduct(models.Model):
         "Product",
         verbose_name="Продукт",
         on_delete=CASCADE,
-        related_name="related_producs",
+        related_name="related_products",
     )
     qty = models.PositiveIntegerField(
         default=1
