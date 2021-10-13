@@ -12,8 +12,10 @@ class IndexView(ListView):
 
     def get_queryset(self):
         q = super().get_queryset().filter(available=True)
-        self.new_games = list(q.filter(category__name__icontains="Новые игры"))[:4]
-        self.best_games = list(q.filter(category__name__icontains="Лучшие игры"))[:4]
+        self.new_games = list(
+            q.filter(category__name__icontains="Новые игры"))[:4]
+        self.best_games = list(
+            q.filter(category__name__icontains="Лучшие игры"))[:4]
         self.soon_games = list(q.filter(category__name__icontains="Скоро в продаже"))[
             :4
         ]

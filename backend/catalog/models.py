@@ -44,7 +44,8 @@ class Gallery(models.Model):
     Модель альбома для фотографий
     """
 
-    image = models.ImageField(verbose_name="Изображение", upload_to=user_directory_path)
+    image = models.ImageField(
+        verbose_name="Изображение", upload_to=user_directory_path)
     is_cover = models.BooleanField(verbose_name="Обложка?", default=False)
     product = models.ForeignKey(
         "Product", verbose_name="Продукт", related_name="images", on_delete=CASCADE
@@ -66,11 +67,13 @@ class Product(models.Model):
     category = models.ManyToManyField(
         "Category", verbose_name="Категория"
     )  # игры, например
-    name = models.CharField(verbose_name="Имя продукта", max_length=255, db_index=True)
+    name = models.CharField(verbose_name="Имя продукта",
+                            max_length=255, db_index=True)
     slug = models.SlugField(unique=True)
 
     description = models.TextField(verbose_name="Описание")
-    price = models.DecimalField(verbose_name="Цена", max_digits=9, decimal_places=2)
+    price = models.DecimalField(
+        verbose_name="Цена", max_digits=9, decimal_places=2)
 
     stock = models.PositiveIntegerField(verbose_name="Количество")
     available = models.BooleanField(verbose_name="Доступно", default=True)
@@ -78,9 +81,11 @@ class Product(models.Model):
     incarousel = models.BooleanField(
         verbose_name="Показывать в карусели", default=False
     )
-    inbanner = models.BooleanField(verbose_name="Показывать в баннере", default=False)
+    inbanner = models.BooleanField(
+        verbose_name="Показывать в баннере", default=False)
 
-    created_at = models.DateTimeField(verbose_name="Создано", auto_now_add=True)
+    created_at = models.DateTimeField(
+        verbose_name="Создано", auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name="Обновлено", auto_now=True)
 
     def get_cover(self):

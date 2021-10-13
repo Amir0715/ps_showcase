@@ -9,9 +9,15 @@ django-phonenumber-field = "*"
 django-sass-processor = "*"
 phonenumbers = "*"
 pillow = "*"
+django-cors-headers = "*"
+djangorestframework = "*"
+djoser = "*"
+drf-spectacular = "*"
+libsass = "*"
 
 [dev-packages]
 pylint = "*"
+autopep8 = "*"
 
 [requires]
 python_version = "3.9"
