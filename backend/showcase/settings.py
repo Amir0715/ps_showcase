@@ -36,6 +36,17 @@ INSTALLED_APPS = [
     "user",
     # react app dashboard
     "dashboard",
+
+    # api for react app
+    "api",
+    'rest_framework',
+    'corsheaders',
+    'drf_spectacular',
+    'django_filters',
+
+    # auth system
+    'djoser',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -148,6 +159,14 @@ SASS_OUTPUT_STYLE = "compact"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SPECTACULAR_SETTINGS = {
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SCHEMA_PATH_PREFIX': r'/api/',
+    'TITLE': 'Snippets API',
+    'DESCRIPTION': 'Test description',
+    'COMPONENT_SPLIT_REQUEST': True,
+}
 
 # Каталог, где будет храниться медиа файлы
 

@@ -14,10 +14,12 @@ djangorestframework = "*"
 djoser = "*"
 drf-spectacular = "*"
 libsass = "*"
+django-filter = "*"
 
 [dev-packages]
 pylint = "*"
 autopep8 = "*"
+pylint-django = "*"
 
 [requires]
 python_version = "3.9"

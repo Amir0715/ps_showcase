@@ -6,6 +6,7 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls, name="admin"),
+    path("api/", include("api.urls")),
     path("dashboard/", include("dashboard.urls")),
     path("", include("catalog.urls")),
 ]
