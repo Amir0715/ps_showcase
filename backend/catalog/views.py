@@ -21,7 +21,7 @@ class IndexView(ListView):
         self.carousel_games = list(q.filter(incarousel=True))
         self.banner_games = list(q.filter(inbanner=True))[:2]
         self.game_category = list(
-            Category.objects.filter(parent_category__name__icontains="Игры")
+            Category.objects.filter(parent__name__icontains="Игры")
         )
         return q
 
@@ -43,7 +43,7 @@ class GameDetailView(View):
     def get_context_data(self, **kwargs):
         context = {}
         context["game_category"] = Category.objects.filter(
-            parent_category__name__icontains="Игры"
+            parent__name__icontains="Игры"
         )
         context["game"] = self.get_queryset()
         return context
@@ -70,7 +70,7 @@ class GameListView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         self.game_category = Category.objects.filter(
-            parent_category__name__icontains="Игры"
+            parent__name__icontains="Игры"
         )
         self.category = Category.objects.get(
             slug=self.kwargs.setdefault("category", "games")

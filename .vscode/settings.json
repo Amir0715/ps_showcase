@@ -8,4 +8,5 @@
     ],
     "python.formatting.provider": "autopep8",
     "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
+    "eslint.options": { "configFile": "/home/amir/projects/ps_showcase/.vscode/eslint.json" }
 }

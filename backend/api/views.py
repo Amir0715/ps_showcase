@@ -5,7 +5,7 @@ from rest_framework import viewsets, permissions
 
 class CategoryListApiView(viewsets.ModelViewSet):
     '''
-    Полный вывод всех категорий и под-категорий с продуктами
+    Полный вывод всех категорий и под-категорий без продуктов
     '''
     serializer_class = CategoryListSerializer
     queryset = Category.objects.all()

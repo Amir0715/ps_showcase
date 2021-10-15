@@ -26,6 +26,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    'rest_framework',
+    'corsheaders',
+
     # my app
     "catalog",
     # scss
@@ -40,8 +44,6 @@ INSTALLED_APPS = [
     # api for react app
     # 'django_filters',
     "api",
-    'rest_framework',
-    'corsheaders',
 
     # auth system
     'djoser',
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -120,8 +123,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication', # обычные токены которые будут записываться в базу данных
-        # 'rest_framework_simplejwt.authentication.JWTAuthentication', # 
+        # обычные токены которые будут записываться в базу данных
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication', #
     ),
     'DEFAULT_FILTER_BACKENDS': (
         # 'django_filters.rest_framework.DjangoFilterBackend',

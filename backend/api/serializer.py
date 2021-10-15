@@ -36,13 +36,13 @@ class ProductListSerializer(serializers.ModelSerializer):
 
 class CategoryListSerializer(serializers.ModelSerializer):
     '''
-    Полный вывод всех категорий и под-категорий с продуктами
+    Полный вывод всех категорий и под-категорий без продуктов
     '''
     children = RecursiveSrializer(many=True, required=False)
-    products = ProductListSerializer(many=True)
+    # products = ProductListSerializer(many=True)
 
     class Meta:
         list_serializer_class = FilterCategoryListSerializer
         model = Category
-        fields = ('id', 'name', 'slug', 'children', 'products')
+        fields = ('id', 'name', 'slug', 'children')
 
