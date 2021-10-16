@@ -9,6 +9,7 @@ import ProductsPage from "./ProductsPage";
 import UsersPage from "./UsersPage";
 import StatisticsPage from "./StatisticsPage";
 import SettingsPage from "./SettingsPage";
+import { AddPage } from "./AddPage";
 
 import { AppBar } from "../components/appBar";
 import { NavBar } from "../components/navBar";
@@ -34,6 +35,9 @@ const MainPage = (props) => {
                 <Switch>
                     <Route exact path="/">
                         <DashboardPage />
+                    </Route>
+                    <Route path="/add">
+                        <AddPage />
                     </Route>
                     <Route path="/orders">
                         <OrdersPage />
