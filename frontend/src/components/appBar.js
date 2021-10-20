@@ -8,19 +8,19 @@ const MyAppBar = (props) => {
             sx={{
                 width: { sm: `calc(100% - ${props.drawerWidth}px)` },
                 ml: { sm: `${props.drawerWidth}px` },
+                backgroundColor: 'white',
             }}
         >
             <Toolbar>
                 <IconButton
-                    color="inherit"
                     aria-label="open drawer"
                     edge="start"
                     onClick={props.handleDrawerToggle}
-                    sx={{ mr: 2, display: { sm: 'none' } }}
+                    sx={{ mr: 2, display: { sm: 'none' }, color:"black"}}
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" noWrap component="div">
+                <Typography variant="h6" noWrap component="div" sx={{color:"black"}}>
                     {props.title}
                 </Typography>
             </Toolbar>

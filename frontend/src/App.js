@@ -1,15 +1,14 @@
 import { LoginPage } from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
-import RoutersMap from "./components/routes";
+import { Route, withRouter, Switch } from "react-router-dom";
 
 const App = () => {
   return (
     <div className="App"> 
-      {/* <Switch> */}
+      <Switch>
         <Route path="/login" component={LoginPage} />
         <Route path="/" component={MainPage} />
-      {/* </Switch> */}
+      </Switch>
     </div>
   );
 };

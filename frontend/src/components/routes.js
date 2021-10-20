@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import DashboardPage from "../pages/DashboardPage";
 import OrdersPage from "../pages/OrdersPage";
 import CategoriesPage from "../pages/CategoriesPage";
