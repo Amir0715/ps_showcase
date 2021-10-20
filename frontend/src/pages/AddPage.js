@@ -31,27 +31,30 @@ import CurrencyInput from 'react-currency-input-field';
 import api from '../api/api';
 import store from '../store/store';
 import ImageUploading from 'react-images-uploading';
+import * as Yup from 'yup';
 
-
-const MyFileUploader = ({ label, ...props }) => {
-    const [field, meta] = useField({ ...props, type: 'file' });
-
-    const handleChange = async (files) => {
-        if (!files) return;
-
-    };
-
-    return (
-        <Box margin={1}>
-            <label htmlFor={props.id || props.name}>{label}</label>
-            <br />
-            <input type="file" {...field} {...props} />
-            {meta.touched && meta.error ? (
-                <div className="error">{meta.error}</div>
-            ) : null}
-        </Box>
-    );
-};
+const SignupSchema = Yup.object().shape({
+    name: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    description: Yup.string()
+        .min(20, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    images: Yup.array()
+        .min(2, 'Мин 2 изображения!')
+        .max(10, 'Макс 2 изображения!')
+        .required('Required'),
+    price: Yup.number()
+        .positive('Должно быть больше нуля!')
+        .min(1, 'Мин 1')
+        .required('Required'),
+    stock: Yup.number()
+        .positive('Должно быть больше нуля!')
+        .min(1, 'Мин 1')
+        .required('Required'),
+});
 
 
 const AddPage = (props) => {
@@ -98,7 +101,7 @@ const AddPage = (props) => {
             </Typography>
             <Formik
                 initialValues={{
-                    images: null,
+                    images: [],
                     name: '',
                     description: '',
                     subcategories: [],
@@ -110,6 +113,7 @@ const AddPage = (props) => {
                     inbanner: false,
                 }}
                 onSubmit={handleSubmit}
+                validationSchema={SignupSchema}
             >
                 {({ values, handleChange, handleBlur, submitForm, isSubmitting, touched, errors, setFieldValue }) => (
                     <Form>
@@ -118,7 +122,11 @@ const AddPage = (props) => {
                                 name="images"
                                 multiple
                                 value={values.images}
-                                onChange={(imageList, addUpdateIndex) => {console.log(imageList, addUpdateIndex); setFieldValue('images', imageList); console.log(values.images);}}
+                                onChange={(imageList, addUpdateIndex) => {
+                                    console.log(imageList, addUpdateIndex);
+                                    setFieldValue('images', imageList);
+                                    console.log(values.images);
+                                }}
                                 maxNumber={99}
                                 dataURLKey="data_url"
                             >
@@ -154,6 +162,9 @@ const AddPage = (props) => {
                                     </div>
                                 )}
                             </ImageUploading>
+                            {errors.images && touched.images ? (
+                                <div>{errors.images}</div>
+                            ) : null}
                         </Box>
                         {/* {values.images.length > 0 ? `<div>${values.images.map((image) => image.name)}</div>` : <div>Нет изображений</div>} */}
                         <Box margin={1}>
@@ -162,6 +173,9 @@ const AddPage = (props) => {
                                 label="Название"
                                 component={TextField}
                                 required />
+                            {/* {errors.name && touched.name ? (
+                                <div>{errors.name}</div>
+                            ) : null} */}
                         </Box>
                         <Box margin={1}>
                             <Field
@@ -172,6 +186,9 @@ const AddPage = (props) => {
                                 minRows={4}
                                 maxRows={10}
                                 required />
+                            {/* {errors.description && touched.description ? (
+                                <div>{errors.description}</div>
+                            ) : null} */}
                         </Box>
                         <Box margin={1}>
                             <Field
@@ -196,6 +213,9 @@ const AddPage = (props) => {
                                     );
                                 }}
                             />
+                            {errors.categories && touched.categories ? (
+                                <div>{errors.categories}</div>
+                            ) : null}
                         </Box>
                         <Box margin={1}>
                             <Field
@@ -219,6 +239,9 @@ const AddPage = (props) => {
                                     );
                                 }}
                             />
+                            {errors.subcategories && touched.subcategories ? (
+                                <div>{errors.subcategories}</div>
+                            ) : null}
                         </Box>
                         <Box margin={1}>
                             <CurrencyInput
@@ -230,6 +253,9 @@ const AddPage = (props) => {
                                 value={values.price}
                                 onValueChange={handleChange("price")}
                             />
+                            {errors.price && touched.price ? (
+                                <div>{errors.price}</div>
+                            ) : null}
                         </Box>
                         <Box margin={1}>
                             <CurrencyInput
@@ -241,6 +267,9 @@ const AddPage = (props) => {
                                 value={values.stock}
                                 onValueChange={handleChange("stock")}
                             />
+                            {errors.stock && touched.stock ? (
+                                <div>{errors.stock}</div>
+                            ) : null}
                         </Box>
                         <Box margin={1}>
                             <FormGroup>
