@@ -36,12 +36,6 @@ const ListItems = () => {
                     </ListItemButton>
                 </Box>
             ))}
-            {/* <ListItemButton component={Link} to="/" >
-            <ListItemIcon>
-                 <DashboardIcon /> 
-             </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-         </ListItemButton> */}
         </div>
     );
 };

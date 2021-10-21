@@ -16,6 +16,7 @@ const structure = [
     { title: "Пользователи", to: "/users", component: UsersPage},
     { title: "Статистика", to: "/statistics", component: StatisticsPage },
     { title: "Настройки", to: "/settings", component: SettingsPage },
+    { title: "Профиль", to: "/profile", component: SettingsPage },
 ];
 
 const RoutersMap = () =>{

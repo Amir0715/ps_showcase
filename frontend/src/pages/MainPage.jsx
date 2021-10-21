@@ -9,6 +9,7 @@ import ProductsPage from "./ProductsPage";
 import UsersPage from "./UsersPage";
 import StatisticsPage from "./StatisticsPage";
 import SettingsPage from "./SettingsPage";
+import ProfilePage from "./ProfilePage";
 import { AddPage } from "./AddPage";
 
 import { AppBar } from "../components/appBar";
@@ -59,6 +60,9 @@ const MainPage = (props) => {
                     </Route>
                     <Route path="/settings">
                         <SettingsPage />
+                    </Route>
+                    <Route path="/profile">
+                        <ProfilePage />
                     </Route>
                 </Switch>
             </Box>
