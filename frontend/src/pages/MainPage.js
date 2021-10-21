@@ -1,6 +1,6 @@
 import {Box, Toolbar } from "@mui/material";
 import { useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import CategoriesPage from "./CategoriesPage";
 import DashboardPage from "./DashboardPage";
@@ -13,6 +13,7 @@ import { AddPage } from "./AddPage";
 
 import { AppBar } from "../components/appBar";
 import { NavBar } from "../components/navBar";
+import store from "../store/store";
 
 const drawerWidth = 200; // px
 
@@ -25,7 +26,9 @@ const MainPage = (props) => {
     };
 
     const container = window !== undefined ? () => window().document.body : undefined;
-
+    if (!store.getState().authorized) {
+        return <Redirect to="/login" />;
+    }
     return (
         <Box sx={{ display: 'flex' }}>
             <AppBar drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} title="Главная страница" />

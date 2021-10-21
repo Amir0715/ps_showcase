@@ -3,7 +3,8 @@ import store from "../store/store";
 import { setLoading } from "../store/actionCreators/loading";
 import { setProducts } from "../store/actionCreators/products";
 import { setCategories } from "../store/actionCreators/categories";
-
+import { setToken } from "../store/actionCreators/token";
+import { setAuthorized } from "../store/actionCreators/authorized";
 class ApiClient {
     baseURL = `${process.env.REACT_APP_API_HOST}/api`;
     // token = null;
@@ -11,17 +12,7 @@ class ApiClient {
     timeout = 1000;
     axios = null;
 
-
     constructor() {
-        /* если ни одного параметр, то значить вытаскиваем токен из хранилища
-        this.login(username, password).then(token => {
-            console.log(`token in constructor : ${token}`);
-            if (token) {
-                this.token = token;
-                this.headers = { "Authorization": `Token ${this.token}` };
-            } else {
-            }
-        }); */
         this.axios = axios.create({ baseURL: this.baseURL, timeout: this.timeout });
         // этот итерцептор будет выполнять перед каждым запросом
         this.axios.interceptors.request.use((req) => {
@@ -34,6 +25,7 @@ class ApiClient {
             this.dispatch(setLoading(false));
             return res;
         });
+
     };
 
     dispatch = (action) => store.dispatch(action);
@@ -57,21 +49,30 @@ class ApiClient {
     //#region apiLogin
     /**
      * Возращает токен пользователя. Если параметры не пустые и в хранилище нет токена делается пост запрос
-     * @param {string?} username - логин пользователя
+     * @param {string?} email - логин пользователя
      * @param {string?} password - пароль пользователя
      */
-    async login(username, password) {
-        const apiUrl = `${this.baseURL}/auth/token/login/`;
+    async login(email, password) {
         const token = this.getTokenFromLocal();
         if (token) {
-            console.log("token in login " + token);
+            console.log("token from local " + token);
+            this.axios.defaults.headers.common['Authorization'] = token;
+            this.dispatch(setToken(token));
+            this.dispatch(setAuthorized(true));
             return token;
-        } else if (username && password) {
+        } else if (email && password) {
             // если в хранилище не оказалось мы делаем запрос и получаем токен
-            console.log("login data " + username + " " + password);
+            console.log("login from server " + email + " " + password);
             try {
-                return await axios.post(apiUrl, { username, password }).then(response => response.data.auth_token);
+                const response = await this.axios.post("/auth/token/login/", { email, password });
+                const token = await response.data.auth_token;
+                console.log(token);
+                this.axios.defaults.headers.common['Authorization'] = token;
+                this.dispatch(setToken(token));
+                this.dispatch(setAuthorized(true));
+                return token;
             } catch (error) {
+                this.dispatch(setAuthorized(false));
                 this.l(error);
             }
         }

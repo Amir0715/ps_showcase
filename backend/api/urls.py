@@ -9,9 +9,6 @@ from api import views as api_views
 router = DefaultRouter()
 router.register(r'categories', api_views.CategoryListApiView, basename='category')
 router.register(r'products', api_views.ProductListApiView, basename='product')
-# router.register(r'category_product', api_views.CategoryProductListApiView, basename='category_product')
-# router.register(r'product_detail', api_views.ProductDetailListApiView, basename='product_detail')
-
 
 urlpatterns = [
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
@@ -19,5 +16,8 @@ urlpatterns = [
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'),
          name='swagger-ui'),
     path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path("auth/", include('djoser.urls')),
+    path("auth/", include('djoser.urls.authtoken')),
+    path("auth/", include('djoser.urls.jwt')),
     path('', include(router.urls))
 ]

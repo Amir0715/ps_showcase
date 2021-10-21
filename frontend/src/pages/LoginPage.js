@@ -12,16 +12,19 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import api from '../api/api';
+import store from '../store/store';
+import { Redirect } from 'react-router-dom';
 
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
+            Copyright © {" "}
             <Link color="inherit" href="">
                 Your Website
-            </Link>{' '}
+            </Link>{" "}
             {new Date().getFullYear()}
-            {'.'}
+            {"."}
         </Typography>
     );
 }
@@ -29,15 +32,41 @@ function Copyright(props) {
 const theme = createTheme();
 
 const LoginPage = () => {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [rememberMe, setRememberMe] = React.useState(false);
+    const [redirect, setRedirect] = React.useState(false);
+
+    const login = () => {
+        api.login(email, password)
+            .then(() => {
+                const token = store.getState().token;
+                console.log(token);
+                if (token) {
+                    if (rememberMe) {
+                        localStorage.setItem('token', token);
+                    } else {
+                        sessionStorage.setItem('token', token);
+                    }
+                    setRedirect(true);
+                } else {
+                    console.log(token);
+                }
+            })
+            .catch((e) => console.error(e));
     };
+
+    React.useEffect(() => {
+        login();
+    }, []);
+
+    const handleLogin = (event) => {
+        if (!email) return;
+        if (!password) return;
+        login();
+    };
+
+    if (redirect) return <Redirect to="/"/>;
 
     return (
         <ThemeProvider theme={theme}>
@@ -49,7 +78,7 @@ const LoginPage = () => {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(https://source.unsplash.com/random)',
+                        backgroundImage: 'url(images/login_background.png)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -73,7 +102,10 @@ const LoginPage = () => {
                         <Typography component="h1" variant="h5">
                             Вход
                         </Typography>
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                        <Box
+                            component="form"
+                            
+                            sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
                                 required
@@ -83,6 +115,8 @@ const LoginPage = () => {
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                             <TextField
                                 margin="normal"
@@ -93,15 +127,22 @@ const LoginPage = () => {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                             <FormControlLabel
-                                control={<Checkbox value="remember" color="primary" />}
+                                control={<Checkbox
+                                    name="remember"
+                                    checked={rememberMe}
+                                    color="primary"
+                                    onChange={(e) => setRememberMe(e.target.checked)}
+                                />}
                                 label="Запомнить"
                             />
                             <Button
-                                type="submit"
                                 fullWidth
                                 variant="contained"
+                                onClick={handleLogin}
                                 sx={{ mt: 3, mb: 2 }}
                             >
                                 Войти
