@@ -7,8 +7,6 @@ import { setToken } from "../store/actionCreators/token";
 import { setAuthorized } from "../store/actionCreators/authorized";
 class ApiClient {
     baseURL = `${process.env.REACT_APP_API_HOST}/api`;
-    // token = null;
-    // headers = { "Authorization": `Token ${this.token}` };
     timeout = 1000;
     axios = null;
 
@@ -46,7 +44,8 @@ class ApiClient {
         this.dispatch(setCategories(data));
         return data;
     }
-    //#region apiLogin
+
+    // #region apiLogin
     /**
      * Возращает токен пользователя. Если параметры не пустые и в хранилище нет токена делается пост запрос
      * @param {string?} email - логин пользователя
@@ -56,7 +55,7 @@ class ApiClient {
         const token = this.getTokenFromLocal();
         if (token) {
             console.log("token from local " + token);
-            this.axios.defaults.headers.common['Authorization'] = token;
+            this.axios.defaults.headers.common['Authorization'] = `Token ${token}`;
             this.dispatch(setToken(token));
             this.dispatch(setAuthorized(true));
             return token;
@@ -88,15 +87,23 @@ class ApiClient {
         return localStorage.getItem('token') ?? sessionStorage.getItem('token') ?? store.getState().token ?? false;
     }
 
+    removeTokenFromLocal() {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        this.dispatch(setToken(""));
+    }
+
     async getMe() {
         const apiUrl = `${this.baseURL}/auth/users/me/`;
-        if (!this.token) {
+        const token = this.getTokenFromLocal(); 
+        if (!token) {
             // токен не найден
             throw new Error("Токен отстутствует!");
         }
         try {
             // токен существует
-            return await this.axios.get(apiUrl).then(response => response.data);
+            const response = await this.axios.get(apiUrl);
+            return await response.data;
         } catch (error) {
             this.l(error);
         }
@@ -104,37 +111,24 @@ class ApiClient {
 
     async logout() {
         const apiUrl = `${this.baseURL}/auth/token/logout/`;
-        if (!this.token) {
+        const token = this.getTokenFromLocal(); 
+
+        if (!token) {
             // токен не найден
             throw new Error("Токен отстутствует!");
         }
         try {
             // токен существует
             const response = await this.axios.post(apiUrl);
-            if (response.statusText === "ok") {
-                this.token = null;
+            if (response.status === 204) {
+                this.removeTokenFromLocal();
+                this.dispatch(setAuthorized(false));
             }
         } catch (error) {
             this.l(error);
         }
     }
 
-    async registration(username, email, password) {
-        const apiUrl = `${process.env.REACT_APP_API_HOST}/auth/users/`;
-        try {
-            const response = await axios.post(apiUrl,
-                {
-                    username,
-                    email,
-                    password,
-                });
-            if (response.statusText === "OK") {
-                return await this.login(username, password).then(response => response.data.auth_token);
-            }
-        } catch (error) {
-            this.l(error);
-        }
-    }
     //#endregion
     l(error) {
         if (error.response) {
@@ -156,4 +150,4 @@ class ApiClient {
     }
 }
 
-export default new ApiClient(); // TODO: каждый импорт = новый инстанс ?
+export default new ApiClient();
