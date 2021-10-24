@@ -3,27 +3,34 @@ import store from "../store/store";
 import { setLoading } from "../store/actionCreators/loading";
 import { setProducts } from "../store/actionCreators/products";
 import { setCategories } from "../store/actionCreators/categories";
-import { setToken } from "../store/actionCreators/token";
+import { setToken, setEmail } from "../store/actionCreators/user";
 import { setAuthorized } from "../store/actionCreators/authorized";
+
+// FIXME: Апи не должен ничего возвращать
+// FIXME: Обработка ответов сервера
+
 class ApiClient {
     baseURL = `${process.env.REACT_APP_API_HOST}/api`;
     timeout = 1000;
     axios = null;
 
     constructor() {
-        this.axios = axios.create({ baseURL: this.baseURL, timeout: this.timeout });
+        this.axios = axios.create({ baseURL: this.baseURL });
+        const token = this.getTokenFromLocal();
+        if (token) { 
+            this.axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+        }
         // этот итерцептор будет выполнять перед каждым запросом
         this.axios.interceptors.request.use((req) => {
             this.dispatch(setLoading(true));
             return req;
         });
 
-        // этот итерцептор будет выполнять после каждого запроса
+        // этот итерцептор будет выполняться для каждого ответа
         this.axios.interceptors.response.use((res) => {
             this.dispatch(setLoading(false));
             return res;
         });
-
     };
 
     dispatch = (action) => store.dispatch(action);
@@ -46,11 +53,7 @@ class ApiClient {
     }
 
     // #region apiLogin
-    /**
-     * Возращает токен пользователя. Если параметры не пустые и в хранилище нет токена делается пост запрос
-     * @param {string?} email - логин пользователя
-     * @param {string?} password - пароль пользователя
-     */
+
     async login(email, password) {
         const token = this.getTokenFromLocal();
         if (token) {
@@ -58,18 +61,20 @@ class ApiClient {
             this.axios.defaults.headers.common['Authorization'] = `Token ${token}`;
             this.dispatch(setToken(token));
             this.dispatch(setAuthorized(true));
-            return token;
         } else if (email && password) {
             // если в хранилище не оказалось мы делаем запрос и получаем токен
             console.log("login from server " + email + " " + password);
             try {
                 const response = await this.axios.post("/auth/token/login/", { email, password });
-                const token = await response.data.auth_token;
-                console.log(token);
-                this.axios.defaults.headers.common['Authorization'] = token;
-                this.dispatch(setToken(token));
-                this.dispatch(setAuthorized(true));
-                return token;
+                if (response.status === 200) {
+                    const token = await response.data.auth_token;
+                    console.log(token);
+                    this.axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+                    this.dispatch(setToken(token));
+                    this.dispatch(setAuthorized(true));
+                } else {
+                    console.error(response);
+                }
             } catch (error) {
                 this.dispatch(setAuthorized(false));
                 this.l(error);
@@ -84,7 +89,7 @@ class ApiClient {
      * boolean - false
      */
     getTokenFromLocal() {
-        return localStorage.getItem('token') ?? sessionStorage.getItem('token') ?? store.getState().token ?? false;
+        return localStorage.getItem('token') ?? sessionStorage.getItem('token') ?? store.getState().user.token ?? false;
     }
 
     removeTokenFromLocal() {
@@ -94,8 +99,8 @@ class ApiClient {
     }
 
     async getMe() {
-        const apiUrl = `${this.baseURL}/auth/users/me/`;
-        const token = this.getTokenFromLocal(); 
+        const apiUrl = "/auth/users/me/";
+        const token = this.getTokenFromLocal();
         if (!token) {
             // токен не найден
             throw new Error("Токен отстутствует!");
@@ -103,15 +108,21 @@ class ApiClient {
         try {
             // токен существует
             const response = await this.axios.get(apiUrl);
-            return await response.data;
+            if (response.status === 200) {
+                console.log("get me : ", response);
+                const email = response.data.email;
+                console.log("email is", email);
+                this.dispatch(setEmail(email));
+                console.log(store.getState().user.email); 
+            }
         } catch (error) {
             this.l(error);
         }
     }
 
     async logout() {
-        const apiUrl = `${this.baseURL}/auth/token/logout/`;
-        const token = this.getTokenFromLocal(); 
+        const apiUrl = "/auth/token/logout/";
+        const token = this.getTokenFromLocal();
 
         if (!token) {
             // токен не найден
@@ -123,6 +134,7 @@ class ApiClient {
             if (response.status === 204) {
                 this.removeTokenFromLocal();
                 this.dispatch(setAuthorized(false));
+                this.dispatch(setEmail(""));
             }
         } catch (error) {
             this.l(error);

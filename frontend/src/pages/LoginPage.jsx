@@ -40,7 +40,7 @@ const LoginPage = () => {
     const login = () => {
         api.login(email, password)
             .then(() => {
-                const token = store.getState().token;
+                const token = store.getState().user.token;
                 console.log(token);
                 if (token) {
                     if (rememberMe) {
@@ -50,7 +50,7 @@ const LoginPage = () => {
                     }
                     setRedirect(true);
                 } else {
-                    console.log(token);
+                    console.error(`Token from store is ${token}`);
                 }
             })
             .catch((e) => console.error(e));

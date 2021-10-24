@@ -1,0 +1,4 @@
+const SET_TOKEN = "SET_TOKEN";
+const SET_EMAIL = "SET_EMAIL";
+
+export { SET_TOKEN, SET_EMAIL };

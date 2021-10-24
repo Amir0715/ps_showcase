@@ -1,20 +1,28 @@
 import { Paper, Box, TextField, Button } from "@mui/material";
 import * as React from "react";
+import { Redirect } from "react-router-dom";
 import api from "../api/api";
 import store from "../store/store";
 
 
 const ProfilePage = (props) => {
     const [email, setEmail] = React.useState('');
-
+    const [redirected, setRedirected] = React.useState(false);
     React.useEffect(() => {
-        api.getMe().then((data) => setEmail(data.email));
+        api.getMe().then(() => {
+            setEmail(store.getState().user.email);
+            console.log(store.getState().user.email); 
+        });
     }, []);
 
     const logout = (e) => {
-        api.logout();
+        api.logout().then(() => {
+            setRedirected(true);
+        });
     };
     
+    if(redirected) return <Redirect to="/login"/>;
+
     return (
         <Box component={Paper} padding={1}>
             <Box margin={1}>
@@ -28,7 +36,7 @@ const ProfilePage = (props) => {
                     <Button variant="contained" color="warning" onClick={logout}>Выйти</Button>
                 </Box>
             </Box>
-        </Box>  
+        </Box>
     );
 };
 
