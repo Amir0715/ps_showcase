@@ -37,23 +37,23 @@ const SignupSchema = Yup.object().shape({
     name: Yup.string()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
-        .required('Required'),
+        .required('Это поле должно быть заполнено!'),
     description: Yup.string()
         .min(20, 'Too Short!')
         .max(50, 'Too Long!')
-        .required('Required'),
+        .required('Это поле должно быть заполнено!'),
     images: Yup.array()
         .min(2, 'Мин 2 изображения!')
         .max(10, 'Макс 2 изображения!')
-        .required('Required'),
+        .required('Это поле должно быть заполнено!'),
     price: Yup.number()
         .positive('Должно быть больше нуля!')
         .min(1, 'Мин 1')
-        .required('Required'),
+        .required('Это поле должно быть заполнено!'),
     stock: Yup.number()
         .positive('Должно быть больше нуля!')
         .min(1, 'Мин 1')
-        .required('Required'),
+        .required('Это поле должно быть заполнено!'),
 });
 
 

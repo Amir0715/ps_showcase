@@ -57,7 +57,7 @@ const headCells = [
 const ProductsPage = () => {
     useEffect(() => {
         api.getProducts().then(() => {
-            console.log(store.getState());
+            
         });
     }, []);
 

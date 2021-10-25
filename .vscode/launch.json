@@ -5,25 +5,34 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Attach to Chrome",
+            "port": 3000,
+            "request": "attach",
+            "type": "pwa-chrome",
+            "webRoot": "${workspaceFolder}${pathSeparator}frontend${pathSeparator}",
+            // "preLaunchTask": ["React: run dev server"]
+        },
+
+        {
+            "name": "Django: Dev server",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}${pathSeparator}backend${pathSeparator}manage.py",
+            "args": [
+                "runserver"
+            ],
+            "django": true,
+        },
+        {
             "name": "Python: Django runserver with migrations",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}${pathSeparator}manage.py",
+            "program": "${workspaceFolder}${pathSeparator}backend${pathSeparator}manage.py",
             "args": [
                 "runserver"
             ],
             "django": true,
             "preLaunchTask": "Django migrate"
-        },
-        {
-            "name": "Python: Django runserver",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}${pathSeparator}manage.py",
-            "args": [
-                "runserver"
-            ],
-            "django": true
         },
     ]
 }

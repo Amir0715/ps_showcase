@@ -247,6 +247,7 @@ export default function EnhancedTable(props) {
                       // TODO: ОБОБЩИТЬ
                       <MyTableRow
                         row={row}
+                        key={index}
                         isItemSelected={isItemSelected}
                         labelId={labelId}
                         handleClick={handleClick}

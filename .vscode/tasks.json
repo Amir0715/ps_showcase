@@ -8,7 +8,7 @@
             "type": "shell",
             "command": "${config:python.pythonPath}",
             "args": [
-                "${workspaceFolder}${pathSeparator}manage.py",
+                "${workspaceFolder}${pathSeparator}backend${pathSeparator}manage.py",
                 "makemigrations",
                 "${input:appName}"
             ]
@@ -18,14 +18,34 @@
             "type": "shell",
             "command": "${config:python.pythonPath}",
             "args": [
-                "${workspaceFolder}${pathSeparator}manage.py",
+                "${workspaceFolder}${pathSeparator}backend${pathSeparator}manage.py",
                 "migrate"
             ],
             "dependsOn": [
                 "Django makemigrations"
             ],
             "problemMatcher": []
-        }
+        },
+        {
+            "label": "Django: run dev server",
+            "type": "shell",
+            "command": "${config:python.pythonPath}",
+            "args": [
+                "${workspaceFolder}${pathSeparator}backend${pathSeparator}manage.py",
+                "runserver"
+            ]
+        },
+        {
+            "label": "React: run dev server",
+            "type": "shell",
+            "command": "yarn",
+            "args": [
+                "start"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}${pathSeparator}frontend",
+            }
+        },
     ],
     "inputs": [
         {

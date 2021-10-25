@@ -1,20 +1,25 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { 
+    Avatar, 
+    Button, 
+    CssBaseline, 
+    TextField, 
+    FormControlLabel, 
+    Checkbox, 
+    Link, 
+    Paper, 
+    Box, 
+    Grid, 
+    Typography, 
+    Alert, 
+    AlertTitle 
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import api from '../api/api';
 import store from '../store/store';
 import { Redirect } from 'react-router-dom';
+import * as yup from 'yup';
 
 function Copyright(props) {
     return (
@@ -29,11 +34,24 @@ function Copyright(props) {
     );
 }
 
+const schema = yup.object().shape(
+    {
+        email: yup.string()
+            .email("Проверьте на правильность эл. почту!")
+            .required("Поле эл. почты необходимо!"),
+        password: yup.string()
+            .required("Поле пароля необходимо!"),
+    }
+);
+
 const theme = createTheme();
 
 const LoginPage = () => {
     const [email, setEmail] = React.useState("");
+
     const [password, setPassword] = React.useState("");
+    const [error, setError] = React.useState("");
+    
     const [rememberMe, setRememberMe] = React.useState(false);
     const [redirect, setRedirect] = React.useState(false);
 
@@ -41,7 +59,6 @@ const LoginPage = () => {
         api.login(email, password)
             .then(() => {
                 const token = store.getState().user.token;
-                console.log(token);
                 if (token) {
                     if (rememberMe) {
                         localStorage.setItem('token', token);
@@ -50,10 +67,13 @@ const LoginPage = () => {
                     }
                     setRedirect(true);
                 } else {
-                    console.error(`Token from store is ${token}`);
+                    
                 }
             })
-            .catch((e) => console.error(e));
+            .catch((e) => {
+                console.log(e);
+                setError("Невозможно войти с предоставленными учетными данными.");
+            });
     };
 
     React.useEffect(() => {
@@ -61,9 +81,13 @@ const LoginPage = () => {
     }, []);
 
     const handleLogin = (event) => {
-        if (!email) return;
-        if (!password) return;
-        login();
+        schema.validate({email, password})
+        .then((valid) => {
+            login();
+        })
+        .catch((err) => {
+            setError(err.errors);
+        });
     };
 
     if (redirect) return <Redirect to="/"/>;
@@ -78,7 +102,7 @@ const LoginPage = () => {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(images/login_background.png)',
+                        backgroundImage: `url(${process.env.REACT_APP_STATIC_URL}images/login_background.png)`,
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -139,6 +163,7 @@ const LoginPage = () => {
                                 />}
                                 label="Запомнить"
                             />
+
                             <Button
                                 fullWidth
                                 variant="contained"
@@ -147,6 +172,14 @@ const LoginPage = () => {
                             >
                                 Войти
                             </Button>
+                            {error !== "" ? 
+                                <Alert severity="error" variant="filled" sx={{ width: '100%'}}>
+                                    <AlertTitle>Ошибка</AlertTitle>
+                                    {error}
+                                </Alert>
+                                : null
+                            }
+                            
                             <Copyright sx={{ mt: 5 }} />
                         </Box>
                     </Box>

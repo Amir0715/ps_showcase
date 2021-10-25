@@ -6,7 +6,6 @@ const tableRow = (props) => {
         for (var cell in props.headCells) {
             res.set(props.headCells[cell]['id'], props.headCells[cell]['type']);
         }
-        console.log(res);
         return res;
     };
 
@@ -25,6 +24,7 @@ const tableRow = (props) => {
                         <TableCell
                             component="th"
                             id={props.labelId}
+                            key={key}
                             scope="row"
                             padding="none"
                         >
@@ -35,6 +35,7 @@ const tableRow = (props) => {
                 case "boolean":
                     array.push(
                         <TableCell
+                            key={key}
                             padding="checkbox"
                         >
                             <Checkbox
@@ -50,7 +51,9 @@ const tableRow = (props) => {
                     break;
                 case "string":
                     array.push(
-                        <TableCell align="left">
+                        <TableCell 
+                            key={key}
+                            align="left">
                             {value}
                         </TableCell>
                     );

@@ -7,7 +7,7 @@ import { setToken, setEmail } from "../store/actionCreators/user";
 import { setAuthorized } from "../store/actionCreators/authorized";
 
 // FIXME: Апи не должен ничего возвращать
-// FIXME: Обработка ответов сервера
+// FIXME: При получении не валидного запроса кидать exception
 
 class ApiClient {
     baseURL = `${process.env.REACT_APP_API_HOST}/api`;
@@ -17,7 +17,7 @@ class ApiClient {
     constructor() {
         this.axios = axios.create({ baseURL: this.baseURL });
         const token = this.getTokenFromLocal();
-        if (token) { 
+        if (token) {
             this.axios.defaults.headers.common['Authorization'] = `Token ${token}`;
         }
         // этот итерцептор будет выполнять перед каждым запросом
@@ -64,20 +64,13 @@ class ApiClient {
         } else if (email && password) {
             // если в хранилище не оказалось мы делаем запрос и получаем токен
             console.log("login from server " + email + " " + password);
-            try {
-                const response = await this.axios.post("/auth/token/login/", { email, password });
-                if (response.status === 200) {
-                    const token = await response.data.auth_token;
-                    console.log(token);
-                    this.axios.defaults.headers.common['Authorization'] = `Token ${token}`;
-                    this.dispatch(setToken(token));
-                    this.dispatch(setAuthorized(true));
-                } else {
-                    console.error(response);
-                }
-            } catch (error) {
-                this.dispatch(setAuthorized(false));
-                this.l(error);
+            const response = await this.axios.post("/auth/token/login/", { email, password });
+            // FIXME: Нужна ли проверка статус кода 
+            if (response.status === 200) {
+                const token = await response.data.auth_token;
+                this.axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+                this.dispatch(setToken(token));
+                this.dispatch(setAuthorized(true));
             }
         }
     }
@@ -113,7 +106,7 @@ class ApiClient {
                 const email = response.data.email;
                 console.log("email is", email);
                 this.dispatch(setEmail(email));
-                console.log(store.getState().user.email); 
+                console.log(store.getState().user.email);
             }
         } catch (error) {
             this.l(error);
