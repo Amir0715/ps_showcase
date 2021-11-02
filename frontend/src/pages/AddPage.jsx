@@ -7,11 +7,13 @@ import {
     Typography,
     Box,
     FormGroup,
+    TextField,
+    Switch
 } from '@material-ui/core';
 import MuiTextField from '@material-ui/core/TextField';
 import {
-    TextField,
-    Switch,
+    // TextField,
+    // Switch,
 } from 'formik-material-ui';
 
 import {
@@ -32,7 +34,6 @@ const SignupSchema = Yup.object().shape({
         .required('Это поле должно быть заполнено!'),
     description: Yup.string()
         .min(20, 'Too Short!')
-        .max(50, 'Too Long!')
         .required('Это поле должно быть заполнено!'),
     images: Yup.array()
         .min(2, 'Мин 2 изображения!')
@@ -48,49 +49,14 @@ const SignupSchema = Yup.object().shape({
         .required('Это поле должно быть заполнено!'),
 });
 
-const MyAddPage = (props) => {
-    const [isEditing, setIsEditing] = React.useState(false);
-    const { id } = useParams();
-    const [product, setProduct] = React.useState();
-    const formik = useFormik({
-        initialValues: {
-            images: [],
-            name: '',
-            description: '',
-            subcategories: [],
-            categories: [],
-            price: 0,
-            stock: 0,
-            available: false,
-            incarousel: false,
-            inbanner: false,
-        },
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-        },
-    });
-
-
-};
-
 const AddPage = (props) => {
-    const [isEditing, setIsEditing] = React.useState(false);
+    const [isEditing, setIsEditing] = React.useState(false);  // true - изменение сущ. продукта
     const [categories, setcategories] = React.useState([]);
     const [subSelectDisabled, setSubSelectDisabled] = React.useState(true);
     const [subcategories, setsubcategories] = React.useState([]);
     const { id } = useParams();
-    const [product, setProduct] = React.useState({
-        images: isEditing ? store.getState().products.current.images : [],
-        name: isEditing ? store.getState().products.current.name : '',
-        description: isEditing ? store.getState().products.current.description : '',
-        subcategories: [],
-        categories: [],
-        price: isEditing ? store.getState().products.current.price : 0,
-        stock: isEditing ? store.getState().products.current.stock : 0,
-        available: isEditing ? store.getState().products.current.available : false,
-        incarousel: isEditing ? store.getState().products.current.incarousel : false,
-        inbanner: isEditing ? store.getState().products.current.inbanner : false,
-    });
+    const [title, setTitle] = React.useState("Новый продукт");
+    const [buttonTitle, setButtonTitle] = React.useState("Добавить");
 
     const handleSubmit = (values, { setSubmitting }) => {
         setTimeout(() => {
@@ -113,17 +79,46 @@ const AddPage = (props) => {
         });
     };
 
+    const formik = useFormik({
+        initialValues: {
+            images: [],
+            name: '',
+            description: '',
+            subcategories: [],
+            categories: [],
+            price: 0,
+            stock: 0,
+            available: false,
+            incarousel: false,
+            inbanner: false,
+        },
+        onSubmit: handleSubmit,
+        validationSchema: SignupSchema
+    });
+
     React.useEffect(() => {
         if (id !== null && id !== undefined) {
             console.log(id);
             api.getProduct(id)
-            .then(() => {
-                setIsEditing(true);
-                console.log(store.getState().products.current);
-            })
-            .catch((e) => {
-                console.error(e);
-            });
+                .then(() => {
+                    setIsEditing(true);
+                    const product = store.getState().products.current;
+                    console.log(product);
+                    setTitle(product.name);
+                    setButtonTitle("Сохранить");
+                    // АВТОЗАПОЛНЕНИЕ ФОРМЫ ДАННЫМИ
+                    formik.setFieldValue("name", product.name);
+                    formik.setFieldValue("description", product.description);
+                    formik.setFieldValue("price", product.price);
+                    formik.setFieldValue("stock", product.stock);
+                    formik.setFieldValue("available", product.available);
+                    formik.setFieldValue("incarousel", product.incarousel);
+                    formik.setFieldValue("inbanner", product.inbanner);
+
+                })
+                .catch((e) => {
+                    console.error(e);
+                });
         }
         api.getCategories()
             .then(() => {
@@ -135,38 +130,23 @@ const AddPage = (props) => {
             });
     }, []);
 
+
+
     return (
         <Box margin={1}>
             <Typography variant="h3" component="div" gutterBottom>
-                {props.title ? props.title : "Новый продукт"}
+                {title}
             </Typography>
-            <Formik
-                initialValues={{
-                    images: store.getState().products.current.images ? store.getState().products.current.images : [],
-                    name: store.getState().products.current.name ? store.getState().products.current.name : '',
-                    description: store.getState().products.current.description ? store.getState().products.current.description : '',
-                    subcategories: [],
-                    categories: [],
-                    price: store.getState().products.current.price ? store.getState().products.current.price : 0,
-                    stock: store.getState().products.current.stock ? store.getState().products.current.stock : 0,
-                    available: store.getState().products.current.available ? store.getState().products.current.available : false,
-                    incarousel: store.getState().products.current.incarousel ? store.getState().products.current.incarousel : false,
-                    inbanner: store.getState().products.current.inbanner ? store.getState().products.current.inbanner : false,
-                }}
-                onSubmit={handleSubmit}
-                validationSchema={SignupSchema}
-            >
-                {({ values, handleChange, submitForm, isSubmitting, touched, errors, setFieldValue }) => (
-                    <Form>
-                        <Box margin={1}>
+            <form>
+                {/* <Box margin={1}>
                             <ImageUploading
                                 name="images"
                                 multiple
-                                value={values.images}
+                                value={formik.values.images}
                                 onChange={(imageList, addUpdateIndex) => {
                                     console.log(imageList, addUpdateIndex);
-                                    setFieldValue('images', imageList);
-                                    console.log(values.images);
+                                    formik.setFieldValue('images', imageList);
+                                    console.log(formik.values.images);
                                 }}
                                 maxNumber={99}
                                 dataURLKey="data_url"
@@ -203,150 +183,161 @@ const AddPage = (props) => {
                                     </div>
                                 )}
                             </ImageUploading>
-                            {errors.images && touched.images ? (
-                                <div>{errors.images}</div>
+                            {formik.errors.images && formik.touched.images ? (
+                                <div>{formik.errors.images}</div>
                             ) : null}
-                        </Box>
-                        <Box margin={1}>
-                            <Field
-                                name="name"
-                                label="Название"
-                                component={TextField}
-                                required />
-                        </Box>
-                        <Box margin={1}>
-                            <Field
-                                name="description"
-                                label="Описание"
-                                component={TextField}
-                                multiline
-                                minRows={4}
-                                maxRows={10}
-                                required />
-                        </Box>
-                        <Box margin={1}>
-                            <Field
-                                name="categories"
-                                component={Autocomplete}
-                                options={categories}
-                                getOptionLabel={(data) => data.name ? data.name : ""}
-                                onHighlightChange={(e, option, reason) => handleHighlightChange(e, option, reason, values)}
-                                disableClearable
-                                autoHighlight
-                                required
-                                style={{ width: 300 }}
-                                renderInput={(params) => {
-                                    return (
-                                        <MuiTextField
-                                            {...params}
-                                            error={touched['categories'] && !!errors['categories']}
-                                            helperText={touched['categories'] && errors['categories']}
-                                            label="Категория"
-                                            variant="outlined"
-                                        />
-                                    );
-                                }}
-                            />
-                            {errors.categories && touched.categories ? (
-                                <div>{errors.categories}</div>
-                            ) : null}
-                        </Box>
-                        <Box margin={1}>
-                            <Field
-                                name="subcategories"
-                                multiple
-                                required
-                                component={Autocomplete}
-                                options={subcategories}
-                                getOptionLabel={(data) => data.name ? data.name : ""}
-                                style={{ width: 300 }}
-                                disabled={subSelectDisabled}
-                                renderInput={(params) => {
-                                    return (
-                                        <MuiTextField
-                                            {...params}
-                                            error={touched['subcategories'] && !!errors['subcategories']}
-                                            helperText={touched['subcategories'] && errors['subcategories']}
-                                            label="Категория"
-                                            variant="outlined"
-                                        />
-                                    );
-                                }}
-                            />
-                            {errors.subcategories && touched.subcategories ? (
-                                <div>{errors.subcategories}</div>
-                            ) : null}
-                        </Box>
-                        <Box margin={1}>
-                            <CurrencyInput
-                                name="price"
-                                placeholder="Введите цену"
-                                allowNegativeValue={false}
-                                decimalsLimit={1}
-                                prefix="$ "
-                                value={values.price}
-                                onValueChange={handleChange("price")}
-                            />
-                            {errors.price && touched.price ? (
-                                <div>{errors.price}</div>
-                            ) : null}
-                        </Box>
-                        <Box margin={1}>
-                            <CurrencyInput
-                                name="stock"
-                                placeholder="Введите колличество"
-                                allowNegativeValue={false}
-                                decimalsLimit={1}
-                                suffix=" шт."
-                                value={values.stock}
-                                onValueChange={handleChange("stock")}
-                            />
-                            {errors.stock && touched.stock ? (
-                                <div>{errors.stock}</div>
-                            ) : null}
-                        </Box>
-                        <Box margin={1}>
-                            <FormGroup>
-                                <FormControlLabel 
-                                    label="Доступно?" 
-                                    control={
-                                    <Field 
-                                        component={Switch} 
-                                        type="checkbox" 
-                                        name="available" 
-                                        />} 
+                        </Box> */}
+                <Box margin={1}>
+                    <TextField
+                        name="name"
+                        label="Название"
+                        required
+                        value={formik.values.name}
+                        onChange={formik.handleChange}
+                        error={formik.touched.name && Boolean(formik.errors.name)}
+                        helperText={formik.touched.name && formik.errors.name}
+                    />
+                </Box>
+                <Box margin={1}>
+                    <TextField
+                        name="description"
+                        label="Описание"
+                        multiline
+                        required
+                        minRows={4}
+                        maxRows={10}
+                        value={formik.values.description}
+                        onChange={formik.handleChange}
+                        error={formik.touched.description && Boolean(formik.errors.description)}
+                        helperText={formik.touched.description && formik.errors.description}
+                    />
+                </Box>
+                {/* <Box margin={1}>
+                    <Field
+                        name="categories"
+                        component={Autocomplete}
+                        options={categories}
+                        getOptionLabel={(data) => data.name ? data.name : ""}
+                        onHighlightChange={(e, option, reason) => handleHighlightChange(e, option, reason, formik.values)}
+                        disableClearable
+                        autoHighlight
+                        required
+                        style={{ width: 300 }}
+                        renderInput={(params) => {
+                            return (
+                                <MuiTextField
+                                    {...params}
+                                    error={formik.touched['categories'] && !!formik.errors['categories']}
+                                    helperText={formik.touched['categories'] && formik.errors['categories']}
+                                    label="Категория"
+                                    variant="outlined"
                                 />
-                                <FormControlLabel 
-                                    label="В карусели?" 
-                                    control={
-                                    <Field 
-                                        component={Switch} 
-                                        type="checkbox" 
-                                        name="incarousel" 
-                                        />} 
+                            );
+                        }}
+                    />
+                    {formik.errors.categories && formik.touched.categories ? (
+                        <div>{formik.errors.categories}</div>
+                    ) : null}
+                </Box>
+                <Box margin={1}> 
+                    <Field
+                        name="subcategories"
+                        multiple
+                        required
+                        component={Autocomplete}
+                        options={subcategories}
+                        getOptionLabel={(data) => data.name ? data.name : ""}
+                        style={{ width: 300 }}
+                        disabled={subSelectDisabled}
+                        renderInput={(params) => {
+                            return (
+                                <MuiTextField
+                                    {...params}
+                                    error={formik.touched['subcategories'] && !!formik.errors['subcategories']}
+                                    helperText={formik.touched['subcategories'] && formik.errors['subcategories']}
+                                    label="Категория"
+                                    variant="outlined"
                                 />
-                                <FormControlLabel 
-                                    label="В баннере?" 
-                                    control={
-                                    <Field 
-                                        component={Switch} 
-                                        type="checkbox" 
-                                        name="inbanner" 
-                                        />} 
-                                />
-                            </FormGroup>
-                        </Box>
-                        <Box margin={1}>
-                            <Button variant="contained" disabled={isSubmitting} onClick={submitForm} >
-                                Добавить
-                            </Button>
-                        </Box>
-                        <Box margin={1}>
-                            {isSubmitting && <LinearProgress />}
-                        </Box>
-                    </Form>
+                            );
+                        }}
+                    />
+                    {formik.errors.subcategories && formik.touched.subcategories ? (
+                        <div>{formik.errors.subcategories}</div>
+                    ) : null}
+                </Box>*/}
+                {/* <Box margin={1}>
+                    <CurrencyInput
+                        name="price"
+                        placeholder="Введите цену"
+                        inputType="number"
+                        allowNegativeValue={false}
+                        decimalsLimit={1}
+                        prefix="$ "
+                        value={formik.values.price}
+                        onChangeEvent={(event, maskedvalue, floatvalue) => {formik.setFieldValue("price", floatvalue);}}
+                    />
+                    {formik.errors.price && formik.touched.price ? (
+                        <div>{formik.errors.price}</div>
+                    ) : null}
+                </Box>
+                <Box margin={1}>
+                    <CurrencyInput
+                        name="stock"
+                        placeholder="Введите колличество"
+                        inputType="number"
+                        allowNegativeValue={false}
+                        decimalsLimit={1}
+                        suffix=" шт."
+                        value={formik.values.stock}
+                        onChangeEvent={(event, maskedvalue, floatvalue) => {formik.setFieldValue("stock", floatvalue);}}
+                    />
+                    {formik.errors.stock && formik.touched.stock ? (
+                        <div>{formik.errors.stock}</div>
+                    ) : null}
+                </Box> */}
+                <Box margin={1}>
+                    <FormGroup>
+                        <FormControlLabel
+                            label="Доступно?"
+                            control={
+                                <Switch
+                                    name="available"
+                                    checked={formik.values.available}
+                                    onChange={(event) => {formik.setFieldValue("available", event.target.checked);}}
+                                />}
+                        />
+                        <FormControlLabel
+                            label="В карусели?"
+                            control={
+                                <Switch
+                                    name="incarousel"
+                                    checked={formik.values.incarousel}
+                                    onChange={(event) => {formik.setFieldValue("incarousel", event.target.checked);}}
+                                />}
+                        />
+                        <FormControlLabel
+                            label="В баннере?"
+                            control={
+                                <Switch
+                                    name="inbanner"
+                                    checked={formik.values.inbanner}
+                                    onChange={(event) => {formik.setFieldValue("inbanner", event.target.checked);}}
+                                />}
+                        />
+                    </FormGroup>
+                </Box>
+                <Box margin={1}>
+                    <Button variant="contained" disabled={formik.isSubmitting} onClick={formik.submitForm} >
+                        {buttonTitle}
+                    </Button>
+                </Box>
+                <Box margin={1}>
+                    {formik.isSubmitting && <LinearProgress />}
+                </Box>
+            </form>
+            {/* </Form>
                 )}
-            </Formik>
+            </Formik>*/}
         </Box>
     );
 };
