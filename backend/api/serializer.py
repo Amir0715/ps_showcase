@@ -25,6 +25,7 @@ class GalleryListSerializer(serializers.ModelSerializer):
     '''
     Выводит все фотографии
     '''
+
     class Meta:
         model = Gallery
         fields = ('id', 'image', 'is_cover')
@@ -48,6 +49,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
     '''
     Полный вывод всех категорий и под-категорий без продуктов
     '''
+    
     children = RecursiveSrializer(many=True, required=False)
     # products = ProductListSerializer(many=True)
 

@@ -10,7 +10,7 @@ router = DefaultRouter()
 router.register(r'categories', api_views.CategoryListApiView, basename='category')
 router.register(r'all_categories', api_views.AllCategoryListApiView, basename='all_category')
 router.register(r'products', api_views.ProductListApiView, basename='product')
-# router.register(r'images', api_views.GalleryListSerializer, basename='images')
+router.register(r'images', api_views.GalleryListApiView, basename='images')
 
 urlpatterns = [
     path('schema/', SpectacularAPIView.as_view(), name='schema'),

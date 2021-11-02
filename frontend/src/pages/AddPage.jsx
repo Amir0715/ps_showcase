@@ -8,7 +8,9 @@ import {
     Box,
     FormGroup,
     TextField,
-    Switch
+    Switch,
+    RadioGroup,
+    Radio
 } from '@material-ui/core';
 import MuiTextField from '@material-ui/core/TextField';
 import {
@@ -115,7 +117,7 @@ const AddPage = (props) => {
                     formik.setFieldValue("available", product.available);
                     formik.setFieldValue("incarousel", product.incarousel);
                     formik.setFieldValue("inbanner", product.inbanner);
-
+                    formik.setFieldValue("images", product.images);
                 })
                 .catch((e) => {
                     console.error(e);
@@ -131,63 +133,82 @@ const AddPage = (props) => {
             });
     }, []);
 
-
+    const handleImageChangeCover = (event, id) => {
+        event.preventDefault();
+        const imgs = formik.values.images.map((img) => {
+            if (img.id === id) {
+                // Находим и меняем у нужного элемента с индексом id isCover на event.target.checked
+                return { ...img, is_cover: event.target.checked };
+            }
+            // А у остальных элементов сбрасываем
+            return { ...img, is_cover: false };
+        });
+        formik.setFieldValue('images', imgs);
+    };
 
     return (
         <Box margin={1}>
-            <Typography variant="h3" component="div" gutterBottom>
+            <Typography variant="h3" component={Box} gutterBottom>
                 {title}
             </Typography>
             <form>
-                {/* <Box margin={1}>
-                            <ImageUploading
-                                name="images"
-                                multiple
-                                value={formik.values.images}
-                                onChange={(imageList, addUpdateIndex) => {
-                                    console.log(imageList, addUpdateIndex);
-                                    formik.setFieldValue('images', imageList);
-                                    console.log(formik.values.images);
-                                }}
-                                maxNumber={99}
-                                dataURLKey="data_url"
-                            >
-                                {({
-                                    imageList,
-                                    onImageUpload,
-                                    onImageRemoveAll,
-                                    onImageUpdate,
-                                    onImageRemove,
-                                    isDragging,
-                                    dragProps
-                                }) => (
-                                    // write your building UI
-                                    <div className="upload__image-wrapper">
-                                        <button
-                                            style={isDragging ? { color: "red" } : null}
-                                            onClick={onImageUpload}
-                                            {...dragProps}
-                                        >
-                                            Click or Drop here
-                                        </button>
-                                        &nbsp;
-                                        <button onClick={onImageRemoveAll}>Remove all images</button>
-                                        {imageList.map((image, index) => (
-                                            <div key={index} className="image-item">
-                                                <img src={image.data_url} alt="" width="100" />
-                                                <div className="image-item__btn-wrapper">
-                                                    <button onClick={() => onImageUpdate(index)}>Update</button>
-                                                    <button onClick={() => onImageRemove(index)}>Remove</button>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </ImageUploading>
-                            {formik.errors.images && formik.touched.images ? (
-                                <div>{formik.errors.images}</div>
-                            ) : null}
-                        </Box> */}
+                <Box margin={1}>
+                    <ImageUploading
+                        name="images"
+                        multiple
+                        value={formik.values.images}
+                        onChange={(imageList, addUpdateIndex) => {
+                            const imgs = imageList.map((img, index) => ({ id: index, image: img.dataURL, file: img.file, is_cover: false }));
+                            formik.setFieldValue('images', imgs);
+                        }}
+                        maxNumber={99}
+                    >
+                        {({
+                            imageList,
+                            onImageUpload,
+                            onImageRemoveAll,
+                            onImageUpdate,
+                            onImageRemove,
+                            isDragging,
+                            dragProps
+                        }) => (
+                            // write your building UI
+                            <Box margin={1}>
+                                <Button
+                                    variant="contained"
+                                    sx={isDragging ? { color: "red" } : null}
+                                    onClick={onImageUpload}
+                                    {...dragProps}
+                                >
+                                    Нажмите или перетащите сюда
+                                </Button>
+                                &nbsp;
+                                <Button variant="contained" onClick={onImageRemoveAll}>Очистить</Button>
+                                {imageList.map((image, index) => (
+                                    <Box key={index} margin={1}>
+                                        <img src={image.image} alt="" width="600" />
+                                        <Box margin={1}>
+                                            <Button variant="contained" onClick={() => onImageUpdate(index)}>Заменить</Button>
+                                            <Button variant="contained" onClick={() => onImageRemove(index)}>Удалить</Button>
+                                            <FormControlLabel
+                                                label="Обложка?"
+                                                control={
+                                                    <Switch
+                                                        name="isCover"
+                                                        checked={image.is_cover}
+                                                        onChange={(event) => { handleImageChangeCover(event, image.id); }}
+                                                    />}
+                                            />
+                                        </Box>
+                                    </Box>
+                                ))}
+                            </Box>
+                        )}
+                    </ImageUploading>
+                    {formik.errors.images && formik.touched.images ? (
+                        <div>{formik.errors.images}</div>
+                    ) : null}
+                </Box>
                 <Box margin={1}>
                     <TextField
                         name="name"
@@ -282,28 +303,13 @@ const AddPage = (props) => {
                     {formik.errors.price && formik.touched.price ? (
                         <div>{formik.errors.price}</div>
                     ) : null}
-                </Box>
-                <Box margin={1}>
-                    <CurrencyInput
-                        name="stock"
-                        placeholder="Введите колличество"
-                        inputType="number"
-                        allowNegativeValue={false}
-                        decimalsLimit={1}
-                        suffix=" шт."
-                        value={formik.values.stock}
-                        onChangeEvent={(event, maskedvalue, floatvalue) => {formik.setFieldValue("stock", floatvalue);}}
-                    />
-                    {formik.errors.stock && formik.touched.stock ? (
-                        <div>{formik.errors.stock}</div>
-                    ) : null}
                 </Box> */}
                 <Box margin={1}>
                     <CountInput
                         name="stock"
                         value={formik.values.stock}
-                        onPlus={e => {formik.setFieldValue('stock', formik.values.stock + 1);}}
-                        onSub={e => {formik.setFieldValue('stock', formik.values.stock - 1 > 0 ? formik.values.stock - 1 : formik.values.stock);}}
+                        onPlus={e => { formik.setFieldValue('stock', formik.values.stock + 1); }}
+                        onSub={e => { formik.setFieldValue('stock', formik.values.stock - 1 > 0 ? formik.values.stock - 1 : formik.values.stock); }}
                         onChange={(event) => { console.log(event); formik.setFieldValue("stock", event.target.stock); }}
                     />
                 </Box>
@@ -347,9 +353,6 @@ const AddPage = (props) => {
                     {formik.isSubmitting && <LinearProgress />}
                 </Box>
             </form>
-            {/* </Form>
-                )}
-            </Formik>*/}
         </Box>
     );
 };
