@@ -26,6 +26,7 @@ import store from '../store/store';
 import ImageUploading from 'react-images-uploading';
 import * as Yup from 'yup';
 import { useParams } from 'react-router-dom';
+import CountInput from '../components/widgets/CountInput/CountInput';
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -59,10 +60,10 @@ const AddPage = (props) => {
     const [buttonTitle, setButtonTitle] = React.useState("Добавить");
 
     const handleSubmit = (values, { setSubmitting }) => {
-        setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-        }, 400);
+        // setTimeout(() => {
+        //     alert(JSON.stringify(values, null, 2));
+        //     setSubmitting(false);
+        // }, 400);
         console.log(values);
     };
 
@@ -192,6 +193,7 @@ const AddPage = (props) => {
                         name="name"
                         label="Название"
                         required
+                        fullWidth
                         value={formik.values.name}
                         onChange={formik.handleChange}
                         error={formik.touched.name && Boolean(formik.errors.name)}
@@ -203,6 +205,7 @@ const AddPage = (props) => {
                         name="description"
                         label="Описание"
                         multiline
+                        fullWidth
                         required
                         minRows={4}
                         maxRows={10}
@@ -296,6 +299,15 @@ const AddPage = (props) => {
                     ) : null}
                 </Box> */}
                 <Box margin={1}>
+                    <CountInput
+                        name="stock"
+                        value={formik.values.stock}
+                        onPlus={e => {formik.setFieldValue('stock', formik.values.stock + 1);}}
+                        onSub={e => {formik.setFieldValue('stock', formik.values.stock - 1 > 0 ? formik.values.stock - 1 : formik.values.stock);}}
+                        onChange={(event) => { console.log(event); formik.setFieldValue("stock", event.target.stock); }}
+                    />
+                </Box>
+                <Box margin={1}>
                     <FormGroup>
                         <FormControlLabel
                             label="Доступно?"
@@ -303,7 +315,7 @@ const AddPage = (props) => {
                                 <Switch
                                     name="available"
                                     checked={formik.values.available}
-                                    onChange={(event) => {formik.setFieldValue("available", event.target.checked);}}
+                                    onChange={(event) => { formik.setFieldValue("available", event.target.checked); }}
                                 />}
                         />
                         <FormControlLabel
@@ -312,7 +324,7 @@ const AddPage = (props) => {
                                 <Switch
                                     name="incarousel"
                                     checked={formik.values.incarousel}
-                                    onChange={(event) => {formik.setFieldValue("incarousel", event.target.checked);}}
+                                    onChange={(event) => { formik.setFieldValue("incarousel", event.target.checked); }}
                                 />}
                         />
                         <FormControlLabel
@@ -321,13 +333,13 @@ const AddPage = (props) => {
                                 <Switch
                                     name="inbanner"
                                     checked={formik.values.inbanner}
-                                    onChange={(event) => {formik.setFieldValue("inbanner", event.target.checked);}}
+                                    onChange={(event) => { formik.setFieldValue("inbanner", event.target.checked); }}
                                 />}
                         />
                     </FormGroup>
                 </Box>
                 <Box margin={1}>
-                    <Button variant="contained" disabled={formik.isSubmitting} onClick={formik.submitForm} >
+                    <Button variant="contained" disabled={formik.isSubmitting} onClick={formik.handleSubmit}>
                         {buttonTitle}
                     </Button>
                 </Box>
