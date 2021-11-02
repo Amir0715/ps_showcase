@@ -20,3 +20,18 @@ class ProductListApiView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+class AllCategoryListApiView(viewsets.ModelViewSet):
+    '''
+    Полный вывод всех категорий и под-категорий без продуктов на одном уровне
+    '''
+    serializer_class = AllCategoryListSerializer
+    queryset = Category.objects.all()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+# class GalleryListApiView(viewsets.ModelViewSet):
+#     '''
+#     Полный вывод всех фотографий
+#     '''
+#     serializer_class = GalleryListSerializer
+#     queryset = Gallery.objects.all()
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

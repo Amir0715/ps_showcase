@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from catalog.models import Category, Product
+from catalog.models import Category, Gallery, Product
 
 
 class FilterCategoryListSerializer(serializers.ListSerializer):
@@ -21,16 +21,26 @@ class RecursiveSrializer(serializers.Serializer):
         serializer = self.parent.parent.__class__(value, context=self.context)
         return serializer.data
 
+class GalleryListSerializer(serializers.ModelSerializer):
+    '''
+    Выводит все фотографии
+    '''
+    class Meta:
+        model = Gallery
+        fields = ('id', 'image', 'is_cover')
 
 class ProductListSerializer(serializers.ModelSerializer):
     '''
     Полный вывод всех продуктов без категорий 
     '''
+
+    images = GalleryListSerializer(many=True)
+
     class Meta:
         model = Product
         fields = (
             'id', 'name', 'slug', 'price', 'description', 'price',
-            'stock', 'available', 'incarousel', 'inbanner', 'created_at', 'updated_at'
+            'stock', 'available', 'incarousel', 'inbanner', 'created_at', 'updated_at', 'images'
         )
 
 
@@ -46,3 +56,11 @@ class CategoryListSerializer(serializers.ModelSerializer):
         model = Category
         fields = ('id', 'name', 'slug', 'children')
 
+class AllCategoryListSerializer(serializers.ModelSerializer):
+    '''
+    Полный вывод всех категорий и под-категорий без продуктов на одном уровне
+    '''
+
+    class Meta:
+        model = Category
+        fields = ('id', 'name', 'slug', 'children')

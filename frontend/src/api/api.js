@@ -1,7 +1,7 @@
 import axios from "axios";
 import store from "../store/store";
 import { setLoading } from "../store/actionCreators/loading";
-import { setProducts } from "../store/actionCreators/products";
+import { setProducts, setCurrentProduct } from "../store/actionCreators/products";
 import { setCategories } from "../store/actionCreators/categories";
 import { setToken, setEmail } from "../store/actionCreators/user";
 import { setAuthorized } from "../store/actionCreators/authorized";
@@ -40,13 +40,32 @@ class ApiClient {
      */
     async getProducts() {
         const response = await this.axios.get('/products/');
-        const data = await response.data;
-        this.dispatch(setProducts(data));
-        return data;
+        if (response.status === 200)
+        {
+            const data = await response.data;
+            this.dispatch(setProducts(data));
+        }
     }
+
+    async getProduct(id) {
+        const response = await this.axios.get(`/products/${id}/`);
+        if (response.status === 200)
+        {
+            const data = await response.data;
+            this.dispatch(setCurrentProduct(data));
+        }
+    }
+
 
     async getCategories() {
         const response = await this.axios.get('/categories/');
+        const data = await response.data;
+        this.dispatch(setCategories(data));
+        return data;
+    }
+
+    async getAllCategories() {
+        const response = await this.axios.get('/all_categories/');
         const data = await response.data;
         this.dispatch(setCategories(data));
         return data;

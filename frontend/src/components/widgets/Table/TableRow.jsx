@@ -31,7 +31,7 @@ const MyTableRow = (props) => {
                             scope="row"
                             padding="none"
                         >
-                            <Link
+                            <Link 
                                 key={row.id}
                                 to={`${url}/add/${row.id}`} >
                                 {value}
@@ -58,23 +58,10 @@ const MyTableRow = (props) => {
                     break;
                 case "string":
                     array.push(
-                        <TableCell
+                        <TableCell 
                             key={key}
                             align="left">
                             {value}
-                        </TableCell>
-                    );
-                    break;
-                case "array":
-                    array.push(
-                        <TableCell
-                            key={key}
-                            align="left">
-                            {value && value.sort().map((value) => <span><Link
-                                key={row.id}
-                                to={`${url}/add/${value}`} >
-                                {value}
-                            </Link> </span>)}
                         </TableCell>
                     );
                     break;
@@ -89,7 +76,7 @@ const MyTableRow = (props) => {
     return (
         <TableRow
             hover
-            onClick={(event) => props.handleClick(event, props.row.name)}
+            onClick={(event) => props.handleClick(event, props.row.id)}
             role="checkbox"
             aria-checked={props.isItemSelected}
             tabIndex={-1}

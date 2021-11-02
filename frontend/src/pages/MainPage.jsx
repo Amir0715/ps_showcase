@@ -15,6 +15,7 @@ import { AddPage } from "./AddPage";
 import { AppBar } from "../components/appBar";
 import { NavBar } from "../components/navBar";
 import store from "../store/store";
+import ProductPage from "./ProductPage";
 
 const drawerWidth = 200; // px
 
@@ -40,17 +41,23 @@ const MainPage = (props) => {
                     <Route exact path="/">
                         <DashboardPage />
                     </Route>
-                    <Route path="/add">
-                        <AddPage />
-                    </Route>
                     <Route path="/orders">
                         <OrdersPage />
                     </Route>
                     <Route path="/categories">
                         <CategoriesPage />
                     </Route>
+                    <Route path="/products/add/:id">
+                        <AddPage />
+                    </Route>
+                    <Route path="/products/add">
+                        <AddPage />
+                    </Route>
                     <Route path="/products">
                         <ProductsPage />
+                    </Route>
+                    <Route path="/product">
+                        <ProductPage />
                     </Route>
                     <Route path="/users">
                         <UsersPage />

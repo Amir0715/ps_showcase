@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useRouteMatch } from "react-router-dom";
 import api from "../api/api";
 import EnhancedTable from "../components/widgets/tableSortSelect";
 import store from "../store/store";
@@ -61,7 +62,7 @@ const ProductsPage = () => {
         });
     }, []);
 
-    return <EnhancedTable tabletitle="Продукты" headCells={headCells} rows={store.getState().products} />;
+    return (<EnhancedTable tabletitle="Продукты" headCells={headCells} rows={store.getState().products.all} />);
 };
 
 export default ProductsPage;

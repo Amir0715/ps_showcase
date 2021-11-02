@@ -6,6 +6,7 @@ import ProductsPage from "../pages/ProductsPage";
 import UsersPage from "../pages/UsersPage";
 import StatisticsPage from "../pages/StatisticsPage";
 import SettingsPage from "../pages/SettingsPage";
+import ProductPage from "../pages/ProductPage";
 
 
 const structure = [
@@ -13,6 +14,7 @@ const structure = [
     { title: "Заказы", to: "/orders", component: OrdersPage},
     { title: "Категории", to: "/categories", component: CategoriesPage},
     { title: "Продукты", to: "/products", component: ProductsPage },
+    { title: "Продукт", to: "/product", component: ProductPage },
     { title: "Пользователи", to: "/users", component: UsersPage},
     { title: "Статистика", to: "/statistics", component: StatisticsPage },
     { title: "Настройки", to: "/settings", component: SettingsPage },

@@ -21,7 +21,7 @@ import {
 import { Delete, FilterList, Add } from '@mui/icons-material';
 import { visuallyHidden } from '@mui/utils';
 import { MyTableRow } from "./tableRow";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -58,7 +58,7 @@ function EnhancedTableHead(props) {
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{
-              'aria-label': 'select all desserts',
+              'aria-label': 'select all',
             }}
           />
         </TableCell>
@@ -99,7 +99,7 @@ EnhancedTableHead.propTypes = {
 
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
-
+  const { path, url } = useRouteMatch();
   return (
     <Toolbar
       sx={{
@@ -144,7 +144,7 @@ const EnhancedTableToolbar = (props) => {
             </IconButton>
           </Tooltip>
           <Tooltip title="Add" arrow>
-            <IconButton component={Link} to={'/add'}>
+            <IconButton component={Link} to={`${url}/add`}>
               <Add />
             </IconButton>
           </Tooltip>
@@ -240,7 +240,7 @@ export default function EnhancedTable(props) {
                 props.rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .sort(getComparator(order, orderBy))
                   .map((row, index) => {
-                    const isItemSelected = isSelected(row.id);
+                    const isItemSelected = isSelected(row.name);
                     const labelId = `enhanced-table-checkbox-${index}`;
                     return (
                       // Возвращаем строку

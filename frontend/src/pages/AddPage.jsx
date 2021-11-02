@@ -1,37 +1,29 @@
 import * as React from 'react';
-import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
-import { InputNumber } from 'element-react';
-import 'element-theme-default';
+import { Formik, Form, Field, useFormik } from 'formik';
 import {
     Button,
     LinearProgress,
-    FormControl,
-    InputLabel,
     FormControlLabel,
     Typography,
     Box,
     FormGroup,
-    MenuItem,
 } from '@material-ui/core';
 import MuiTextField from '@material-ui/core/TextField';
 import {
-    fieldToTextField,
     TextField,
-    TextFieldProps,
-    Select,
     Switch,
 } from 'formik-material-ui';
 
 import {
     Autocomplete,
-    ToggleButtonGroup,
-    AutocompleteRenderInputParams,
 } from 'formik-material-ui-lab';
 import CurrencyInput from 'react-currency-input-field';
+
 import api from '../api/api';
 import store from '../store/store';
 import ImageUploading from 'react-images-uploading';
 import * as Yup from 'yup';
+import { useParams } from 'react-router-dom';
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -56,11 +48,49 @@ const SignupSchema = Yup.object().shape({
         .required('Это поле должно быть заполнено!'),
 });
 
+const MyAddPage = (props) => {
+    const [isEditing, setIsEditing] = React.useState(false);
+    const { id } = useParams();
+    const [product, setProduct] = React.useState();
+    const formik = useFormik({
+        initialValues: {
+            images: [],
+            name: '',
+            description: '',
+            subcategories: [],
+            categories: [],
+            price: 0,
+            stock: 0,
+            available: false,
+            incarousel: false,
+            inbanner: false,
+        },
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+    });
+
+
+};
 
 const AddPage = (props) => {
+    const [isEditing, setIsEditing] = React.useState(false);
     const [categories, setcategories] = React.useState([]);
     const [subSelectDisabled, setSubSelectDisabled] = React.useState(true);
     const [subcategories, setsubcategories] = React.useState([]);
+    const { id } = useParams();
+    const [product, setProduct] = React.useState({
+        images: isEditing ? store.getState().products.current.images : [],
+        name: isEditing ? store.getState().products.current.name : '',
+        description: isEditing ? store.getState().products.current.description : '',
+        subcategories: [],
+        categories: [],
+        price: isEditing ? store.getState().products.current.price : 0,
+        stock: isEditing ? store.getState().products.current.stock : 0,
+        available: isEditing ? store.getState().products.current.available : false,
+        incarousel: isEditing ? store.getState().products.current.incarousel : false,
+        inbanner: isEditing ? store.getState().products.current.inbanner : false,
+    });
 
     const handleSubmit = (values, { setSubmitting }) => {
         setTimeout(() => {
@@ -84,6 +114,17 @@ const AddPage = (props) => {
     };
 
     React.useEffect(() => {
+        if (id !== null && id !== undefined) {
+            console.log(id);
+            api.getProduct(id)
+            .then(() => {
+                setIsEditing(true);
+                console.log(store.getState().products.current);
+            })
+            .catch((e) => {
+                console.error(e);
+            });
+        }
         api.getCategories()
             .then(() => {
                 const res = store.getState().category;
@@ -97,25 +138,25 @@ const AddPage = (props) => {
     return (
         <Box margin={1}>
             <Typography variant="h3" component="div" gutterBottom>
-                {props.title ? props.title : "None title page"}
+                {props.title ? props.title : "Новый продукт"}
             </Typography>
             <Formik
                 initialValues={{
-                    images: [],
-                    name: '',
-                    description: '',
+                    images: store.getState().products.current.images ? store.getState().products.current.images : [],
+                    name: store.getState().products.current.name ? store.getState().products.current.name : '',
+                    description: store.getState().products.current.description ? store.getState().products.current.description : '',
                     subcategories: [],
                     categories: [],
-                    price: 0,
-                    stock: 0,
-                    available: false,
-                    incarousel: false,
-                    inbanner: false,
+                    price: store.getState().products.current.price ? store.getState().products.current.price : 0,
+                    stock: store.getState().products.current.stock ? store.getState().products.current.stock : 0,
+                    available: store.getState().products.current.available ? store.getState().products.current.available : false,
+                    incarousel: store.getState().products.current.incarousel ? store.getState().products.current.incarousel : false,
+                    inbanner: store.getState().products.current.inbanner ? store.getState().products.current.inbanner : false,
                 }}
                 onSubmit={handleSubmit}
                 validationSchema={SignupSchema}
             >
-                {({ values, handleChange, handleBlur, submitForm, isSubmitting, touched, errors, setFieldValue }) => (
+                {({ values, handleChange, submitForm, isSubmitting, touched, errors, setFieldValue }) => (
                     <Form>
                         <Box margin={1}>
                             <ImageUploading
@@ -166,16 +207,12 @@ const AddPage = (props) => {
                                 <div>{errors.images}</div>
                             ) : null}
                         </Box>
-                        {/* {values.images.length > 0 ? `<div>${values.images.map((image) => image.name)}</div>` : <div>Нет изображений</div>} */}
                         <Box margin={1}>
                             <Field
                                 name="name"
                                 label="Название"
                                 component={TextField}
                                 required />
-                            {/* {errors.name && touched.name ? (
-                                <div>{errors.name}</div>
-                            ) : null} */}
                         </Box>
                         <Box margin={1}>
                             <Field
@@ -186,9 +223,6 @@ const AddPage = (props) => {
                                 minRows={4}
                                 maxRows={10}
                                 required />
-                            {/* {errors.description && touched.description ? (
-                                <div>{errors.description}</div>
-                            ) : null} */}
                         </Box>
                         <Box margin={1}>
                             <Field
@@ -273,9 +307,33 @@ const AddPage = (props) => {
                         </Box>
                         <Box margin={1}>
                             <FormGroup>
-                                <FormControlLabel control={<Field component={Switch} type="checkbox" name="available" />} label="Доступно?" />
-                                <FormControlLabel control={<Field component={Switch} type="checkbox" name="incarousel" />} label="В карусели?" />
-                                <FormControlLabel control={<Field component={Switch} type="checkbox" name="inbanner" />} label="В баннере?" />
+                                <FormControlLabel 
+                                    label="Доступно?" 
+                                    control={
+                                    <Field 
+                                        component={Switch} 
+                                        type="checkbox" 
+                                        name="available" 
+                                        />} 
+                                />
+                                <FormControlLabel 
+                                    label="В карусели?" 
+                                    control={
+                                    <Field 
+                                        component={Switch} 
+                                        type="checkbox" 
+                                        name="incarousel" 
+                                        />} 
+                                />
+                                <FormControlLabel 
+                                    label="В баннере?" 
+                                    control={
+                                    <Field 
+                                        component={Switch} 
+                                        type="checkbox" 
+                                        name="inbanner" 
+                                        />} 
+                                />
                             </FormGroup>
                         </Box>
                         <Box margin={1}>

@@ -1,4 +1,4 @@
-import { SET_PRODUCTS, ADD_PRODUCT, EDIT_PRODUCT, DELETE_PRODUCT } from "../actions/products";
+import { SET_PRODUCTS, ADD_PRODUCT, EDIT_PRODUCT, DELETE_PRODUCT, SET_CURRENT_PRODUCT } from "../actions/products";
 
 /**
  * добавляет продукт в стор
@@ -37,4 +37,11 @@ const deleteProduct = (id) => (
     }
 );
 
-export { setProducts };
+const setCurrentProduct = (product) => (
+    {
+        type: SET_CURRENT_PRODUCT,
+        value: product
+    }
+);
+
+export { setProducts, setCurrentProduct };
