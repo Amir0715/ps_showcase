@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Formik, Form, Field, useFormik } from 'formik';
+import { Field, useFormik } from 'formik';
 import {
     Button,
     LinearProgress,
@@ -9,15 +9,8 @@ import {
     FormGroup,
     TextField,
     Switch,
-    RadioGroup,
-    Radio
 } from '@material-ui/core';
 import MuiTextField from '@material-ui/core/TextField';
-import {
-    // TextField,
-    // Switch,
-} from 'formik-material-ui';
-
 import {
     Autocomplete,
 } from 'formik-material-ui-lab';
@@ -29,6 +22,7 @@ import ImageUploading from 'react-images-uploading';
 import * as Yup from 'yup';
 import { useParams } from 'react-router-dom';
 import CountInput from '../components/widgets/CountInput/CountInput';
+import AutoComplete from '../components/widgets/AutoComplete/AutoComplete';
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -54,9 +48,6 @@ const SignupSchema = Yup.object().shape({
 
 const AddPage = (props) => {
     const [isEditing, setIsEditing] = React.useState(false);  // true - изменение сущ. продукта
-    const [categories, setcategories] = React.useState([]);
-    const [subSelectDisabled, setSubSelectDisabled] = React.useState(true);
-    const [subcategories, setsubcategories] = React.useState([]);
     const { id } = useParams();
     const [title, setTitle] = React.useState("Новый продукт");
     const [buttonTitle, setButtonTitle] = React.useState("Добавить");
@@ -69,26 +60,13 @@ const AddPage = (props) => {
         console.log(values);
     };
 
-    const handleHighlightChange = (e, option, reason, values) => {
-        setSubSelectDisabled(false);
-        const categories = store.getState().category;
-        if (values.categories.length !== 0 && values.categories.id !== option.id) {
-            values.subcategories = [];
-        }
-        categories.forEach(category => {
-            if (category.id === option.id) {
-                setsubcategories(category.children);
-            }
-        });
-    };
-
     const formik = useFormik({
         initialValues: {
             images: [],
             name: '',
             description: '',
             subcategories: [],
-            categories: [],
+            category: {},
             price: 0,
             stock: 0,
             available: false,
@@ -101,13 +79,12 @@ const AddPage = (props) => {
 
     React.useEffect(() => {
         if (id !== null && id !== undefined) {
-            console.log(id);
+            setTitle("Загрузка...");
             api.getProduct(id)
                 .then(() => {
                     setIsEditing(true);
                     const product = store.getState().products.current;
                     console.log(product);
-                    setTitle(product.name);
                     setButtonTitle("Сохранить");
                     // АВТОЗАПОЛНЕНИЕ ФОРМЫ ДАННЫМИ
                     formik.setFieldValue("name", product.name);
@@ -118,19 +95,12 @@ const AddPage = (props) => {
                     formik.setFieldValue("incarousel", product.incarousel);
                     formik.setFieldValue("inbanner", product.inbanner);
                     formik.setFieldValue("images", product.images);
+                    setTitle(product.name);
                 })
                 .catch((e) => {
                     console.error(e);
                 });
         }
-        api.getCategories()
-            .then(() => {
-                const res = store.getState().category;
-                const parents = res.map((category) => ({ id: category.id, name: category.name, slug: category.slug }));
-                const children = res.map((category) => category.children);
-                setcategories(parents);
-                setsubcategories(children);
-            });
     }, []);
 
     const handleImageChangeCover = (event, id) => {
@@ -236,6 +206,12 @@ const AddPage = (props) => {
                         helperText={formik.touched.description && formik.errors.description}
                     />
                 </Box>
+                <Box margin={1}>
+                    <AutoComplete
+                        formik={formik}
+                        
+                    />
+                </Box>
                 {/* <Box margin={1}>
                     <Field
                         name="categories"
@@ -288,7 +264,7 @@ const AddPage = (props) => {
                     {formik.errors.subcategories && formik.touched.subcategories ? (
                         <div>{formik.errors.subcategories}</div>
                     ) : null}
-                </Box>*/}
+                </Box> */}
                 {/* <Box margin={1}>
                     <CurrencyInput
                         name="price"

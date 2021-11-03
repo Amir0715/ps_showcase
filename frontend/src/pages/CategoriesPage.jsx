@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import api from "../api/api";
-import { MyTable as Table } from "../components/widgets/Table/Table";
 import EnhancedTable from "../components/widgets/tableSortSelect";
-import { setHeadCells, setTableTitle } from "../store/actionCreators/table";
 import store from "../store/store";
 import * as React from 'react';
 
@@ -39,7 +37,7 @@ const headCells = [
 
 const CategoriesPage = () => {
     const [data, setData] = React.useState([{}]);
-    
+
 
     useEffect(() => {
         api.getAllCategories().then(() => {
@@ -50,7 +48,7 @@ const CategoriesPage = () => {
     }, []);
 
     return (
-        <EnhancedTable tabletitle="Продукты" headCells={headCells} rows={data} />
+        <EnhancedTable tabletitle="Категории" headCells={headCells} rows={data} />
     );
 };
 
