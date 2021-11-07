@@ -28,7 +28,7 @@
 
             {% for image in game.images.all %}
             <img src="{{ image.image.url }}" class="galery-container_inner_img cursor"
-                onclick="openModal();currentSlide({{ forloop.counter }})">
+                onclick="openModal(); currentSlide({{ forloop.counter }})">
             {% endfor %}
 
         </div>
@@ -76,24 +76,14 @@
 
             </div>
             <ul class="info-container_attributes_list">
+                {% for value in game.values.all %}
                 <li>
-                    <span class="info-container_attributes_list_key">Жанр :</span>
+                    <span class="info-container_attributes_list_key">{{ value.attribute }} : </span>
                     <ul class="info-container_attributes_sublist">
-                        <li><span class="info-container_attributes_sublist_value">Шутер</span></li>
-                        <li><span class="info-container_attributes_sublist_value">От первого лица</span></li>
-                        <li><span class="info-container_attributes_sublist_value">Фантастика</span></li>
+                        <li><span class="info-container_attributes_sublist_value">{{ value }}</span></li>
                     </ul>
                 </li>
-                <li><span class="info-container_attributes_list_key">Дата выхода:</span>
-                    <ul class="info-container_attributes_sublist">
-                        <li><span class="info-container_attributes_sublist_value">2014 г</span></li>
-                    </ul>
-                </li>
-                <li><span class="info-container_attributes_list_key">Рейтинг:</span>
-                    <ul class="info-container_attributes_sublist">
-                        <li><span class="info-container_attributes_sublist_value">18+</span></li>
-                    </ul>
-                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
