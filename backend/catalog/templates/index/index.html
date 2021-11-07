@@ -13,7 +13,7 @@
     <section class="section centered">
         <div class="section_header">
             <div class="section_header_title">Новые игры</div>
-            <div class="section_header_see-all"><a href="{% url 'catalog:game_list' game_category.0.slug %}">Посмотреть
+            <div class="section_header_see-all"><a href="{% url 'catalog:game_list' game_category.1.slug %}">Посмотреть
                     все</a></div>
         </div>
         <div class="section_games">
@@ -100,7 +100,7 @@
     <section class="soon section centered">
         <div class="section_header">
             <div class="section_header_title">Скоро в продаже</div>
-            <div class="section_header_see-all"><a href="{% url 'catalog:game_list' game_category.0.slug %}">Посмотреть
+            <div class="section_header_see-all"><a href="{% url 'catalog:game_list' game_category.2.slug %}">Посмотреть
                     все</a></div>
         </div>
 
@@ -118,3 +118,7 @@
 </main>
 
 {% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'js/carousel.js' %}"></script>
+{% endblock scripts %}

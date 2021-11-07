@@ -2,6 +2,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.base import View
 from catalog.models import Product, Category
 from django.shortcuts import render
+from catalog.filters import ProductFilter
 
 
 class IndexView(ListView):
@@ -15,14 +16,15 @@ class IndexView(ListView):
             q.filter(category__name__icontains="Новые игры"))[:4]
         self.best_games = list(
             q.filter(category__name__icontains="Лучшие игры"))[:4]
-        self.soon_games = list(q.filter(category__name__icontains="Скоро в продаже"))[
-            :4
-        ]
-        self.carousel_games = list(q.filter(incarousel=True))
-        self.banner_games = list(q.filter(inbanner=True))[:2]
+        self.soon_games = list(
+            q.filter(category__name__icontains="Скоро в продаже"))[:4]
         self.game_category = list(
             Category.objects.filter(parent__name__icontains="Игры")
         )
+        self.carousel_games = list(
+            q.filter(incarousel=True))
+        self.banner_games = list(
+            q.filter(inbanner=True))[:2]
         return q
 
     def get_context_data(self, **kwargs):
@@ -60,6 +62,7 @@ class GameListView(ListView):
     template_name = "game/game_list.html"
     model = Product
     context_object_name = "games"
+    # filterset_class = ProductFilter
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -69,11 +72,17 @@ class GameListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+
         self.game_category = Category.objects.filter(
             parent__name__icontains="Игры"
         )
+
         self.category = Category.objects.get(
             slug=self.kwargs.setdefault("category", "games")
         )
-        queryset.filter(category=self.category)
-        return queryset.filter(available=True)
+
+        q = queryset.filter(available=True).filter(category=self.category)
+
+        if self.request.GET:
+            q = ProductFilter(self.request.GET, queryset=q).qs
+        return q

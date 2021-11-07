@@ -4,7 +4,7 @@ import * as React from "react";
 import api from "../../../api/api";
 import store from "../../../store/store";
 
-const AutoComplete = ({ formik, ...props }) => {
+const AutoComplete = ({ formik, isEditing, ...props }) => {
 
     const [options, setOptions] = React.useState({ categories: [], subCategories: [] });
     const [selectedCategory, setSelectedCategory] = React.useState({});
@@ -21,13 +21,13 @@ const AutoComplete = ({ formik, ...props }) => {
         setSelectedSubCategories([]);
         formik.setFieldValue("subcategories", []);
         setOptions(options => ({ ...options, subCategories: [] }));
-        
+
         // нужно взять из стора все категории, достать потомков для категории у которого id === value.id 
         const children = store.getState().category.find((category) => category.id === value.id).children;
         // и подсунуть для подкатегории option 
         setOptions(options => ({ ...options, subCategories: children }));
         setSubSelectDisabled(false);
-        
+
     };
     const handleSubCategoryChange = (event, value) => {
         event.preventDefault();
@@ -44,6 +44,34 @@ const AutoComplete = ({ formik, ...props }) => {
                 console.log("parents = ", parents);
             });
     }, []);
+
+    React.useEffect(() => {
+        if (isEditing) {
+            const res = store.getState().category;
+            // если это загрузка
+            console.log(isEditing);
+            const product_category = store.getState().products.current.category;
+            console.log(product_category);
+            // const product_categories = res.map(category => category.children.filter(children => product_category.includes(children.id)));
+            let product_categories = {};
+            res.map(element => {
+                const childrens = element.children.filter(children => product_category.includes(children.id))
+                    .map(childrencategory => ({ id: childrencategory.id, name: childrencategory.name, slug: childrencategory.slug }));
+                console.log(childrens);
+                if (childrens.length > 0) {
+                    // данный родитель имеет хотя бы одну нужную нам категорию
+                    product_categories = { id: element.id, name: element.name, slug: element.slug, children: childrens };
+                }
+                return element;
+            });
+            console.log(product_categories);
+            setSelectedCategory({id: product_categories.id, name: product_categories.name, slug: product_categories.slug});
+            formik.setFieldValue("category", {id: product_categories.id, name: product_categories.name, slug: product_categories.slug});
+            setSelectedSubCategories(product_categories.children);
+            formik.setFieldValue("subcategories", product_categories.children);
+            setSubSelectDisabled(false);
+        }
+    }, [isEditing]);
 
     return (
         <Box margin={1}>
@@ -84,8 +112,7 @@ const AutoComplete = ({ formik, ...props }) => {
                         label="Подкатегория"
                         variant="outlined"
                     />
-                )
-                }
+                )}
             />
         </Box>
     );

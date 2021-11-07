@@ -25,7 +25,12 @@
 
 .grid {
     display: grid;
-    grid-template-areas: "S C C C";
+    grid-template-areas:
+        "S S S S"
+        "C C C C";
+    @include for-tablet-up {
+        grid-template-areas: "S C C C";
+    }
 }
 
 .filter {
@@ -45,9 +50,13 @@
         &_items {
             &_label {
                 position: relative;
-                cursor: pointer;
-                padding: 5px 0px 5px 25px;
-                height: 16px;
+                label {
+                    min-width: 20px;
+                }
+                
+                // cursor: pointer;
+                // padding: 5px 0px 5px 25px;
+                // height: 16px;
                 &_icon {
                     height: 16px;
                     position: absolute;
@@ -57,8 +66,35 @@
                     right: 0;
                     margin: auto 0px;
                 }
+                select {
+                    width: 180px;
+                    // margin-top: 10px;
+                }
                 &_input {
-                    display: none;
+                    &[type="number"] {
+                        width: 120px;
+                    }
+                    
+                    margin-bottom: 10px;
+                    // убираем стелочки для инпута
+                    &[type="number"]::-webkit-outer-spin-button,
+                    &[type="number"]::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                    &[type="number"] {
+                        -moz-appearance: textfield;
+                    }
+                    &[type="number"]:hover,
+                    &[type="number"]:focus {
+                        -moz-appearance: number-input;
+                    }
+                    &[type="number"]::-webkit-inner-spin-button,
+                    &[type="number"]::-webkit-outer-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                    // height: ;
                 }
                 &_text {
                     font-size: 16px;
@@ -68,6 +104,22 @@
                     color: $dark_font_color;
                 }
             }
+        }
+    }
+
+    &_show_button {
+        display: block;
+        font-size: 20px;
+        width: 180px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 4px;
+        margin: 15px auto 0px;
+        // box-shadow: 4px 4px 4px rgba($color: #000, $alpha: 0.5);
+        cursor: pointer;
+        @include for-tablet-up {
+            font-size: 20px;
+            width: 180px;
         }
     }
 }

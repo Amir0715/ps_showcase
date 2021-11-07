@@ -32,6 +32,8 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def count_of_games(self):
+        return self.products.count()
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
@@ -156,13 +158,17 @@ class CategoryAttribute(models.Model):
 
     category = models.ForeignKey(
         "Category",
-        verbose_name="Атрибут категории",
+        verbose_name="Категория",
         on_delete=models.CASCADE,
         related_name="attributes",
     )  # категория
+    
     name = models.CharField(
         verbose_name="Название атрибута", max_length=255
     )  # названия атрибута, то бишь ключ
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = "Атрибут категории"
@@ -180,15 +186,20 @@ class AttributeValue(models.Model):
         on_delete=models.CASCADE,
         related_name="values",
     )  # атрибут, ключ
+
     product = models.ForeignKey(
         "Product",
         verbose_name="Значение атрибута для продукта",
         on_delete=models.CASCADE,
         related_name="values",
     )  # продукт
+
     value = models.CharField(
         verbose_name="Значение атрибута", max_length=255
     )  # значение атрибута
+
+    def __str__(self):
+        return self.value
 
     class Meta:
         verbose_name = "Значение атрибута"

@@ -58,6 +58,7 @@ const AddPage = (props) => {
         //     setSubmitting(false);
         // }, 400);
         console.log(values);
+        setSubmitting(false);
     };
 
     const formik = useFormik({
@@ -209,7 +210,7 @@ const AddPage = (props) => {
                 <Box margin={1}>
                     <AutoComplete
                         formik={formik}
-                        
+                        isEditing={isEditing}
                     />
                 </Box>
                 {/* <Box margin={1}>

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "dashboard",
 
     # api for react app
-    # 'django_filters',
+    'django_filters',
     "api",
 
     # auth system
