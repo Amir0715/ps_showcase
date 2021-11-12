@@ -46,8 +46,10 @@
                 <a href="#"><img src="{% static 'images/viber.svg' %}" class="icon__social_viber"></a>
             </div>
             <div class="header_flex-wraper__right__search">
-                <input type="search" name="search" id="search" placeholder="Поиск...">
-                <img src="{% static 'images/search_icon.svg' %}" class="icon__search">
+                <form action="{% url 'catalog:game_list' %}" method="get">
+                    <input type="text" name="q" id="search" placeholder="Поиск...">
+                    <!-- <button><img src="{% static 'images/search_icon.svg' %}" class="icon__search"></a> -->
+                </form>
             </div>
             <div class="header_flex-wraper__right__cart">
                 <a href="#"><img src="{% static 'images/cart_icon.svg' %}" class="icon__cart"><span
