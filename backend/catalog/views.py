@@ -80,9 +80,7 @@ class GameListView(ListView):
         self.category = Category.objects.get(
             slug=self.kwargs.setdefault("category", "games")
         )
-
         q = queryset.filter(available=True).filter(category=self.category)
-
         if self.request.GET:
             q = ProductFilter(self.request.GET, queryset=q).qs
         return q
