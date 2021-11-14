@@ -116,20 +116,38 @@
                         color: $second_font_color;
                     }
                 }
+
                 button {
                     border: none;
-                    // height: 30px;
-                    border-radius: 5px;
-                    padding: 3px 10px;
+                    // padding: 3px 10px;
                     background: $base_color;
                     cursor: pointer;
-                    text-transform: uppercase;
                     font-weight: bold;
                     color: white;
                 }
+                
                 img {
                     width: 25px;
                     height: 24px;
+                }
+            }
+
+            &__cart {
+                // width: 60px;
+                margin: auto 3px auto 0px;
+                // text-align: center;
+                a {
+                    display: block;
+                    // width: 60px;
+                    // height: 40px;
+                }
+                span {
+                    font-size: 18px;
+                    color: #90b3ce;
+                    line-height: 24px;
+                }
+                img {
+                    margin: 0px 3px 0px 0px;
                 }
             }
 
@@ -215,23 +233,40 @@
 
             &__right {
                 width: auto;
+                height: 40px;
                 margin-left: 0px;
+                margin-right: 5px;
                 &__social {
                     display: none;
                 }
 
                 &__search {
+                    margin: auto 0px;
                     input {
-                        width: 130px;
+                        width: 60%;
                         height: 24px;
                         margin-right: 5px;
-                        display: none;
+                        // display: none;
                     }
-                    margin: 0px 15px 0px 0px;
+                    button {
+                        border: none;
+                        background: $base_color;
+                        cursor: pointer;
+                        font-weight: bold;
+                        color: white;
+                    }
+
                 }
 
                 &__cart {
-                    margin: 0px 20px 0px 0px;
+                    // width: 60px;
+                    // text-align: center;
+                    margin: auto 8px auto 0px;
+                    a {
+                        display: block;
+                        width: 40px;
+                        // height: 40px;
+                    }
                     span {
                         font-size: 18px;
                         color: #90b3ce;
@@ -245,8 +280,10 @@
                     // бургер
                     display: block;
                     position: relative;
-                    width: 30px;
+                    width: 45px;
                     height: 24px;
+                    margin-top: auto;
+                    margin-bottom: auto;
                     span {
                         // центральная линия бургера
                         position: absolute;
