@@ -9,8 +9,12 @@ main {
 
 .cover-container {
     position: relative;
-    // height: 50vh;
-    height: 280px;
+    @media screen and (orientation:portrait) {
+        height: 60vh;
+    }
+    @media screen and (orientation:landscape) {
+        height: 280px;
+    }
 
     @include for-tablet-up {
         height: 60vh;
