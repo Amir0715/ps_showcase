@@ -142,12 +142,12 @@ body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
 
 .info-container_attributes_sublist_value { line-height: 130%; font-size: 14px; }
 
-.banner-container { margin-top: 70px; position: relative; text-align: center; width: 100%; height: 150px; line-height: 150px; font-size: 22px; }
+.banner-container { margin-top: 70px; position: relative; text-align: center; width: 100%; max-width: 1345px; height: 150px; font-size: 22px; }
 
-@media (min-width: 1200px) { .banner-container { width: 1345px; height: 200px; line-height: 200px; font-size: 48px; } }
+@media (min-width: 1200px) { .banner-container { height: 200px; font-size: 48px; } }
 
 .banner-container_img { object-fit: cover; height: 100%; width: 100%; filter: brightness(60%); }
 
-.banner-container_text { font-family: "Lato", sans-serif; font-weight: 700; position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0; }
+.banner-container_text { font-family: "Lato", sans-serif; font-weight: 700; position: absolute; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%); }
 
 /*# sourceMappingURL=game_detail.css.map */

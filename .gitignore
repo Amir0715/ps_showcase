@@ -5,7 +5,6 @@ __pycache__/
 # Django
 *.sqlite3
 backend/*/migrations/??*_??*.py
-backend/static
 
 # Visual studio
 .vscode/* 

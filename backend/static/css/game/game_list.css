@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+@import url(./reset/reset.css);
+* { color: #ffffff; }
+
+a { text-decoration: none; outline: none !important; }
+
+a:active { border: 0; outline: none; }
+
+.centered { margin: 0px auto; }
+
+@media (max-width: 599px) { .centered { width: 90%; } }
+
+@media (min-width: 600px) { .centered { width: 90%; } }
+
+@media (min-width: 1200px) { .centered { width: 1140px; } }
+
+.button { font-size: 20px; font-family: "Roboto", sans-serif; font-weight: 400; background-color: #0072ce; text-align: center; }
+
+.button:hover { background-color: #005eaa; }
+
+body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
+
+.content { margin-top: 50px; }
+
+@media (min-width: 600px) { .content { margin-top: 100px; } }
+
+.catalog { grid-area: C; margin-top: 20px; }
+
+@media (min-width: 1200px) { .catalog { margin-top: 0px; } }
+
+.catalog_header { font-size: 24px; }
+
+.catalog_header_title { color: #444444; }
+
+.catalog_grid { margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: space-evenly; }
+
+@media (min-width: 600px) { .catalog_grid { justify-content: center; } }
+
+@media (min-width: 1200px) { .catalog_grid { display: grid; margin-top: 30px; row-gap: 20px; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto; } }
+
+.grid { display: grid; grid-template-areas: "S S S S" "C C C C"; }
+
+@media (min-width: 1200px) { .grid { grid-template-areas: "S C C C"; } }
+
+.filter { padding: 0px 20px; width: 180px; grid-area: S; color: #444444; }
+
+.filter_group { margin-bottom: 20px; }
+
+.filter_group_header { margin-bottom: 10px; }
+
+.filter_group_header_title { color: #444444; font-size: 20px; }
+
+.filter_group_items_label { position: relative; }
+
+.filter_group_items_label label { min-width: 20px; }
+
+.filter_group_items_label_icon { height: 16px; position: absolute; left: 0; top: 0; bottom: 0; right: 0; margin: auto 0px; }
+
+.filter_group_items_label select { width: 180px; }
+
+.filter_group_items_label_input { margin-bottom: 10px; }
+
+.filter_group_items_label_input[type="number"] { width: 120px; }
+
+.filter_group_items_label_input[type="number"]::-webkit-outer-spin-button, .filter_group_items_label_input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.filter_group_items_label_input[type="number"] { -moz-appearance: textfield; }
+
+.filter_group_items_label_input[type="number"]:hover, .filter_group_items_label_input[type="number"]:focus { -moz-appearance: number-input; }
+
+.filter_group_items_label_input[type="number"]::-webkit-inner-spin-button, .filter_group_items_label_input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+.filter_group_items_label_text { font-size: 16px; line-height: 16px; display: inline-block; color: #444444; }
+
+.filter_show_button { display: block; font-size: 20px; width: 180px; height: 30px; line-height: 30px; border-radius: 4px; margin: 15px auto 0px; cursor: pointer; }
+
+@media (min-width: 600px) { .filter_show_button { font-size: 20px; width: 180px; } }
+
+/*# sourceMappingURL=game_list.css.map */

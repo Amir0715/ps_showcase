@@ -32,8 +32,6 @@ body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
 
 @media (min-width: 1200px) { .game-card_cover { height: 290px; } }
 
-@media (min-width: 1200px) { .game-card_cover { height: 290px; } }
-
 .game-card_cover img { object-fit: cover; height: 100%; width: 100%; }
 
 .game-card_body { display: flex; flex-direction: column; }
