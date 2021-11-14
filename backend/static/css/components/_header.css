@@ -60,6 +60,8 @@ body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
 
 .header_flex-wraper__right__search input::placeholder { color: #e5e5e5; }
 
+.header_flex-wraper__right__search button { border: none; border-radius: 5px; padding: 3px 10px; background: #0072ce; cursor: pointer; text-transform: uppercase; font-weight: bold; color: white; }
+
 .header_flex-wraper__right__search img { width: 25px; height: 24px; }
 
 .header_flex-wraper__right__menu { display: none; }

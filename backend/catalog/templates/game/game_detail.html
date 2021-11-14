@@ -23,16 +23,16 @@
         </div>
     </div>
     <div class="galery-container">
-        <a href="#" class="galery-container_left-arrow ">&#10094;</a>
-        <div class="galery-container_inner">
-
-            {% for image in game.images.all %}
-            <img src="{{ image.image.url }}" class="galery-container_inner_img cursor"
-                onclick="openModal(); currentSlide({{ forloop.counter }})">
-            {% endfor %}
-
+        <div class="galery-container_strip">
+            <div class="galery-container_strip_scroll">
+                {% for image in game.images.all %}
+                <div class="galery-container_strip_scroll_item">
+                    <img src="{{ image.image.url }}" class="galery-container_strip_scroll_item_img cursor"
+                        onclick="openModal(); currentSlide({{ forloop.counter }})">
+                </div>
+                {% endfor %}
+            </div>
         </div>
-        <a href="#" class="galery-container_rigth-arrow">&#10095;</a>
     </div>
 
     <div class="lightbox-container" id="lightbox">

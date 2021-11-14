@@ -8,8 +8,13 @@ main {
 }
 
 .cover-container {
-    height: 80vh;
     position: relative;
+    // height: 50vh;
+    height: 280px;
+
+    @include for-tablet-up {
+        height: 60vh;
+    }
 
     &_img {
         object-fit: cover;
@@ -24,36 +29,82 @@ main {
         left: 0;
         bottom: 0;
         right: 0;
-        width: 1140px;
+        width: 85%;
         height: 100%;
         z-index: 1;
 
-        &_description {
-            height: 185px;
-            position: absolute;
-            bottom: 25px;
-            right: 0px;
+        @include for-desktop-up {
+            width: 1140px;
+        }
 
-            font-size: 38px;
+        &_description {
+            position: absolute;
+            right: 0px;
+            background-color: rgba($ligth_grey_color, 0.8);
+            border-radius: 8px;
+
+            font-size: 28px;
+            padding: 15px;
+            bottom: 20px;
+
+            @include for-tablet-up {
+                font-size: 32px;
+                padding: 15px;
+                bottom: 20px;
+            }
+
+            @include for-desktop-up {
+                // height: 185px;
+                font-size: 38px;
+                padding: 20px;
+                bottom: 25px;
+            }
 
             &_text {
+                color: $dark_font_color;
+                margin-bottom: 10px;
                 @include latoFont(600);
-                line-height: 80px;
+                @include for-desktop-up {
+                    line-height: 60px;
+                    margin-bottom: 0px;
+                }
             }
 
             &_flex-wraper {
                 display: flex;
                 justify-content: space-between;
-                line-height: 60px;
+                line-height: 40px;
+
+                @include for-desktop-up {
+                    line-height: 60px;
+                }
 
                 &_price {
-                    margin-right: 20px;
+                    color: $dark_font_color;
+                    margin-right: 8px;
+                    font-size: 18px;
+                    @include for-tablet-up {
+                        font-size: 24px;
+                        margin-right: 15px;
+                    }
+                    @include for-desktop-up {
+                        font-size: inherit;
+                        margin-right: 20px;
+                    }
                 }
 
                 &_button {
-                    height: 60px;
+                    // display: none;
+                    padding: 0px 10px;
+                    font-size: 14px;
+                    @include for-tablet-up {
+                        font-size: 18px;
+                    }
+                    @include for-desktop-up {
+                        height: 60px;
+                        font-size: 24px;
+                    }
                     text-align: center;
-                    font-size: 24px;
                     background-color: $base_color;
                     border-radius: 8px;
                     box-shadow: 4px 4px 4px rgba($color: #000, $alpha: 0.5);
@@ -64,44 +115,62 @@ main {
     }
 }
 
+$mobile_width : 115px;
+$mobile_height: 65px;
+$desktop_width: 250px;
+$desktop_height: 142px;
+
 .galery-container {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin: 50px auto;
-
-    &_left-arrow,
-    &_rigth-arrow {
-        font-size: 22px;
-        color: $base_color;
-        margin: 0px 50px 0px auto;
+    margin: 20px auto;
+    @include for-tablet-up {
+        margin: 50px auto;
     }
 
-    &_rigth-arrow {
-        margin: 0px auto 0px 50px;
-    }
-
-    &_inner {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 1140px;
-        height: 150px;
+    &_strip {
+        height: $mobile_height + 8;
+        margin-top: 4px;
+        margin-bottom: 4px;
         background-color: $ligth_grey_color;
-        padding: 10px 10px;
+        @include for-tablet-up {
+            // width: 90vh;
+            height: $desktop_height + 8;
+        }
+        @include for-desktop-up {
+            min-width: 260px;
+            max-width: 1140px;
+            height: $desktop_height + 8;
+        }
+        
+        &_scroll {
+            overflow-x: auto;
+            display: flex;
+            max-width: 90vw;
 
-        &_img {
-            width: 277px;
-            object-fit: cover;
-            height: 100%;
-            margin: 0px 5px;
-
-            &:first-child {
-                margin-left: 10px;
+            @include for-desktop-up {
+                min-width: 260px;
+                max-width: 1140px;
             }
-
-            &:last-child {
-                margin-right: 10px;
+            &_item{
+                float: left;
+                margin: 4px;
+                // height: 142px;
+                // width: 250px;
+                &_img {
+                    object-fit: cover;
+                    width: $mobile_width;
+                    height: $mobile_height;
+                    @include for-tablet-up {
+                        width: 250px;
+                        height: 142px;
+                    }
+                }
+            
+                &:last-child {
+                    margin-right: 8px;
+                }
             }
         }
     }
@@ -121,10 +190,18 @@ main {
     &_close {
         display: block;
         position: absolute;
-        padding: 20px;
-        margin: 20px;
-        font-size: 30px;
-        width: 30px;
+    
+        padding: 10px;
+        margin: 10px;
+        font-size: 20px;
+        width: 20px;
+    
+        @include for-tablet-up {
+            padding: 20px;
+            margin: 20px;
+            font-size: 30px;
+            width: 30px;
+        }
         text-align: center;
         right: 0;
         top: 0;
@@ -156,11 +233,18 @@ main {
         &_right-arrow {
             display: block;
             position: absolute;
-            padding: 20px;
-            margin: 0px 20px;
-            font-size: 30px;
-            width: 30px;
-            height: 30px;
+            padding: 5px;
+            margin: 0px 5px;
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+            @include for-tablet-up {
+                padding: 20px;
+                margin: 0px 20px;
+                font-size: 30px;
+                width: 30px;
+                height: 30px;
+            }
             text-align: center;
             top: 50%;
             left: 0px;
@@ -176,8 +260,10 @@ main {
 
         &_demos {
             max-width: 100%;
-            height: 90px;
+            // height: 120px;
             margin-top: 50px;
+            overflow-x: auto;
+            padding-bottom: 5px;
             display: flex;
             &_img {
                 object-fit: cover;
@@ -198,11 +284,22 @@ main {
 
 .info-container {
     display: flex;
+    flex-direction: column;
+    // width: 90%;
+    @include for-tablet-up {
+        flex-direction: row;
+        // width: initial;
+    }
 
     &_description {
-        flex: 0 1 70%;
         background-color: #f3f4f4;
-        padding: 25px 50px 130px;
+        padding: 20px 20px 80px;
+        flex: 0 1 50%;
+        // width: inherit;
+        @include for-tablet-up {
+            padding: 25px 50px 130px;
+            flex: 0 1 70%;
+        }
 
         &_header {
             @include rabotoFont(400);
@@ -223,18 +320,28 @@ main {
 
     &_attributes {
         background-color: #e8eaed;
-        padding: 25px 30px;
-        width: 255px;
+        padding: 10px 15px;
+        // width: inherit;
+
+        @include for-tablet-up {
+            padding: 25px 30px;
+            width: 255px;
+        }
 
         span {
             color: #004073;
         }
 
         &_header {
-            padding-bottom: 10px;
+            padding-bottom: 5px;
             margin-bottom: 15px;
             border-bottom: solid 1px $base_color;
             height: 24px;
+
+            @include for-tablet-up {
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+            }
         }
 
         &_list {
@@ -252,7 +359,11 @@ main {
         }
 
         &_sublist {
-            margin: 10px 0px 10px 20px;
+            margin: 7px 0px 8px 10px;
+
+            @include for-tablet-up {
+                margin: 10px 0px 10px 20px;
+            }
 
             &_value {
                 line-height: 130%;
@@ -264,12 +375,19 @@ main {
 
 .banner-container {
     margin-top: 70px;
-    height: 200px;
-    width: 1345px;
     position: relative;
-    line-height: 200px;
     text-align: center;
-    font-size: 48px;
+    width: 100%;
+    height: 150px;
+    line-height: 150px;
+    font-size: 22px;
+
+    @include for-desktop-up {
+        width: 1345px;
+        height: 200px;
+        line-height: 200px;
+        font-size: 48px;
+    }
 
     &_img {
         object-fit: cover;
