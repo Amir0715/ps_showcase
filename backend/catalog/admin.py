@@ -11,7 +11,6 @@ from .models import (
     CategoryAttribute,
 )
 from django.urls import reverse
-from django.utils.http import urlencode
 
 
 class GalleryInline(admin.TabularInline):

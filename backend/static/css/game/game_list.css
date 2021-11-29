@@ -20,7 +20,7 @@ a:active { border: 0; outline: none; }
 
 body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
 
-.content { margin-top: 50px; }
+.content { margin-top: 20px; }
 
 @media (min-width: 600px) { .content { margin-top: 100px; } }
 
@@ -38,13 +38,15 @@ body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
 
 @media (min-width: 1200px) { .catalog_grid { display: grid; margin-top: 30px; row-gap: 20px; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto; } }
 
-.grid { display: grid; grid-template-areas: "S S S S" "C C C C"; }
+.grid { display: grid; grid-template-areas: "S" "C"; }
 
 @media (min-width: 1200px) { .grid { grid-template-areas: "S C C C"; } }
 
-.filter { padding: 0px 20px; width: 180px; grid-area: S; color: #444444; }
+.filter { width: auto; grid-area: S; color: #444444; margin: auto; }
 
-.filter_group { margin-bottom: 20px; }
+@media (min-width: 600px) { .filter { padding: 0px 20px; width: 180px; margin-top: 0px; } }
+
+@media (min-width: 600px) { .filter_group { margin-bottom: 20px; } }
 
 .filter_group_header { margin-bottom: 10px; }
 

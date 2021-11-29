@@ -1,7 +1,7 @@
 @import "../base";
 
 .content {
-    margin-top: 50px;
+    margin-top: 20px;
 
     @include for-tablet-up {
         margin-top: 100px;
@@ -45,20 +45,28 @@
 .grid {
     display: grid;
     grid-template-areas:
-        "S S S S"
-        "C C C C";
+        "S"
+        "C";
     @include for-desktop-up {
         grid-template-areas: "S C C C";
     }
 }
 
 .filter {
-    padding: 0px 20px;
-    width: 180px;
+    width: auto;
     grid-area: S;
     color: $dark_font_color;
+    margin: auto;
+    @include for-tablet-up {
+        padding: 0px 20px;
+        width: 180px;
+        margin-top: 0px;
+    }
+
     &_group {
-        margin-bottom: 20px;
+        @include for-tablet-up {
+            margin-bottom: 20px;
+        }
         &_header {
             margin-bottom: 10px;
             &_title {
@@ -72,10 +80,6 @@
                 label {
                     min-width: 20px;
                 }
-
-                // cursor: pointer;
-                // padding: 5px 0px 5px 25px;
-                // height: 16px;
                 &_icon {
                     height: 16px;
                     position: absolute;
@@ -113,7 +117,6 @@
                         -webkit-appearance: none;
                         margin: 0;
                     }
-                    // height: ;
                 }
                 &_text {
                     font-size: 16px;
@@ -134,7 +137,6 @@
         line-height: 30px;
         border-radius: 4px;
         margin: 15px auto 0px;
-        // box-shadow: 4px 4px 4px rgba($color: #000, $alpha: 0.5);
         cursor: pointer;
         @include for-tablet-up {
             font-size: 20px;
