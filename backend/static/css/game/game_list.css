@@ -20,9 +20,9 @@ a:active { border: 0; outline: none; }
 
 body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
 
-.content { margin-top: 20px; }
+.content { padding-top: 60px; }
 
-@media (min-width: 600px) { .content { margin-top: 100px; } }
+@media (min-width: 600px) { .content { margin-top: 100px; padding-top: 0px; } }
 
 .catalog { grid-area: C; margin-top: 20px; }
 

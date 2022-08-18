@@ -150,3 +150,9 @@ $animation_duration: 10s;
     display: inline-block;
     transition: background-color 0.6s ease;
 }
+
+@media screen and (max-width: 1200px) {
+    .slideshow-container {
+        padding-top: 40px;
+    }
+}

@@ -84,7 +84,7 @@ body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
 
 .galery-container_strip_scroll_item:last-child { margin-right: 8px; }
 
-.lightbox-container { display: none; position: fixed; z-index: 6; top: 0; left: 0; width: 100%; height: 100%; overflow: auto; background-color: black; }
+.lightbox-container { display: none; position: fixed; z-index: 12; top: 0; left: 0; width: 100%; height: 100%; overflow: auto; background-color: black; }
 
 .lightbox-container_close { display: block; position: absolute; padding: 10px; margin: 10px; font-size: 20px; width: 20px; text-align: center; right: 0; top: 0; font-weight: bold; }
 

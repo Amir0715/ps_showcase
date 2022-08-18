@@ -4,7 +4,7 @@ import { Route, withRouter, Switch } from "react-router-dom";
 
 const App = () => {
   return (
-    <div className="App"> 
+    <div className="App">
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Route path="/" component={MainPage} />

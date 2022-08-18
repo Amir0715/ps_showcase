@@ -160,24 +160,24 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [AttributeValueInline, GalleryInline]
 
     list_editable = ["price", "stock", "available", "inbanner", "incarousel"]
-    filter_horizontal = ("category", )
+    # filter_horizontal = ("category", )
     readonly_fields = ("created_at", "updated_at",)
 
     fieldsets = (
-        (None, {
+        ("Основная информация", {
             "fields": (
                 "name",
                 "description",
                 "slug",
             ),
         }),
-        ("Числа", {
+        ("Цена", {
             "fields": (
                 ("price",
                  "stock",),
             ),
         }),
-        (None, {
+        ("Категория", {
             "fields": (
                 "category",
             ),

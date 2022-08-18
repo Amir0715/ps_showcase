@@ -5,21 +5,19 @@ name = "pypi"
 
 [packages]
 django = "*"
-django-phonenumber-field = "*"
-django-sass-processor = "*"
-phonenumbers = "*"
-pillow = "*"
-django-cors-headers = "*"
 djangorestframework = "*"
+django-filter = "*"
+django-cors-headers = "*"
+libsass = "*"
+django-compressor = "*"
+django-sass-processor = "*"
+django-phonenumber-field = "*"
 djoser = "*"
 drf-spectacular = "*"
-libsass = "*"
-django-filter = "*"
+phonenumbers = "*"
+pillow = "*"
 
 [dev-packages]
-pylint = "*"
-autopep8 = "*"
-pylint-django = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"

@@ -9,10 +9,10 @@ main {
 
 .cover-container {
     position: relative;
-    @media screen and (orientation:portrait) {
+    @media screen and (orientation: portrait) {
         height: 60vh;
     }
-    @media screen and (orientation:landscape) {
+    @media screen and (orientation: landscape) {
         height: 280px;
     }
 
@@ -119,7 +119,7 @@ main {
     }
 }
 
-$mobile_width : 115px;
+$mobile_width: 115px;
 $mobile_height: 65px;
 $desktop_width: 250px;
 $desktop_height: 142px;
@@ -147,7 +147,7 @@ $desktop_height: 142px;
             max-width: 1140px;
             height: $desktop_height + 8;
         }
-        
+
         &_scroll {
             overflow-x: auto;
             display: flex;
@@ -157,7 +157,7 @@ $desktop_height: 142px;
                 min-width: 260px;
                 max-width: 1140px;
             }
-            &_item{
+            &_item {
                 float: left;
                 margin: 4px;
                 // height: 142px;
@@ -171,7 +171,7 @@ $desktop_height: 142px;
                         height: 142px;
                     }
                 }
-            
+
                 &:last-child {
                     margin-right: 8px;
                 }
@@ -183,7 +183,7 @@ $desktop_height: 142px;
 .lightbox-container {
     display: none;
     position: fixed;
-    z-index: 6;
+    z-index: 12;
     top: 0;
     left: 0;
     width: 100%;
@@ -194,12 +194,12 @@ $desktop_height: 142px;
     &_close {
         display: block;
         position: absolute;
-    
+
         padding: 10px;
         margin: 10px;
         font-size: 20px;
         width: 20px;
-    
+
         @include for-tablet-up {
             padding: 20px;
             margin: 20px;

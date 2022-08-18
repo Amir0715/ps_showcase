@@ -1,10 +1,11 @@
 @import "../base";
 
 .content {
-    margin-top: 20px;
+    padding-top: 60px;
 
     @include for-tablet-up {
         margin-top: 100px;
+        padding-top: 0px;
     }
 }
 
@@ -31,7 +32,7 @@
         @include for-tablet-up {
             justify-content: center;
         }
-        
+
         @include for-desktop-up {
             display: grid;
             margin-top: 30px;
