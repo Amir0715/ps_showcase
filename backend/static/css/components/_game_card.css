@@ -24,7 +24,7 @@ body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
 
 @media (min-width: 600px) { .game-card { width: 250px; margin: 10px; } }
 
-@media (min-width: 1200px) { .game-card { width: 270px; margin: 0px; } .game-card:not(:last-child) { margin-right: 20px; } }
+@media (min-width: 1200px) { .game-card { width: 270px; margin: 0px; margin-top: 20px; } .game-card:not(:last-child) { margin-right: 20px; } }
 
 .game-card:hover { box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75); }
 
@@ -34,13 +34,15 @@ body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
 
 .game-card_cover img { object-fit: cover; height: 100%; width: 100%; }
 
-.game-card_body { display: flex; flex-direction: column; }
+.game-card_body { display: none; }
+
+@media (min-width: 600px) { .game-card_body { display: flex; flex-direction: column; } }
 
 .game-card_body_header { font-family: "Lato", sans-serif; font-weight: 500; text-align: center; font-size: 12px; line-height: 20px; height: 20px; display: none; color: #000; }
 
 @media (min-width: 600px) { .game-card_body_header { display: block; line-height: 30px; height: 30px; font-size: 18px; } }
 
-.game-card_body_footer { display: flex; justify-content: space-between; text-align: center; margin-top: 5px; line-height: 30px; height: 30px; }
+.game-card_body_footer { display: none; justify-content: space-between; text-align: center; margin-top: 5px; line-height: 30px; height: 30px; }
 
 @media (min-width: 600px) { .game-card_body_footer { line-height: 30px; height: 30px; font-size: 18px; } }
 

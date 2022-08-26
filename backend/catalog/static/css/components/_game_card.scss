@@ -13,6 +13,7 @@
     @include for-desktop-up {
         width: 270px;
         margin: 0px;
+        margin-top: 20px;
         &:not(:last-child) {
             margin-right: 20px;
         }
@@ -39,8 +40,11 @@
     }
 
     &_body {
-        display: flex;
-        flex-direction: column;
+        display: none;
+        @include for-tablet-up {
+            display: flex;
+            flex-direction: column;
+        }
 
         &_header {
             @include latoFont(500);
@@ -59,7 +63,7 @@
         }
 
         &_footer {
-            display: flex;
+            display: none;
             justify-content: space-between;
             text-align: center;
             margin-top: 5px;

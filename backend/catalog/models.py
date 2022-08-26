@@ -59,7 +59,7 @@ class Gallery(models.Model):
         verbose_name = "Альбом"
         verbose_name_plural = "Альбомы"
 
-
+# TODO: Убрать db_index
 class Product(models.Model):
     """
     Модель продукта, для продажи
@@ -68,8 +68,7 @@ class Product(models.Model):
     category = models.ManyToManyField(
         "Category", verbose_name="Категория", related_name="products"
     )  # игры, например
-    name = models.CharField(verbose_name="Имя продукта",
-                            max_length=255, db_index=True)
+    name = models.CharField(verbose_name="Имя продукта", max_length=255)
     slug = models.SlugField(unique=True)
 
     description = models.TextField(verbose_name="Описание")
@@ -162,7 +161,7 @@ class CategoryAttribute(models.Model):
         on_delete=models.CASCADE,
         related_name="attributes",
     )  # категория
-    
+
     name = models.CharField(
         verbose_name="Название атрибута", max_length=255
     )  # названия атрибута, то бишь ключ

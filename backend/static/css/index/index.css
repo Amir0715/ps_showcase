@@ -36,7 +36,7 @@ body { font-family: "Roboto", sans-serif; font-weight: 300; min-width: 320px; }
 
 .section_games { display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 30px; }
 
-@media (min-width: 600px) { .section_games { justify-content: center; margin-top: 20px; } }
+@media (min-width: 600px) { .section_games { justify-content: center; margin-top: 0px; } }
 
 .banner { height: 220px; margin-top: 50px; width: 100%; position: relative; }
 

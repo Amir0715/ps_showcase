@@ -30,9 +30,9 @@
                                 <span class="game-card_body_footer_price">
                                     {{ game.price }}
                                 </span>
-                                <a href="#" class="game-card_body_footer_button">
+                                <!-- <a href="#" class="game-card_body_footer_button">
                                     В корзину
-                                </a>
+                                </a> -->
                             </div>
                         </div>
                     </a>
@@ -69,13 +69,16 @@
                     <div class="filter_group_items_label">
                         <select name="genre" id="genre">
                             <option value="">Все игры</option>
-                            <option value="Ролевые">Ролевые</option>
+                            {% for genre in genres %}
+                            <option value="{{ genre.value }}">{{ genre.value }}</option>
+                            {% endfor %}
+                            <!-- <option value="Ролевые">Ролевые</option>
                             <option value="Симуляторы">Симуляторы</option>
                             <option value="Гонки">Гонки</option>
                             <option value="Спорт">Спорт</option>
                             <option value="Экшен">Экшен</option>
                             <option value="Шутер">Шутер</option>
-                            <option value="Приключение">Приключение</option>
+                            <option value="Приключение">Приключение</option> -->
                         </select>
                     </div>
                 </div>

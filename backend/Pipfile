@@ -16,8 +16,12 @@ djoser = "*"
 drf-spectacular = "*"
 phonenumbers = "*"
 pillow = "*"
+django-extensions = "*"
+django-debug-toolbar = "*"
+python-dotenv = "*"
 
 [dev-packages]
+bpython = "*"
 
 [requires]
 python_version = "3.10"

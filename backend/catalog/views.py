@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView
-from django.views.generic.base import View
-from catalog.models import Product, Category
+from django.views.generic.base import View, TemplateView
+from catalog.models import CategoryAttribute, Product, Category
 from django.shortcuts import render
 from catalog.filters import ProductFilter
 
@@ -13,11 +13,11 @@ class IndexView(ListView):
     def get_queryset(self):
         q = super().get_queryset().filter(available=True)
         self.new_games = list(
-            q.filter(category__name__icontains="Новые игры"))[:4]
+            q.filter(category__name__icontains="Новые игры"))[:8]
         self.best_games = list(
-            q.filter(category__name__icontains="Лучшие игры"))[:4]
+            q.filter(category__name__icontains="Лучшие игры"))[:8]
         self.soon_games = list(
-            q.filter(category__name__icontains="Скоро в продаже"))[:4]
+            q.filter(category__name__icontains="Скоро в продаже"))[:8]
         self.game_category = list(
             Category.objects.filter(parent__name__icontains="Игры")
         )
@@ -68,6 +68,7 @@ class GameListView(ListView):
         context = super().get_context_data(**kwargs)
         context["game_category"] = self.game_category
         context["category"] = self.category
+        context["genres"] = self.genres
         return context
 
     def get_queryset(self):
@@ -80,7 +81,15 @@ class GameListView(ListView):
         self.category = Category.objects.get(
             slug=self.kwargs.setdefault("category", "games")
         )
+
+        self.genres = CategoryAttribute.objects.get(name="Жанр").values.all()
+
         q = queryset.filter(available=True).filter(category=self.category)
         if self.request.GET:
             q = ProductFilter(self.request.GET, queryset=q).qs
         return q
+
+# TODO: добавить страницу с инструкцией как купить
+
+class HowBuy(TemplateView):
+    template_name = "howbuy/how_buy.html"

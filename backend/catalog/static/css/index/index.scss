@@ -35,7 +35,7 @@
         flex-wrap: wrap;
         @include for-tablet-up {
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 0px;
         }
         justify-content: space-between;
         margin-top: 30px;
